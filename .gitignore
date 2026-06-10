@@ -1,0 +1,5 @@
+includes/db.php
+uploads/products/
+.DS_Store
+Thumbs.db
+*.log
