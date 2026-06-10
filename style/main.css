@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: 'font1';
+    src: url("../fonts/font1.ttf") format("truetype");
+    font-family: 'font2';
+    src: url("../fonts/font2.ttf") format("truetype");
+}
+
+.main {
+    width: 100%;
+}
+
+.main-container {
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+}
+
+
+/* Слоган */
+.title {
+    font-family: 'font2', sans-serif;
+    font-size: 90px;
+    display: flex;
+    margin-left: 25vh;
+    padding: 10vh 0;
+}
+
+
+/* Каталог */
+.catalog-container {
+    width: 100%;
+    height: 50vh;
+}
+
+.main-catalog {
+    display: flex;
+    flex-direction: column;
+    height: 630px;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 50px auto 0 auto;
+}
+
+.catalog-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.catalog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.catalog-image:hover img {
+    transform: scale(1.1);      
+}
+
+.catalog-line {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+}
+
+.catalog-button {
+    padding: 30px;
+    text-align: left;
+}
+
+.btn-catalog {
+    font-family: 'font1', sans-serif;
+    color: black;
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 9px 20px;
+    display: inline-block;
+}
+
+.btn-catalog:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px black;
+}
+
+
+/* Новинки */
+.scroll-container{
+    margin: 50vh;
+    border: 2px solid black;
+    display: flex;
+    overflow-x: auto;
+}
+
+.group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.product-card{
+    flex: 0 0 5em;
+    height: 5em;
+    padding: 1em;
+    background-color: red;
+    align-content: center;
+}
