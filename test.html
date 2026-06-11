@@ -1,0 +1,29 @@
+<script>
+// 1. Вход
+fetch('api/login.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({username: 'admin', password: 'password'})
+})
+.then(() => {
+    // 2. Добавить товар в корзину
+    return fetch('api/cart.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product_id: 1, quantity: 2})
+    });
+})
+.then(() => {
+    // 3. Оформить заказ
+    return fetch('api/checkout.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            address: 'г. Москва, ул. Тестовая, д. 1',
+            phone: '+7 999 123 45 67'
+        })
+    });
+})
+.then(r => r.json())
+.then(data => console.log('Заказ:', data));
+</script>
