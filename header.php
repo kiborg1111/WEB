@@ -8,11 +8,11 @@
 
         <nav>
             <ul>
-                <li><a href = "new.php">Новинки</a></li>
-                <li><a href = "catalog.php">Каталог</a></li>
-                <li><a href = "index.php">Мужское</a></li>
-                <li><a href = "index.php">Женское</a></li>
-                <li><a href = "index.php">О нас</a></li>
+                <li><a href ="#scroll-section">Новинки</a></li>
+                <li><a href ="catalog.php">Каталог</a></li>
+                <li><a href ="index.php">Мужское</a></li>
+                <li><a href ="index.php">Женское</a></li>
+                <li><a href ="index.php">О нас</a></li>
             </ul>
         </nav>
          <div class="header-icons">

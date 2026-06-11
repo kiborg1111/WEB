@@ -1,11 +1,27 @@
 * {
     margin: 0;
     padding: 0;
+    overflow-x: none; 
 }
 
-html {
-    scroll-behavior: smooth;
+/*.boot {
+    outline: 2px solid red !important;
 }
+
+.catalog-container {
+    outline: 2px solid blue !important;
+}
+
+.main-catalog {
+    outline: 2px solid green !important;
+}
+
+.catalog-image {
+    outline: 2px solid orange !important;
+}
+.scroll {
+    outline: 2px solid orange !important;
+}*/
 
 @font-face {
     font-family: 'font1';
@@ -16,6 +32,7 @@ html {
 
 .main {
     width: 100%;
+    height: auto;
 }
 
 .main-container {
@@ -30,14 +47,25 @@ html {
     font-size: 90px;
     display: flex;
     margin-left: 25vh;
-    padding: 10vh 0;
+    padding: 100px 0;
 }
 
+.boot {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.boot img{
+    width: 200px;    
+    height: 100px;
+    margin-right: 140px;
+    margin-top: 92px;
+}
 
 /* Каталог */
 .catalog-container {
     width: 100%;
-    height: 50vh;
+    height: auto;
 }
 
 .main-catalog {
@@ -47,7 +75,7 @@ html {
     width: 80vw;
     border: 2px solid black;
     border-radius: 5px;
-    margin: 50px auto 0 auto;
+    margin: 0 auto 0 auto;
 }
 
 .catalog-image {
@@ -62,7 +90,7 @@ html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .catalog-image:hover img {
@@ -95,26 +123,72 @@ html {
     box-shadow: 4px 4px black;
 }
 
-
-/* Новинки */
-.scroll-container{
-    margin: 50vh;
-    border: 2px solid black;
-    display: flex;
-    overflow-x: auto;
+/* Новинки*/
+.text {
+    font-family: 'font2', sans-serif;
+    font-size: 60px;
+    margin-top: 200px;
+    margin-left: 60px;
 }
 
-.group{
+/* Cкролл */
+
+#scroll-section {
+    scroll-margin-top: 230px;  /* отступ от верха (высота шапки + запас) */
+}
+
+.scroll {
+    position: relative;
+    margin-top: 10px;
+}
+
+.left, .right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;                  
+    color: black;                 
+    cursor: pointer;
+    font-size: 60px;                 
+    z-index: 10;
+}
+
+.left {
+    left: 20px;
+}
+
+.right {
+    right: 20px;
+}
+
+.scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+}
+
+.group {
+    display: flex;
+    width: max-content;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    width: 30vw;
+    height: 30vh;
+    border: 2px solid black;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1em;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
 }
 
-.product-card{
-    flex: 0 0 5em;
-    height: 5em;
-    padding: 1em;
-    background-color: red;
-    align-content: center;
+.scroll-container::-webkit-scrollbar {
+    display: none;
 }

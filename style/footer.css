@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'font1';
+    src: url("../fonts/font1.ttf") format("truetype");
+    font-family: 'font2';
+    src: url("../fonts/font2.ttf") format("truetype");
+}
+
+/*.footer-img {
+    outline: 2px solid red !important;
+}
+
+.footer-container {
+    outline: 2px solid blue !important;
+}*/
+
+footer {
+    background-color: #1a1a1a;
+    margin-top: 230px;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.menu {
+    flex: 1;
+}
+
+.menu-title {
+    font-family: 'font2', sans-serif;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 50px 0 0 50px;
+}
+
+.text-menu {
+    font-family: 'font1', sans-serif;
+    color: #999;
+    font-size: 14px;
+    line-height: 3;
+    padding-left: 50px;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 10px;
+    font-size: 24px;
+}
+.footer-img {
+    margin-right: 140px;
+    width: 300px;
+    display: flex;
+}
+
+.footer-img img {
+    height: 400px;
+    width: 300px;
+}
