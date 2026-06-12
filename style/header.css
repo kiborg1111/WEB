@@ -8,7 +8,7 @@
     src: url("../fonts/font1.ttf") format("truetype");
 }
 
-header {
+.header {
     background-color: #ffff;
     border-bottom: 2px solid black;
     position: sticky;

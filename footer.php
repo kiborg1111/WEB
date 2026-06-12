@@ -1,10 +1,10 @@
-<footer>
+<div class="footer">
     <div class="footer-container">
         <div class="menu">
             <div class="menu-title">Меню</div>
             <div class="text-menu">
                 Новинки<br>
-                Каталог<br>
+                <a href ="catalog.php">Каталог</a><br>
                 Мужское<br>
                 Женское<br>
                 О нас
@@ -36,4 +36,4 @@
             <img src="../kickzone/photo/footer.png" alt="подвал">
         </div>
     </div>
-</footer>
+</div>

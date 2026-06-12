@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    overflow-x: none; 
 }
 
 /*.boot {
@@ -58,8 +57,8 @@
 .boot img{
     width: 200px;    
     height: 100px;
-    margin-right: 140px;
-    margin-top: 92px;
+    margin-right: 160px;
+    margin-top: 100px;
 }
 
 /* Каталог */
@@ -132,9 +131,8 @@
 }
 
 /* Cкролл */
-
 #scroll-section {
-    scroll-margin-top: 230px;  /* отступ от верха (высота шапки + запас) */
+    scroll-margin-top: 230px;
 }
 
 .scroll {
