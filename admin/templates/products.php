@@ -45,8 +45,9 @@
 <body>
     <div class="container">
         <div class="nav-links">
-            <a href="index.php">Заказы</a>
-            <a href="products.php" style="background: #28a745;">Товары</a>
+            <a href="index.php">📦 Заказы</a>
+            <a href="products.php" style="background: #28a745;">🏷️ Товары</a>
+            <a href="categories.php">📂 Категории</a>
         </div>
         
         <h1>Управление товарами</h1>

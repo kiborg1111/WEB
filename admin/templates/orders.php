@@ -5,12 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель - Заказы</title>
     <link rel="stylesheet" href="assets/style.css">
+    <style>
+        .nav-links {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .nav-links a {
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .nav-links a:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <div class="nav-links">
+            <a href="index.php" style="background: #28a745;">📦 Заказы</a>
+            <a href="products.php">🏷️ Товары</a>
+            <a href="categories.php">📂 Категории</a>
+        </div>
+        
         <h1>Управление заказами</h1>
         <div class="orders-table">
-            <table>
+            <tr>
                 <thead>
                     <tr>
                         <th>ID</th>
