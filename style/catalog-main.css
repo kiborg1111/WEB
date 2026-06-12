@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main1 {
+    width: 100%;
+    height: auto;
+}
+
+.main-container1 {
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+}
+
+
+/* Слоган */
+.title1 {
+    font-family: 'font2', sans-serif;
+    font-size: 90px;
+    display: flex;
+    margin-left: 10vw;
+    padding: 70px 0;
+}
+
+.filter-cards {
+    display: flex;
+    justify-content: space-between;  /* ← растягивает элементы по краям */
+    align-items: flex-start;         /* ← выравнивание по верху */
+    gap: 40px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Фильтр - фиксированная ширина */
+.filter {
+    display: flex;
+    flex-direction: column;
+    width: 280px;                    /* ← фиксированная ширина */
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: 60px;
+}
+
+.price {
+    font-family: 'font1', sans-serif;
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+/* Контейнер ползунка */
+.slider {
+    width: 222px;
+    margin: 30px 0 0 30px;
+}
+
+/* ТОНКАЯ РОЗОВАЯ ЛИНИЯ - 2px */
+.noUi-target {
+    background: #fac9d1 !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 3px !important;
+}
+
+/* Заполненная область (между ручками) */
+.noUi-connect {
+    background: #ff6ab5 !important;
+    height: 3px !important;
+}
+
+/* РУЧКИ - КРУГЛЫЕ ЧЕРНЫЕ */
+.noUi-handle {
+    width: 20px !important;
+    height: 20px !important;
+    background: #ffffff !important;
+    border: 1px solid black !important;
+    border-radius: 50% !important;   
+    cursor: pointer;
+    top: -7px !important;
+    right: -8px !important;
+}
+
+/* Убираем внутренние полоски у ручек */
+.noUi-handle::before,
+.noUi-handle::after {
+    display: none !important;
+}
+
+/* Эффект при наведении */
+.noUi-handle:hover {
+    transform: scale(1.4);
+}
+
+/* Значения цены */
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    font-family: 'font1', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.price-values span {
+    background: white;
+    margin: 0 15px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.brend{
+    font-family: 'font1', sans-serif;
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.size{
+    font-family: 'font1', sans-serif;
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.color{
+    font-family: 'font1', sans-serif;
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.card-container {
+    flex: 1;                         /* ← занимает всё свободное пространство */
+    margin-top: 60px;
+}
+
+/* Группа карточек */
+.group-product {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 50px;
+}
+
+/* Карточка товара */
+.card-product {
+    width: 400px;
+    height: 300px;
+    border: 1px solid black;
+}
