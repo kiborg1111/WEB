@@ -1,4 +1,4 @@
-<header>
+<div class="header">
     <div class = "header-container">
         <div class = "logo">
             <a href = "index.php">
@@ -8,7 +8,7 @@
 
         <nav>
             <ul>
-                <li><a href ="#scroll-section">Новинки</a></li>
+                <li><a href ="index.php#scroll-section">Новинки</a></li>
                 <li><a href ="catalog.php">Каталог</a></li>
                 <li><a href ="index.php">Мужское</a></li>
                 <li><a href ="index.php">Женское</a></li>
@@ -27,4 +27,4 @@
             </a>
         </div>
     </div>
-</header>
+</div>

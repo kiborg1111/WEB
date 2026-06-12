@@ -1,4 +1,4 @@
-<main>
+<div class="index-main">
     <div class="main">
         <div class="main-container">
             <div class="title">
@@ -30,16 +30,16 @@
 
             <div class="scroll-container" id="scroll_js">
                 <div class="group">
-                    <div class="card">Карточка 1</div>
-                    <div class="card">Карточка 2</div>
-                    <div class="card">Карточка 3</div>
-                    <div class="card">Карточка 4</div>
-                    <div class="card">Карточка 5</div>
+                    <div class="card"></div>
+                    <div class="card"></div>
+                    <div class="card"></div>
+                    <div class="card"></div>
+                    <div class="card"></div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
 <script>
     (function() {
         var container = document.getElementById('scroll_js');
