@@ -29,7 +29,8 @@
             </button>
 
             <div class="scroll-container" id="scroll_js">
-                <div class="group">
+                <div class="group" id="products-group">
+                    <div class="card"></div>
                     <div class="card"></div>
                     <div class="card"></div>
                     <div class="card"></div>
@@ -40,7 +41,29 @@
         </div>
     </div>
 </div>
+
 <script>
+// Загрузка товаров из БД
+fetch('http://localhost:8888/kickzone/api/products.php')
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.products.length > 0) {
+            const container = document.getElementById('products-group');
+            const products = data.products.slice(0, 6);
+            
+            container.innerHTML = products.map(product => `
+                <div class="card" style="background: url('http://localhost:8888/kickzone/uploads/products/${product.image}') center/cover no-repeat; position: relative; border: 2px solid black; border-radius: 10px;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 12px; text-align: center; border-radius: 0 0 8px 8px;">
+                        <div style="font-family: 'font2', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 5px;">${product.name}</div>
+                        <div style="font-family: 'font1', sans-serif; font-size: 14px;">${Number(product.price).toLocaleString()} ₽</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    })
+    .catch(error => console.error('Ошибка:', error));
+
+    // Твой оригинальный скрипт стрелок
     (function() {
         var container = document.getElementById('scroll_js');
         var leftBtn = document.querySelector('.left');
@@ -48,19 +71,16 @@
         
         if (!container || !leftBtn || !rightBtn) return;
         
-        // Функция обновления видимости кнопок
         function updateButtons() {
             var scrollLeft = container.scrollLeft;
             var maxScroll = container.scrollWidth - container.clientWidth;
             
-            // На первой карточке - скрываем левую кнопку полностью
             if (scrollLeft <= 10) {
                 leftBtn.style.display = 'none';
             } else {
                 leftBtn.style.display = 'flex';
             }
             
-            // На последней карточке - скрываем правую кнопку полностью
             if (scrollLeft >= maxScroll - 10) {
                 rightBtn.style.display = 'none';
             } else {
@@ -68,7 +88,6 @@
             }
         }
         
-        // Функция скролла влево
         function scrollLeft() {
             var scrollLeft = container.scrollLeft;
             if (scrollLeft > 10) {
@@ -77,7 +96,6 @@
             }
         }
         
-        // Функция скролла вправо
         function scrollRight() {
             var scrollLeft = container.scrollLeft;
             var maxScroll = container.scrollWidth - container.clientWidth;
@@ -87,14 +105,9 @@
             }
         }
         
-        // Назначаем обработчики
         leftBtn.onclick = scrollLeft;
         rightBtn.onclick = scrollRight;
-        
-        // Обновляем при скролле
         container.addEventListener('scroll', updateButtons);
-        
-        // Начальное обновление
         updateButtons();
     })();
 </script>
