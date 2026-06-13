@@ -14,22 +14,23 @@
                     <span id="sliderMaxValue"></span>
                 </div>
                 <div class="brend">Бренд</div>
-                <div class="brend-card"></div>
+                <div class="brend-card" id="brand-filters"></div>
                 <div class="size">Размер</div>
-                <div class="size-card"></div>
+                <div class="size-card" id="size-filters"></div>
                 <div class="color">Цвет</div>
-                <div class="color-card"></div>
+                <div class="color-card" id="color-filters"></div>
             </div>
 
             <div class="card-container">
                 <div class="group-product" id="catalog-products-container">
-                    <div style="text-align: center; width: 100%;">Загрузка товаров...</div>
+                    <div class="card-product">Загрузка...</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const slider = document.getElementById('Slider');
@@ -63,18 +64,34 @@
         }
     });
 
-    getProducts().then(products => {
+    let allProducts = [];
+
+    async function loadProducts() {
+        try {
+            const response = await fetch('http://localhost/kickzone/api/products.php');
+            const data = await response.json();
+            if (data.success) {
+                allProducts = data.products;
+                initFilters();
+                renderProducts(allProducts);
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+    }
+
+    function renderProducts(products) {
         const container = document.getElementById('catalog-products-container');
         if (!container) return;
         
         if (products.length === 0) {
-            container.innerHTML = '<div style="text-align: center; width: 100%;">Нет товаров</div>';
+            container.innerHTML = '<div class="card-product">Нет товаров</div>';
             return;
         }
         
         container.innerHTML = products.map(product => `
             <div class="card-product">
-                <img src="/uploads/products/${product.image || 'placeholder.jpg'}" style="width: 100%; height: 200px; object-fit: cover;">
+                <img src="/kickzone/uploads/products/${product.image || 'placeholder.jpg'}" style="width: 100%; height: 200px; object-fit: cover;">
                 <h3>${product.name}</h3>
                 <p>${Number(product.price).toLocaleString()} ₽</p>
                 <button class="add-to-cart-btn" data-id="${product.id}">В корзину</button>
@@ -88,5 +105,51 @@
                 alert(result.success ? 'Товар добавлен в корзину' : 'Ошибка: ' + result.message);
             });
         });
-    });
+    }
+
+    function filterProducts() {
+        const selectedBrands = Array.from(document.querySelectorAll('.brend-card input:checked')).map(cb => cb.value);
+        const selectedColors = Array.from(document.querySelectorAll('.color-card input:checked')).map(cb => cb.value);
+        const selectedSizes = Array.from(document.querySelectorAll('.size-card input:checked')).map(cb => cb.value);
+        
+        let filtered = [...allProducts];
+        
+        if (selectedBrands.length > 0) {
+            filtered = filtered.filter(p => selectedBrands.includes(p.brand));
+        }
+        if (selectedColors.length > 0) {
+            filtered = filtered.filter(p => selectedColors.includes(p.color));
+        }
+        if (selectedSizes.length > 0) {
+            filtered = filtered.filter(p => selectedSizes.includes(p.size));
+        }
+        
+        renderProducts(filtered);
+    }
+
+    function initFilters() {
+        const brands = [...new Set(allProducts.map(p => p.brand).filter(b => b))];
+        const colors = [...new Set(allProducts.map(p => p.color).filter(c => c))];
+        const sizes = [...new Set(allProducts.map(p => p.size).filter(s => s))];
+        
+        const brandContainer = document.getElementById('brand-filters');
+        const colorContainer = document.getElementById('color-filters');
+        const sizeContainer = document.getElementById('size-filters');
+        
+        if (brandContainer) {
+            brandContainer.innerHTML = brands.map(b => `<label><input type="checkbox" value="${b}" class="filter-checkbox"> ${b}</label>`).join('');
+        }
+        if (colorContainer) {
+            colorContainer.innerHTML = colors.map(c => `<label><input type="checkbox" value="${c}" class="filter-checkbox"> ${c}</label>`).join('');
+        }
+        if (sizeContainer) {
+            sizeContainer.innerHTML = sizes.sort((a,b) => a-b).map(s => `<label><input type="checkbox" value="${s}" class="filter-checkbox"> ${s}</label>`).join('');
+        }
+        
+        document.querySelectorAll('.filter-checkbox').forEach(cb => {
+            cb.addEventListener('change', filterProducts);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProducts);
 </script>

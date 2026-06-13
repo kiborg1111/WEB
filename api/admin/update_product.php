@@ -10,11 +10,14 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $is_edit = isset($_POST['id']) && !empty($_POST['id']);
 
 $name = $_POST['name'] ?? '';
-$category_id = (int)$_POST['category_id'] ?? 0;
+$category_id = (int)($_POST['category_id'] ?? 0);
 $slug = $_POST['slug'] ?? '';
 $description = $_POST['description'] ?? '';
-$price = (float)$_POST['price'] ?? 0;
-$stock = (int)$_POST['stock'] ?? 0;
+$price = (float)($_POST['price'] ?? 0);
+$stock = (int)($_POST['stock'] ?? 0);
+$brand = $_POST['brand'] ?? '';
+$color = $_POST['color'] ?? '';
+$size = $_POST['size'] ?? '';
 
 if(empty($slug)) {
     $slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $name), '-'));
@@ -38,19 +41,16 @@ if($is_edit) {
     $id = (int)$_POST['id'];
 
     if($image_name) {
-        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, image = ?
-                                WHERE id = ?");
-        $stmt->bind_param("sisssdsi", $name, $category_id, $slug, $description, $price, $stock, $image_name, $id);
+        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, image = ?, brand = ?, color = ?, size = ? WHERE id = ?");
+        $stmt->bind_param("sisssdssssi", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size, $id);
     } else {
-        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?
-                                WHERE id = ?");
-        $stmt->bind_param("sisssdi", $name, $category_id, $slug, $description, $price, $stock, $id);
+        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, brand = ?, color = ?, size = ? WHERE id = ?");
+        $stmt->bind_param("sisssdsssi", $name, $category_id, $slug, $description, $price, $stock, $brand, $color, $size, $id);
     }
     $stmt->execute();
 } else {
-    $stmt = $conn->prepare("INSERT INTO products (name, category_id, slug, description, price, stock, image)
-                            VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sisssds", $name, $category_id, $slug, $description, $price, $stock, $image_name);
+    $stmt = $conn->prepare("INSERT INTO products (name, category_id, slug, description, price, stock, image, brand, color, size) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sisssdssss", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size);
     $stmt->execute();
 }
 
