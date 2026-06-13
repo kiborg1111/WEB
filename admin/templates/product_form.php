@@ -53,6 +53,13 @@
             width: 100%;
             border-radius: 8px;
         }
+        .row-2cols {
+            display: flex;
+            gap: 20px;
+        }
+        .row-2cols .form-group {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -70,16 +77,56 @@
                     <input type="text" name="name" required value="<?= htmlspecialchars($product['name'] ?? '') ?>">
                 </div>
                 
-                <div class="form-group">
-                    <label>Категория *</label>
-                    <select name="category_id" required>
-                        <option value="">Выберите категорию</option>
-                        <?php foreach ($categories as $cat): ?>
-                            <option value="<?= $cat['id'] ?>" <?= isset($product) && $product['category_id'] == $cat['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($cat['name']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                <div class="row-2cols">
+                    <div class="form-group">
+                        <label>Бренд</label>
+                        <select name="brand">
+                            <option value="">Выберите бренд</option>
+                            <option value="Nike" <?= isset($product) && $product['brand'] == 'Nike' ? 'selected' : '' ?>>Nike</option>
+                            <option value="Adidas" <?= isset($product) && $product['brand'] == 'Adidas' ? 'selected' : '' ?>>Adidas</option>
+                            <option value="Puma" <?= isset($product) && $product['brand'] == 'Puma' ? 'selected' : '' ?>>Puma</option>
+                            <option value="New Balance" <?= isset($product) && $product['brand'] == 'New Balance' ? 'selected' : '' ?>>New Balance</option>
+                            <option value="Asics" <?= isset($product) && $product['brand'] == 'Asics' ? 'selected' : '' ?>>Asics</option>
+                            <option value="Reebok" <?= isset($product) && $product['brand'] == 'Reebok' ? 'selected' : '' ?>>Reebok</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Цвет</label>
+                        <select name="color">
+                            <option value="">Выберите цвет</option>
+                            <option value="black" <?= isset($product) && $product['color'] == 'black' ? 'selected' : '' ?>>Черный</option>
+                            <option value="white" <?= isset($product) && $product['color'] == 'white' ? 'selected' : '' ?>>Белый</option>
+                            <option value="red" <?= isset($product) && $product['color'] == 'red' ? 'selected' : '' ?>>Красный</option>
+                            <option value="blue" <?= isset($product) && $product['color'] == 'blue' ? 'selected' : '' ?>>Синий</option>
+                            <option value="grey" <?= isset($product) && $product['color'] == 'grey' ? 'selected' : '' ?>>Серый</option>
+                            <option value="green" <?= isset($product) && $product['color'] == 'green' ? 'selected' : '' ?>>Зеленый</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row-2cols">
+                    <div class="form-group">
+                        <label>Размер</label>
+                        <select name="size">
+                            <option value="">Выберите размер</option>
+                            <?php for($s = 39; $s <= 45; $s++): ?>
+                                <option value="<?= $s ?>" <?= isset($product) && $product['size'] == $s ? 'selected' : '' ?>><?= $s ?></option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Категория *</label>
+                        <select name="category_id" required>
+                            <option value="">Выберите категорию</option>
+                            <?php foreach ($categories as $cat): ?>
+                                <option value="<?= $cat['id'] ?>" <?= isset($product) && $product['category_id'] == $cat['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($cat['name']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -93,14 +140,16 @@
                     <textarea name="description"><?= htmlspecialchars($product['description'] ?? '') ?></textarea>
                 </div>
                 
-                <div class="form-group">
-                    <label>Цена *</label>
-                    <input type="number" step="0.01" name="price" required value="<?= $product['price'] ?? '' ?>">
-                </div>
-                
-                <div class="form-group">
-                    <label>Количество на складе</label>
-                    <input type="number" name="stock" value="<?= $product['stock'] ?? 0 ?>">
+                <div class="row-2cols">
+                    <div class="form-group">
+                        <label>Цена *</label>
+                        <input type="number" step="0.01" name="price" required value="<?= $product['price'] ?? '' ?>">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Количество на складе</label>
+                        <input type="number" name="stock" value="<?= $product['stock'] ?? 0 ?>">
+                    </div>
                 </div>
                 
                 <div class="form-group">
