@@ -44,7 +44,7 @@
 
 <script>
 // Загрузка товаров из БД
-fetch('http://localhost:8888/kickzone/api/products.php')
+fetch('http://localhost/kickzone/api/products.php')
     .then(response => response.json())
     .then(data => {
         if (data.success && data.products.length > 0) {
@@ -52,7 +52,7 @@ fetch('http://localhost:8888/kickzone/api/products.php')
             const products = data.products.slice(0, 6);
             
             container.innerHTML = products.map(product => `
-                <div class="card" style="background: url('http://localhost:8888/kickzone/uploads/products/${product.image}') center/cover no-repeat; position: relative; border: 2px solid black; border-radius: 10px;">
+                <div class="card" style="background: url('http://localhost/kickzone/uploads/products/${product.image}') center/cover no-repeat; position: relative; border: 2px solid black; border-radius: 10px;">
                     <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 12px; text-align: center; border-radius: 0 0 8px 8px;">
                         <div style="font-family: 'font2', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 5px;">${product.name}</div>
                         <div style="font-family: 'font1', sans-serif; font-size: 14px;">${Number(product.price).toLocaleString()} ₽</div>

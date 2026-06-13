@@ -29,7 +29,7 @@ $year = date("Y");
     // Ждём полной загрузки страницы
     document.addEventListener('DOMContentLoaded', function() {
         // Прямой запрос к API
-        fetch('http://localhost:8888/kickzone/api/products.php')
+        fetch('http://localhost/kickzone/api/products.php')
             .then(response => response.json())
             .then(data => {
                 console.log('Товары получены:', data);
