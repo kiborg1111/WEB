@@ -4,7 +4,7 @@
             <div class="menu-title">Меню</div>
             <div class="text-menu">
                 Новинки<br>
-                <a href ="catalog.php">Каталог</a><br>
+                <a href ="/kickzone/catalog.php">Каталог</a><br>
                 Мужское<br>
                 Женское<br>
                 О нас
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="footer-img">
-            <img src="../kickzone/photo/footer.png" alt="подвал">
+            <img src="/kickzone/photo/footer.png" alt="подвал">
         </div>
     </div>
 </div>

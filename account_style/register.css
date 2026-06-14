@@ -1,0 +1,121 @@
+.register-page {
+    max-width: 450px;
+    margin: 80px auto;
+    padding: 40px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.register-page h1 {
+    font-family: 'font2', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 32px;
+    color: #333;
+}
+
+.register-page .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
+}
+
+/* Группа полей формы */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'font1', sans-serif;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: 'font1', sans-serif;
+}
+
+.form-group input:focus {
+    border-color: #ff6ab5;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 106, 181, 0.3);
+}
+
+/* Кнопка регистрации */
+.btn-register {
+    width: 100%;
+    padding: 14px;
+    background: #ff6ab5;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: 'font2', sans-serif;
+    color: black;
+}
+
+.btn-register:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px rgb(0, 0, 0);
+}
+
+.btn-register:active {
+    transform: scale(0.98);
+}
+
+/* Сообщения об ошибках и успехе */
+.error-message {
+    background: #fac9d1;
+    color: red;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
+    display: none;
+}
+
+.success-message {
+    background: #e0ffe0;
+    color: green;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
+    display: none;
+    border-left: 4px solid green;
+}
+
+/* Ссылка на вход */
+.login-link {
+    text-align: center;
+    margin-top: 25px;
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #ff6ab5;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.login-link a:hover {
+    color: #e8559e;
+    text-decoration: underline;
+}

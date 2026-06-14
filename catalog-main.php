@@ -94,7 +94,7 @@
                 <img src="/kickzone/uploads/products/${product.image || 'placeholder.jpg'}" style="width: 100%; height: 200px; object-fit: cover;">
                 <h3>${product.name}</h3>
                 <p>${Number(product.price).toLocaleString()} ₽</p>
-                <button class="add-to-cart-btn" data-id="${product.id}">В корзину</button>
+                <button class="add-to-cart-btn" data-id="${product.id}"><i class="fa-solid fa-basket-shopping"></i></button>
             </div>
         `).join('');
         
