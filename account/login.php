@@ -58,11 +58,16 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
         
         if (data.success) {
-            window.location.href = '/kickzone/account/profile.php';
+            if (data.user.role === 'admin') {
+                window.location.href = '/kickzone/admin/index.php';
+            } else {
+                window.location.href = '/kickzone/account/profile.php';
+            }
         } else {
             errorDiv.textContent = data.message;
             errorDiv.style.display = 'block';
         }
+        
     } catch (error) {
         errorDiv.textContent = 'Ошибка соединения с сервером';
         errorDiv.style.display = 'block';

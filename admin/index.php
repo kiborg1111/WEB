@@ -2,18 +2,18 @@
 session_start();
 require_once '../includes/db.php';
 
-if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header('Location: /index.php');
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header('Location: /kickzone/account/login.php');
     exit;
 }
 
-$stmt = $conn->prepare("SELECT o.*, u.username, u.email
-                        FROM orders o
-                        JOIN users u ON o.user_id = u.id
+$stmt = $conn->prepare("SELECT o.*, u.username, u.email 
+                        FROM orders o 
+                        JOIN users u ON o.user_id = u.id 
                         ORDER BY o.created_at DESC");
 $stmt->execute();
 $result = $stmt->get_result();
 $orders = $result->fetch_all(MYSQLI_ASSOC);
 
-require_once 'templates/orders.php'
+require_once 'templates/orders.php';
 ?>

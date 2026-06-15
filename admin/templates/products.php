@@ -5,57 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Управление товарами</title>
     <link rel="stylesheet" href="assets/style.css">
-    <style>
-        .nav-links {
-            margin-bottom: 20px;
-            display: flex;
-            gap: 15px;
-        }
-        .nav-links a {
-            padding: 8px 16px;
-            background: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-        }
-        .nav-links a:hover {
-            background: #0056b3;
-        }
-        .btn-add {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-        }
-        .btn-add:hover {
-            background: #218838;
-        }
-        .actions a {
-            margin: 0 5px;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .edit { color: #007bff; }
-        .delete { color: #dc3545; }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav-links">
-            <a href="index.php">📦 Заказы</a>
-            <a href="products.php" style="background: #28a745;">🏷️ Товары</a>
-            <a href="categories.php">📂 Категории</a>
+
+<div class="admin-header">
+    <h1>Админ-панель</h1>
+    <a href="/kickzone/account/logout.php" class="logout-btn">Выход</a>
+</div>
+
+<div class="nav-links">
+    <a href="index.php">Заказы</a>
+    <a href="products.php" class="active">Товары</a>
+    <a href="categories.php">Категории</a>
+</div>
+
+<div class="container">
+    <div class="content-card">
+        <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="section-title">Товары</h2>
+            <a href="product_form.php" class="btn-add">+ Добавить товар</a>
         </div>
-        
-        <h1>Управление товарами</h1>
-        
-        <a href="product_form.php" class="btn-add">+ Добавить товар</a>
-        
-        <div class="orders-table">
-            <table>
+        <div class="table-wrapper">
+            <table class="admin-table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -70,7 +41,7 @@
                 <tbody>
                     <?php if (empty($products)): ?>
                         <tr>
-                            <td colspan="7">Нет товаров</td>
+                            <td colspan="7" style="text-align: center;">Нет товаров</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($products as $product): ?>
@@ -78,7 +49,7 @@
                             <td><?= $product['id'] ?></td>
                             <td>
                                 <?php if ($product['image']): ?>
-                                    <img src="../uploads/products/<?= htmlspecialchars($product['image']) ?>" style="width: 50px; height: 50px; object-fit: cover;">
+                                    <img src="../uploads/products/<?= htmlspecialchars($product['image']) ?>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
                                 <?php else: ?>
                                     —
                                 <?php endif; ?>
@@ -88,9 +59,9 @@
                             <td><?= number_format($product['price'], 2) ?> ₽</td>
                             <td><?= $product['stock'] ?></td>
                             <td class="actions">
-                                <a href="product_form.php?id=<?= $product['id'] ?>" class="edit">✏️</a>
-                                <a href="products.php?delete_id=<?= $product['id'] ?>" class="delete" onclick="return confirm('Удалить товар?')">🗑️</a>
-                            </td>
+                                <a href="product_form.php?id=<?= $product['id'] ?>" class="btn-icon btn-edit">✏️</a>
+                                <a href="products.php?delete_id=<?= $product['id'] ?>" class="btn-icon btn-delete" onclick="return confirm('Удалить товар?')">🗑️</a>
+                             </td>
                         </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -98,5 +69,7 @@
             </table>
         </div>
     </div>
+</div>
+
 </body>
 </html>
