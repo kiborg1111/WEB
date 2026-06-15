@@ -1,50 +1,33 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Управление товарами</title>
-    <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
+<?php 
+$title = 'Товары';
+include __DIR__ . '/../header.php'; 
+?>
 
-<div class="admin-header">
-    <h1>Админ-панель</h1>
-    <a href="/kickzone/account/logout.php" class="logout-btn">Выход</a>
-</div>
-
-<div class="nav-links">
-    <a href="index.php">Заказы</a>
-    <a href="products.php" class="active">Товары</a>
-    <a href="categories.php">Категории</a>
-</div>
-
-<div class="container">
-    <div class="content-card">
-        <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-            <h2 class="section-title">Товары</h2>
-            <a href="product_form.php" class="btn-add">+ Добавить товар</a>
-        </div>
-        <div class="table-wrapper">
-            <table class="admin-table">
-                <thead>
+<div class="content-card">
+    <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+        <h2 class="section-title">Товары</h2>
+        <a href="product_form.php" class="btn-add">+ Добавить товар</a>
+    </div>
+    <div class="table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Изображение</th>
+                    <th>Название</th>
+                    <th>Категория</th>
+                    <th>Цена</th>
+                    <th>Остаток</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($products)): ?>
                     <tr>
-                        <th>ID</th>
-                        <th>Изображение</th>
-                        <th>Название</th>
-                        <th>Категория</th>
-                        <th>Цена</th>
-                        <th>Остаток</th>
-                        <th>Действия</th>
+                        <td colspan="7" style="text-align: center;">Нет товаров</td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($products)): ?>
-                        <tr>
-                            <td colspan="7" style="text-align: center;">Нет товаров</td>
-                        </tr>
-                    <?php else: ?>
-                        <?php foreach ($products as $product): ?>
+                <?php else: ?>
+                    <?php foreach ($products as $product): ?>
                         <tr>
                             <td><?= $product['id'] ?></td>
                             <td>
@@ -61,13 +44,12 @@
                             <td class="actions">
                                 <a href="product_form.php?id=<?= $product['id'] ?>" class="btn-icon btn-edit">✏️</a>
                                 <a href="products.php?delete_id=<?= $product['id'] ?>" class="btn-icon btn-delete" onclick="return confirm('Удалить товар?')">🗑️</a>
-                             </td>
+                            </td>
                         </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 

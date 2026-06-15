@@ -268,3 +268,31 @@ button[type="submit"]:hover {
         flex-wrap: wrap;
     }
 }
+
+.back-home-btn {
+    background: #f0f0f0;
+    color: black;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.back-home-btn:hover {
+    background: #ff6ab5;
+    transform: translateY(-2px);
+}
+
+.admin-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-user span {
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
+}
