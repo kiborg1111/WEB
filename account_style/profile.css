@@ -1,0 +1,32 @@
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    font-family: 'font2', sans-serif;
+}
+
+.profile-placeholder {
+    text-align: center;
+    padding: 50px;
+    color: #666;
+    font-family: 'font1', sans-serif;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ff6ab5;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

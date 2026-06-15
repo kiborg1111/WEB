@@ -1,25 +1,28 @@
 .login-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Главный контейнер формы */
+.auth-container {
     max-width: 450px;
-    margin: 80px auto;
-    padding: 40px;
+    width: 100%;
     background: white;
     border: 2px solid black;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.login-page h1 {
+.auth-container h1 {
     font-family: 'font2', sans-serif;
     text-align: center;
-    margin-bottom: 10px;
     font-size: 32px;
-}
-
-.login-page .subtitle {
-    text-align: center;
-    color: #666;
     margin-bottom: 30px;
-    font-family: 'font1', sans-serif;
+    color: #333;
 }
 
 .form-group {
@@ -30,6 +33,7 @@
     display: block;
     font-family: 'font1', sans-serif;
     margin-bottom: 8px;
+    color: #333;
 }
 
 .form-group input {
@@ -39,52 +43,65 @@
     border-radius: 8px;
     font-size: 16px;
     box-sizing: border-box;
+    font-family: 'font1', sans-serif;
+    transition: border 0.3s, box-shadow 0.3s;
 }
 
+/* Поле ввода при фокусе */
 .form-group input:focus {
     border-color: #ff6ab5;
     outline: none;
+    box-shadow: 0 0 5px rgba(255, 22, 138, 0.3);
 }
 
+/* Кнопка входа */
 .btn-login {
     width: 100%;
     padding: 14px;
-    font-family: 'font2', sans-serif;
     background: #ff6ab5;
     border: 2px solid black;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    font-family: 'font2', sans-serif;
+    color: black;
+    transition: transform 0.2s, background 0.2s;
 }
 
+/* Кнопка при наведении */
 .btn-login:hover {
     transform: translateY(-5px);
     box-shadow: 4px 4px rgb(0, 0, 0);
 }
 
-.error-message {
+
+.error {
     background: #ffe0e0;
     color: red;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     margin-bottom: 20px;
     text-align: center;
     font-family: 'font1', sans-serif;
+    font-size: 14px;
     display: none;
 }
 
-.register-link {
+.link {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     font-family: 'font1', sans-serif;
+    font-size: 14px;
 }
 
-.register-link a {
+.link a {
     color: #ff6ab5;
     text-decoration: none;
+    transition: color 0.2s;
 }
 
-.register-link a:hover {
+.link a:hover {
+    color: #e8559e;
     text-decoration: underline;
 }

@@ -1,30 +1,30 @@
 .register-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-container {
     max-width: 450px;
-    margin: 80px auto;
-    padding: 40px;
+    width: 100%;
     background: white;
     border: 2px solid black;
     border-radius: 15px;
+    padding: 40px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.register-page h1 {
+.auth-container h1 {
     font-family: 'font2', sans-serif;
     text-align: center;
-    margin-bottom: 10px;
     font-size: 32px;
+    margin-bottom: 30px;
     color: #333;
 }
 
-.register-page .subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 30px;
-    font-family: 'font1', sans-serif;
-    font-size: 14px;
-}
 
-/* Группа полей формы */
 .form-group {
     margin-bottom: 20px;
 }
@@ -52,16 +52,16 @@
     box-shadow: 0 0 5px rgba(255, 106, 181, 0.3);
 }
 
-/* Кнопка регистрации */
 .btn-register {
     width: 100%;
     padding: 14px;
     background: #ff6ab5;
     border: 2px solid black;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-    font-family: 'font2', sans-serif;
+    font-family: 'font1', sans-serif;
     color: black;
 }
 
@@ -70,13 +70,8 @@
     box-shadow: 4px 4px rgb(0, 0, 0);
 }
 
-.btn-register:active {
-    transform: scale(0.98);
-}
-
-/* Сообщения об ошибках и успехе */
-.error-message {
-    background: #fac9d1;
+.error {
+    background: #ffe0e0;
     color: red;
     padding: 12px;
     border-radius: 8px;
@@ -87,7 +82,8 @@
     display: none;
 }
 
-.success-message {
+/* Сообщение об успехе */
+.success {
     background: #e0ffe0;
     color: green;
     padding: 12px;
@@ -97,25 +93,23 @@
     font-family: 'font1', sans-serif;
     font-size: 14px;
     display: none;
-    border-left: 4px solid green;
 }
 
 /* Ссылка на вход */
-.login-link {
+.link {
     text-align: center;
     margin-top: 25px;
     font-family: 'font1', sans-serif;
     font-size: 14px;
 }
 
-.login-link a {
+.link a {
     color: #ff6ab5;
     text-decoration: none;
-    font-weight: bold;
     transition: color 0.2s;
 }
 
-.login-link a:hover {
+.link a:hover {
     color: #e8559e;
     text-decoration: underline;
 }
