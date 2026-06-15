@@ -1,0 +1,193 @@
+/* account_style/personal_data.css - стили для личных данных */
+
+/* ======================================== */
+/* БЛОК 1: КОНТЕЙНЕР ДЛЯ ВСЕЙ ФОРМЫ */
+/* ======================================== */
+.personal-container {
+    max-width: 1000px;
+    margin-left: 100px;
+    margin-right: 50px;
+    width: auto;
+}
+
+/* ======================================== */
+/* БЛОК 2: КАРТОЧКА (БЕЛАЯ ОСНОВА) */
+/* ======================================== */
+.personal-card {
+    background: white;
+    padding: 20px 25px;
+    position: relative;
+}
+
+/* ======================================== */
+/* БЛОК 3: ЗАГОЛОВОК "ЛИЧНЫЕ ДАННЫЕ" */
+/* ======================================== */
+.personal-card h2 {
+    font-family: 'font2', sans-serif; 
+    font-size: 30px;
+    color: black;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ff6ab5;
+    padding-bottom: 8px;
+    text-align: center;
+}
+
+/* ======================================== */
+/* БЛОК 4: НЕРЕДАКТИРУЕМЫЕ ПОЛЯ */
+/* ======================================== */
+.info-field {
+    margin-bottom: 12px;
+}
+
+.info-field label {
+    display: block;
+    font-family: 'font1', sans-serif;  /* Изменено на font1 */
+    margin-bottom: 3px;
+    font-weight: bold;
+    color: #333;
+    font-size: 13px;
+}
+
+.info-value {
+    width: 100%;
+    padding: 8px 10px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: 'font1', sans-serif;
+    color: #555;
+    box-sizing: border-box;
+}
+
+/* ======================================== */
+/* БЛОК 5: КОНТЕЙНЕР ДЛЯ ГРУППЫ ПОЛЕЙ */
+/* ======================================== */
+.form-group {
+    margin-bottom: 12px;
+}
+
+/* ======================================== */
+/* БЛОК 6: НАЗВАНИЕ ПОЛЯ (ЛЕЙБЛ) */
+/* ======================================== */
+.form-group label {
+    display: block;
+    font-family: 'font1', sans-serif;  /* Изменено на font1 */
+    margin-bottom: 3px;
+    font-weight: bold;
+    color: black;
+    font-size: 13px;
+}
+
+/* ======================================== */
+/* БЛОК 7: ПОЛЯ ВВОДА (INPUT И TEXTAREA) */
+/* ======================================== */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: 'font1', sans-serif;
+}
+
+/* ======================================== */
+/* БЛОК 8: ПОЛЕ ВВОДА В ФОКУСЕ */
+/* ======================================== */
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ff6ab5;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 106, 181, 0.3);
+}
+
+/* ======================================== */
+/* БЛОК 9: ТЕКСТОВОЕ ПОЛЕ (МНОГОСТРОЧНОЕ) */
+/* ======================================== */
+.form-group textarea {
+    resize: vertical;
+    min-height: 50px;
+}
+
+/* ======================================== */
+/* БЛОК 10: КОНТЕЙНЕР ДЛЯ СООБЩЕНИЙ */
+/* ======================================== */
+.messages-container {
+    min-height: 55px;
+}
+
+/* ======================================== */
+/* БЛОК 11: СООБЩЕНИЕ ОБ УСПЕХЕ */
+/* ======================================== */
+.success-message {
+    background: #e0ffe0;
+    color: green;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    font-family: 'font1', sans-serif;
+    font-size: 13px;
+    display: none;
+    border-left: 4px solid green;
+}
+
+/* ======================================== */
+/* БЛОК 12: СООБЩЕНИЕ ОБ ОШИБКЕ */
+/* ======================================== */
+.error-message {
+    background: #ffe0e0;
+    color: red;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    font-family: 'font1', sans-serif;
+    font-size: 13px;
+    display: none;
+    border-left: 4px solid red;
+}
+
+/* ======================================== */
+/* БЛОК 13: КНОПКА "СОХРАНИТЬ ИЗМЕНЕНИЯ" */
+/* ======================================== */
+.btn-save {
+    width: 100%;
+    padding: 10px;
+    background: #ff6ab5;
+    border: 2px solid black;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'font1', sans-serif;
+    color: black;
+    margin-top: 5px;
+}
+
+/* ======================================== */
+/* БЛОК 14: КНОПКА ПРИ НАВЕДЕНИИ */
+/* ======================================== */
+.btn-save:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px rgb(0, 0, 0);
+}
+
+/* ======================================== */
+/* БЛОК 15: СЕКЦИЯ СМЕНЫ ПАРОЛЯ */
+/* ======================================== */
+.password-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd;
+}
+
+/* ======================================== */
+/* БЛОК 16: ЗАГОЛОВОК "СМЕНА ПАРОЛЯ" */
+/* ======================================== */
+.password-section h3 {
+    font-family: 'font1', sans-serif;  /* Изменено на font1 */
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
