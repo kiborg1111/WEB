@@ -60,6 +60,7 @@
                 if (handle === 1) {
                     maxValueSpan.textContent = Math.round(values[1]);
                 }
+                filterProducts();
             });
         }
     });
@@ -108,24 +109,35 @@
     }
 
     function filterProducts() {
-        const selectedBrands = Array.from(document.querySelectorAll('.brend-card input:checked')).map(cb => cb.value);
-        const selectedColors = Array.from(document.querySelectorAll('.color-card input:checked')).map(cb => cb.value);
-        const selectedSizes = Array.from(document.querySelectorAll('.size-card input:checked')).map(cb => cb.value);
-        
-        let filtered = [...allProducts];
-        
-        if (selectedBrands.length > 0) {
-            filtered = filtered.filter(p => selectedBrands.includes(p.brand));
-        }
-        if (selectedColors.length > 0) {
-            filtered = filtered.filter(p => selectedColors.includes(p.color));
-        }
-        if (selectedSizes.length > 0) {
-            filtered = filtered.filter(p => selectedSizes.includes(p.size));
-        }
-        
-        renderProducts(filtered);
+    const selectedBrands = Array.from(document.querySelectorAll('.brend-card input:checked')).map(cb => cb.value);
+    const selectedColors = Array.from(document.querySelectorAll('.color-card input:checked')).map(cb => cb.value);
+    const selectedSizes = Array.from(document.querySelectorAll('.size-card input:checked')).map(cb => cb.value);
+    
+    const slider = document.getElementById('Slider');
+    let minPrice = 2000;
+    let maxPrice = 50000;
+    if (slider && slider.noUiSlider) {
+        const values = slider.noUiSlider.get();
+        minPrice = parseFloat(values[0]);
+        maxPrice = parseFloat(values[1]);
     }
+    
+    let filtered = [...allProducts];
+    
+    filtered = filtered.filter(p => parseFloat(p.price) >= minPrice && parseFloat(p.price) <= maxPrice);
+    
+    if (selectedBrands.length > 0) {
+        filtered = filtered.filter(p => selectedBrands.includes(p.brand));
+    }
+    if (selectedColors.length > 0) {
+        filtered = filtered.filter(p => selectedColors.includes(p.color));
+    }
+    if (selectedSizes.length > 0) {
+        filtered = filtered.filter(p => selectedSizes.includes(p.size));
+    }
+    
+    renderProducts(filtered);
+}
 
     function initFilters() {
         const brands = [...new Set(allProducts.map(p => p.brand).filter(b => b))];
