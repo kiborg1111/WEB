@@ -15,20 +15,14 @@ $username = $_SESSION['username'];
 <head>
     <meta charset="UTF-8">
     <title>Мой профиль - KickZone</title>
-    <style>
-        body { font-family: Arial; background: #f5f5f5; text-align: center; padding: 50px; }
-        .card { background: white; border: 2px solid black; border-radius: 15px; padding: 30px; max-width: 500px; margin: 0 auto; }
-        .btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #ff6ab5; border: 2px solid black; border-radius: 8px; text-decoration: none; color: black; }
-        .logout-btn { background: transparent; margin-left: 10px; }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/kickzone/account_style/profile.css">
+    <link rel="stylesheet" href="/kickzone/account_style/profile_header.css">
 </head>
 <body>
-<div class="card">
-    <h1>👤 Добро пожаловать, <?= htmlspecialchars($username) ?>!</h1>
-    <p>ID: <?= $user_id ?></p>
-    <p>Это ваш личный кабинет</p>
-    <a href="/kickzone/catalog.php" class="btn">🛍️ Каталог</a>
-    <a href="logout.php" class="btn logout-btn">🚪 Выйти</a>
-</div>
+ <a href="/kickzone/index.php" class="back-home-btn">
+    <i class="fas fa-angle-left"></i> 
+</a>
+<?php include 'profile_header.php'; ?>
 </body>
 </html>

@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'font1';
+    src: url("../fonts/font1.ttf") format("truetype");
+    font-family: 'font2';
+    src: url("../fonts/font2.ttf") format("truetype");
+}
+
 .register-page {
     min-height: 80vh;
     display: flex;

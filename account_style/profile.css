@@ -1,32 +1,26 @@
-.profile-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+.back-home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
     background: white;
-}
-
-h1 {
-    text-align: center;
-    font-size: 24px;
-    font-family: 'font2', sans-serif;
-}
-
-.profile-placeholder {
-    text-align: center;
-    padding: 50px;
-    color: #666;
-    font-family: 'font1', sans-serif;
-}
-
-.back-link {
-    display: inline-block;
-    margin-top: 20px;
-    color: #ff6ab5;
+    border: 2px solid black;
+    border-radius: 8px;
+    color: black;
     text-decoration: none;
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
 }
 
-.back-link:hover {
-    text-decoration: underline;
+.back-home-btn i {
+    font-size: 14px;
+}
+
+.back-home-btn:hover {
+    background: #ff6ab5;
+    transform: translateX(-4px);
+    box-shadow: 3px 3px black;
 }

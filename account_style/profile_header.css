@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+@font-face {
+    font-family: 'font1';
+    src: url("../fonts/font1.ttf") format("truetype");
+    font-family: 'font2';
+    src: url("../fonts/font2.ttf") format("truetype");
+}
+
+.profile-sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    border-left: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+    z-index: 100;
+}
+
+.profile-user {
+    text-align: center;
+    margin: 0 -20px 50px -20px;
+    border-bottom: 2px solid black;
+}
+
+.profile-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ff6ab5;
+    transition: transform 0.3s ease;
+}
+
+
+.profile-name h3 {
+    font-family: 'font2', sans-serif;
+    font-size: 20px;
+    margin: 15px 0 15px 0;
+    color: black;
+}
+
+.profile-nav {
+    flex: 1;
+}
+
+.profile-nav ul {
+    list-style: none;
+}
+
+.profile-nav li {
+    margin-bottom: 30px;
+}
+
+/* Ссылки меню */
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    color: black;
+    text-decoration: none;
+    font-family: 'font1', sans-serif;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background: white;
+}
+
+.profile-link i {
+    width: 24px;
+    font-size: 18px;
+    color: black;
+}
+
+.profile-link span {
+    flex: 1;
+}
+
+/* Эффект при наведении */
+.profile-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px rgb(0, 0, 0);
+    background: #ff6ab5;  
+}
+
+
+/* Кнопка выхода */
+.profile-logout {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    color: black;
+    text-decoration: none;
+    font-family: 'font1', sans-serif;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.logout-link i {
+    width: 24px;
+    font-size: 18px;
+    color: black;
+}
+
+.logout-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px rgb(0, 0, 0);
+    background: #ff6ab5; 
+}
+
+
+/* Основной контент (отступ справа, чтобы не перекрывался меню) */
+.main-content {
+    margin-right: 280px;
+    padding: 30px;
+    min-height: 100vh;
+}

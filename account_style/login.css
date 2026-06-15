@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'font1';
+    src: url("../fonts/font1.ttf") format("truetype");
+    font-family: 'font2';
+    src: url("../fonts/font2.ttf") format("truetype");
+}
+
 .login-page {
     min-height: 80vh;
     display: flex;
@@ -44,7 +51,6 @@
     font-size: 16px;
     box-sizing: border-box;
     font-family: 'font1', sans-serif;
-    transition: border 0.3s, box-shadow 0.3s;
 }
 
 /* Поле ввода при фокусе */
@@ -64,9 +70,8 @@
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    font-family: 'font2', sans-serif;
+    font-family: 'font1', sans-serif;
     color: black;
-    transition: transform 0.2s, background 0.2s;
 }
 
 /* Кнопка при наведении */
