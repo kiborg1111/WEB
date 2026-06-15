@@ -41,11 +41,18 @@ async function getOrders() {
     return await response.json();
 }
 
-async function updateProfile(username, email) {
+async function updateProfile(username, email, full_name, phone, address) {
     const response = await fetch('/api/update_profile.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'update_info', username, email })
+        body: JSON.stringify({ 
+            action: 'update_info', 
+            username, 
+            email, 
+            full_name, 
+            phone, 
+            address 
+        })
     });
     return await response.json();
 }
@@ -54,7 +61,11 @@ async function changePassword(old_password, new_password) {
     const response = await fetch('/api/update_profile.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'change_password', old_password, new_password })
+        body: JSON.stringify({ 
+            action: 'change_password', 
+            old_password, 
+            new_password 
+        })
     });
     return await response.json();
 }
@@ -77,5 +88,10 @@ async function removeFromFavorites(productId) {
     const response = await fetch(`/api/favorites.php?product_id=${productId}`, {
         method: 'DELETE'
     });
+    return await response.json();
+}
+
+async function checkAuth() {
+    const response = await fetch('/api/auth.php');
     return await response.json();
 }
