@@ -30,4 +30,3 @@ if($user && password_verify($data['password'], $user['password_hash'])){
 } else {
     echo json_encode(['success' => false, 'message' => 'Неверный логин или пароль']);
 }
-?>

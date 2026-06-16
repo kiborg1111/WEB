@@ -1,4 +1,4 @@
-const API_URL = '/api/';
+const API_URL = '/kickzone/api/';
 
 async function getProducts() {
     const response = await fetch(API_URL + 'products.php');
@@ -7,7 +7,7 @@ async function getProducts() {
 }
 
 async function addToCart(productId, quantity = 1) {
-    const response = await fetch(API_URL + 'cart.php', {
+    const response = await fetch('/kickzone/api/cart.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ product_id: productId, quantity: quantity })
@@ -41,13 +41,12 @@ async function getOrders() {
     return await response.json();
 }
 
-async function updateProfile(username, email, full_name, phone, address) {
-    const response = await fetch('/api/update_profile.php', {
+async function updateProfile(email, full_name, phone, address) {
+        const response = await fetch('/kickzone/api/update_profile.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
             action: 'update_info', 
-            username, 
             email, 
             full_name, 
             phone, 
@@ -58,7 +57,7 @@ async function updateProfile(username, email, full_name, phone, address) {
 }
 
 async function changePassword(old_password, new_password) {
-    const response = await fetch('/api/update_profile.php', {
+    const response = await fetch('/kickzone/api/update_profile.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
