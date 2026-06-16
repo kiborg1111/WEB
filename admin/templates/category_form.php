@@ -4,7 +4,7 @@ include __DIR__ . '/../header.php';
 ?>
 
 <div class="form-container">
-    <h2 class="section-title" style="margin-bottom: 30px;"><?= $is_edit ? '✏️ Редактировать категорию' : '➕ Добавить категорию' ?></h2>
+    <h2 class="section-title" style="margin-bottom: 30px;"><?= $is_edit ? 'Редактировать категорию' : '➕ Добавить категорию' ?></h2>
     
     <form action="update_category.php" method="POST" enctype="multipart/form-data">
         <?php if ($is_edit): ?>

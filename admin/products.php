@@ -14,7 +14,7 @@ if(isset($_GET['delete_id'])) {
     $stmt->bind_param("i", $delete_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $product = $result->fetch_all();
+    $product = $result->fetch_assoc();
 
     if($product && $product['image']) {
         $image_path = '../uploads/products/' . $product['image'];
@@ -31,10 +31,18 @@ if(isset($_GET['delete_id'])) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT p.*, c.name as category_name
-                        FROM products p
-                        LEFT JOIN categories c ON p.category_id = c.id
+$stmt = $conn->prepare("SELECT p.*, 
+                            c.name as category_name, 
+                            col.value as color, 
+                            b.name as brand,
+                            s.value as size
+                        FROM products p 
+                        LEFT JOIN categories c ON p.category_id = c.id 
+                        LEFT JOIN colors col ON p.color_id = col.id 
+                        LEFT JOIN brands b ON p.brand_id = b.id 
+                        LEFT JOIN sizes s ON p.size_id = s.id 
                         ORDER BY p.id DESC");
+
 $stmt->execute();
 $result = $stmt->get_result();
 $products = $result->fetch_all(MYSQLI_ASSOC);

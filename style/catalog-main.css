@@ -206,3 +206,88 @@
     transform: scale(1.1);
 }
 
+/* Фильтр */
+.filter {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    border: 2px solid black;
+    border-radius: 12px;
+    margin-top: 60px;
+    background: white;
+    overflow: hidden;
+}
+
+.price {
+    font-family: 'font1', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    padding: 15px 20px 5px 20px;
+    background: white;
+}
+
+/* Слайдер */
+.slider {
+    width: auto;
+    margin: 20px 20px 0 20px;
+}
+
+/* Значения цены */
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 20px 20px 20px;
+    font-family: 'font1', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+.price-values span {
+    background: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+/* Заголовки фильтров */
+.brend, .size, .color {
+    font-family: 'font2', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    padding: 15px 20px 5px 20px;
+    border-top: 1px solid #eee;
+    background: white;
+}
+
+/* Контейнеры с опциями */
+.brend-card, .size-card, .color-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px 20px 20px;
+}
+
+.brend-card label, .size-card label, .color-card label {
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    transition: 0.2s;
+}
+
+.brend-card label:hover, .size-card label:hover, .color-card label:hover {
+    color: #ff6ab5;
+}
+
+.brend-card input, .size-card input, .color-card input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #ff6ab5;
+}

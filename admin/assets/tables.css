@@ -1,0 +1,137 @@
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    background: #f8f9fa;
+    font-family: 'font1', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 16px;
+    text-align: left;
+    border-bottom: 2px solid #e9ecef;
+    color: #495057;
+}
+
+.admin-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+    height: 80px;
+}
+
+.admin-table td:last-child {
+    vertical-align: middle;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.status-dot-pending {
+    background-color: #ffc107;
+    box-shadow: 0 0 4px #ffc107;
+}
+
+.status-dot-confirmed {
+    background-color: #0d6efd;
+    box-shadow: 0 0 4px #0d6efd;
+}
+
+.status-dot-shipped {
+    background-color: #198754;
+    box-shadow: 0 0 4px #198754;
+}
+
+.status-dot-delivered {
+    background-color: #ff6ab5;
+    box-shadow: 0 0 4px #ff6ab5;
+}
+
+.status-dot-cancelled {
+    background-color: #dc3545;
+    box-shadow: 0 0 4px #dc3545;
+}
+
+.status-select {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    font-family: 'font1', sans-serif;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    min-height: 46px;
+}
+
+.btn-icon {
+    background: #f0f0f0;
+    color: black;
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+}
+
+.btn-icon i {
+    font-size: 14px;
+}
+
+.btn-icon:hover {
+    background: #ff6ab5;
+    color: black;
+    transform: translateY(-2px);
+    border-color: black;
+    box-shadow: 4px 4px rgb(0, 0, 0);
+}
+
+.btn-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 0;
+    background: #f0f0f0;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'font1', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+}
+
+.btn-add:hover {
+    background: #ff6ab5;
+    color: black;
+    transform: translateY(-2px);
+    border-color: black;
+    box-shadow: 4px 4px rgb(0, 0, 0);
+}

@@ -23,12 +23,14 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
         <h1>Админ-панель</h1>
     </div>
     <div class="admin-user">
-        <a href="/kickzone/account/logout.php" class="logout-btn">Выход</a>
+        <a href="/kickzone/account/logout.php" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
     </div>
 </div>
 
 <div class="nav-links">
-    <a href="index.php" <?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'class="active"' : '' ?>>Заказы</a>
+    <a href="index.php" <?= (basename($_SERVER['PHP_SELF']) == 'index.php' || basename($_SERVER['PHP_SELF']) == 'order_details.php') ? 'class="active"' : '' ?>>Заказы</a>
     <a href="products.php" <?= basename($_SERVER['PHP_SELF']) == 'products.php' ? 'class="active"' : '' ?>>Товары</a>
     <a href="categories.php" <?= basename($_SERVER['PHP_SELF']) == 'categories.php' ? 'class="active"' : '' ?>>Категории</a>
 </div>

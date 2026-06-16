@@ -4,7 +4,12 @@ include __DIR__ . '/../header.php';
 ?>
 
 <div class="form-container">
-    <h2 class="section-title" style="margin-bottom: 30px;"><?= $is_edit ? '✏️ Редактировать товар' : '➕ Добавить товар' ?></h2>
+    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+        <a href="products.php" class="back-home-btn">
+            <i class="fas fa-angle-left"></i>
+        </a>
+        <h2 class="section-title" style="margin: 0;"><?= $is_edit ? 'Редактировать товар' : 'Добавить товар' ?></h2>
+    </div>
     
     <form action="/kickzone/api/admin/update_product.php" method="POST" enctype="multipart/form-data">
         <?php if ($is_edit): ?>
@@ -19,27 +24,31 @@ include __DIR__ . '/../header.php';
         <div class="row-2cols" style="display: flex; gap: 20px;">
             <div class="form-group" style="flex: 1;">
                 <label>Бренд</label>
-                <select name="brand">
+                <select name="brand_id">
                     <option value="">Выберите бренд</option>
-                    <option value="Nike" <?= isset($product) && $product['brand'] == 'Nike' ? 'selected' : '' ?>>Nike</option>
-                    <option value="Adidas" <?= isset($product) && $product['brand'] == 'Adidas' ? 'selected' : '' ?>>Adidas</option>
-                    <option value="Puma" <?= isset($product) && $product['brand'] == 'Puma' ? 'selected' : '' ?>>Puma</option>
-                    <option value="New Balance" <?= isset($product) && $product['brand'] == 'New Balance' ? 'selected' : '' ?>>New Balance</option>
-                    <option value="Asics" <?= isset($product) && $product['brand'] == 'Asics' ? 'selected' : '' ?>>Asics</option>
-                    <option value="Reebok" <?= isset($product) && $product['brand'] == 'Reebok' ? 'selected' : '' ?>>Reebok</option>
+                    <?php
+                    $brands = $conn->query("SELECT id, name FROM brands ORDER BY name");
+                    while ($brand = $brands->fetch_assoc()):
+                    ?>
+                        <option value="<?= $brand['id'] ?>" <?= isset($product) && $product['brand_id'] == $brand['id'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($brand['name']) ?>
+                        </option>
+                    <?php endwhile; ?>
                 </select>
             </div>
             
             <div class="form-group" style="flex: 1;">
                 <label>Цвет</label>
-                <select name="color">
+                <select name="color_id">
                     <option value="">Выберите цвет</option>
-                    <option value="black" <?= isset($product) && $product['color'] == 'black' ? 'selected' : '' ?>>Черный</option>
-                    <option value="white" <?= isset($product) && $product['color'] == 'white' ? 'selected' : '' ?>>Белый</option>
-                    <option value="red" <?= isset($product) && $product['color'] == 'red' ? 'selected' : '' ?>>Красный</option>
-                    <option value="blue" <?= isset($product) && $product['color'] == 'blue' ? 'selected' : '' ?>>Синий</option>
-                    <option value="grey" <?= isset($product) && $product['color'] == 'grey' ? 'selected' : '' ?>>Серый</option>
-                    <option value="green" <?= isset($product) && $product['color'] == 'green' ? 'selected' : '' ?>>Зеленый</option>
+                    <?php
+                    $colors = $conn->query("SELECT id, name, value FROM colors ORDER BY name");
+                    while ($color = $colors->fetch_assoc()):
+                    ?>
+                        <option value="<?= $color['id'] ?>" <?= isset($product) && $product['color_id'] == $color['id'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($color['name']) ?>
+                        </option>
+                    <?php endwhile; ?>
                 </select>
             </div>
         </div>
@@ -47,11 +56,16 @@ include __DIR__ . '/../header.php';
         <div class="row-2cols" style="display: flex; gap: 20px;">
             <div class="form-group" style="flex: 1;">
                 <label>Размер</label>
-                <select name="size">
+                <select name="size_id">
                     <option value="">Выберите размер</option>
-                    <?php for($s = 39; $s <= 45; $s++): ?>
-                        <option value="<?= $s ?>" <?= isset($product) && $product['size'] == $s ? 'selected' : '' ?>><?= $s ?></option>
-                    <?php endfor; ?>
+                    <?php
+                    $sizes = $conn->query("SELECT id, value FROM sizes ORDER BY sort_order");
+                    while ($size = $sizes->fetch_assoc()):
+                    ?>
+                        <option value="<?= $size['id'] ?>" <?= isset($product) && $product['size_id'] == $size['id'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($size['value']) ?>
+                        </option>
+                    <?php endwhile; ?>
                 </select>
             </div>
             
@@ -108,6 +122,29 @@ include __DIR__ . '/../header.php';
         </div>
     </form>
 </div>
+
+<style>
+.back-home-btn {
+    background: #f0f0f0;
+    color: black;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease;
+}
+
+.back-home-btn:hover {
+    background: #ff6ab5;
+    color: black;
+    transform: translateY(-2px);
+    border-color: black;
+    box-shadow: 4px 4px rgb(0, 0, 0);
+}
+</style>
 
 </body>
 </html>

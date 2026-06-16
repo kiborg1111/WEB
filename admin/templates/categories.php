@@ -6,7 +6,7 @@ include __DIR__ . '/../header.php';
 <div class="content-card">
     <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
         <h2 class="section-title">Категории</h2>
-        <a href="category_form.php" class="btn-add">+ Добавить категорию</a>
+        <a href="category_form.php" class="btn-add">+</a>
     </div>
     
     <?php if (isset($_SESSION['error'])): ?>
@@ -43,23 +43,29 @@ include __DIR__ . '/../header.php';
                         $stmt->execute();
                         $count = $stmt->get_result()->fetch_assoc()['count'];
                         ?>
-                        <tr>
-                            <td><?= $cat['id'] ?></td>
-                            <td>
+                        <tr style="height: 80px;">
+                            <td style="vertical-align: middle;"><?= $cat['id'] ?></td>
+                            <td style="vertical-align: middle;">
                                 <?php if ($cat['image']): ?>
                                     <img src="../uploads/categories/<?= htmlspecialchars($cat['image']) ?>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
                                 <?php else: ?>
-                                    —
+                                    <span style="display: inline-block; width: 50px; height: 50px; background: #f0f0f0; border-radius: 8px;"></span>
                                 <?php endif; ?>
                             </td>
-                            <td><?= htmlspecialchars($cat['name']) ?></td>
-                            <td><?= htmlspecialchars($cat['slug']) ?></td>
-                            <td><?= htmlspecialchars($cat['description']) ?></td>
-                            <td><?= $cat['sort_order'] ?></td>
-                            <td><?= $count ?></td>
-                            <td class="actions">
-                                <a href="category_form.php?id=<?= $cat['id'] ?>" class="btn-icon btn-edit">✏️</a>
-                                <a href="categories.php?delete_id=<?= $cat['id'] ?>" class="btn-icon btn-delete" onclick="return confirm('Удалить категорию?')">🗑️</a>
+                            <td style="vertical-align: middle;"><?= htmlspecialchars($cat['name']) ?></td>
+                            <td style="vertical-align: middle;"><?= htmlspecialchars($cat['slug']) ?></td>
+                            <td style="vertical-align: middle;"><?= htmlspecialchars($cat['description']) ?></td>
+                            <td style="vertical-align: middle;"><?= $cat['sort_order'] ?></td>
+                            <td style="vertical-align: middle;"><?= $count ?></td>
+                            <td style="vertical-align: middle;">
+                                <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+                                    <a href="category_form.php?id=<?= $cat['id'] ?>" class="btn-icon btn-edit">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a href="categories.php?delete_id=<?= $cat['id'] ?>" class="btn-icon btn-delete" onclick="return confirm('Удалить категорию?')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>

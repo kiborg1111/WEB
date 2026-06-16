@@ -15,9 +15,9 @@ $slug = $_POST['slug'] ?? '';
 $description = $_POST['description'] ?? '';
 $price = (float)($_POST['price'] ?? 0);
 $stock = (int)($_POST['stock'] ?? 0);
-$brand = $_POST['brand'] ?? '';
-$color = $_POST['color'] ?? '';
-$size = $_POST['size'] ?? '';
+$brand = (int)($_POST['brand_id'] ?? 0);
+$color = (int)($_POST['color_id'] ?? 0);
+$size = (int)($_POST['size_id'] ?? 0);
 
 if(empty($slug)) {
     $slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $name), '-'));
@@ -41,16 +41,16 @@ if($is_edit) {
     $id = (int)$_POST['id'];
 
     if($image_name) {
-        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, image = ?, brand = ?, color = ?, size = ? WHERE id = ?");
-        $stmt->bind_param("sisssdssssi", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size, $id);
+        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, image = ?, brand_id = ?, color_id = ?, size_id = ? WHERE id = ?");
+        $stmt->bind_param("sisssdissi", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size, $id);
     } else {
-        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, brand = ?, color = ?, size = ? WHERE id = ?");
-        $stmt->bind_param("sisssdsssi", $name, $category_id, $slug, $description, $price, $stock, $brand, $color, $size, $id);
+        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, brand_id = ?, color_id = ?, size_id = ? WHERE id = ?");
+        $stmt->bind_param("sisssdissi", $name, $category_id, $slug, $description, $price, $stock, $brand, $color, $size, $id);
     }
     $stmt->execute();
 } else {
-    $stmt = $conn->prepare("INSERT INTO products (name, category_id, slug, description, price, stock, image, brand, color, size) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sisssdssss", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size);
+    $stmt = $conn->prepare("INSERT INTO products (name, category_id, slug, description, price, stock, image, brand_id, color_id, size_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sisssdissi", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size);
     $stmt->execute();
 }
 
