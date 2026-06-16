@@ -34,6 +34,9 @@
             Нет аккаунта? <a href="register.php">Зарегистрироваться</a>
         </div>
     </div>
+    <div class="nike">
+        <img src="/kickzone/photo/nike.png" alt="кроссовки">
+    </div>
 </div>
 
 <?php include '../footer.php'; ?>

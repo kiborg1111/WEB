@@ -19,7 +19,12 @@
                 </div>
             </div>
         </div>
-        <div class="text" id="scroll-section">Новинки</div>
+        <div class="new">
+            <div class="text" id="scroll-section">Новинки</div>
+            <div class="glass">
+                <img src="/kickzone/photo/glass.png" alt="глаза">
+            </div>
+        </div>
         <div class="scroll">
             <button class="left">
                 <i class="fas fa-chevron-left"></i>

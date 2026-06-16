@@ -221,7 +221,6 @@
 .price {
     font-family: 'font1', sans-serif;
     font-size: 16px;
-    font-weight: 600;
     margin: 0;
     padding: 15px 20px 5px 20px;
     background: white;
@@ -230,18 +229,18 @@
 /* Слайдер */
 .slider {
     width: auto;
-    margin: 20px 20px 0 20px;
+    margin: 20px 35px 0 35px;
 }
 
 /* Значения цены */
 .price-values {
     display: flex;
     justify-content: space-between;
-    margin: 15px 20px 20px 20px;
+    margin: 15px 5px 20px 5px;
     font-family: 'font1', sans-serif;
     font-size: 12px;
     font-weight: bold;
-    color: #333;
+    color: black;
 }
 
 .price-values span {
@@ -253,9 +252,8 @@
 
 /* Заголовки фильтров */
 .brend, .size, .color {
-    font-family: 'font2', sans-serif;
+    font-family: 'font1', sans-serif;
     font-size: 18px;
-    font-weight: 600;
     margin: 0;
     padding: 15px 20px 5px 20px;
     border-top: 1px solid #eee;
@@ -277,7 +275,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #333;
+    color: black;
     transition: 0.2s;
 }
 

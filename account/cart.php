@@ -63,7 +63,6 @@ $username = $_SESSION['username'];
                 container.innerHTML = `
                     <div class="empty-cart">
                         <div class="empty-cart-content">
-                            <p>Ваша корзина пуста</p>
                             <div class="empty-cart-image">
                                 <img src="/kickzone/photo/cart.png" alt="Пустая корзина">
                             </div>
@@ -82,7 +81,6 @@ $username = $_SESSION['username'];
                             <th>Цена</th>
                             <th>Кол-во</th>
                             <th>Сумма</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
