@@ -20,9 +20,15 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="/kickzone/account_style/profile_header.css">
 </head>
 <body>
- <a href="/kickzone/index.php" class="back-home-btn">
-    <i class="fas fa-angle-left"></i> 
-</a>
-<?php include 'profile_header.php'; ?>
+    <a href="/kickzone/index.php" class="back-home-btn">
+        <i class="fas fa-angle-left"></i> 
+    </a>
+    <?php include 'profile_header.php'; ?>
+
+    <div class="main-content">
+        <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+            <img src="/kickzone/photo/inekemre.gif" style="width: 100%; max-width: 800px; height: auto; border-radius: 12px;">
+        </div>
+    </div>
 </body>
 </html>
