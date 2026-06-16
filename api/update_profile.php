@@ -13,31 +13,27 @@ $input = json_decode(file_get_contents('php://input'), true);
 $action = $input['action'] ?? '';
 
 if ($action === 'update_info') {
-    $username = trim($input['username'] ?? '');
     $email = trim($input['email'] ?? '');
     $full_name = trim($input['full_name'] ?? '');
     $phone = trim($input['phone'] ?? '');
     $address = trim($input['address'] ?? '');
 
-    if (empty($username) || empty($email)) {
-        echo json_encode(['success' => false, 'message' => 'Логин и email обязательны']);
+    if (empty($email)) {
+        echo json_encode(['success' => false, 'message' => 'Email обязателен']);
         exit;
     }
 
-    // Проверка уникальности username и email (кроме текущего пользователя)
-    $stmt = $conn->prepare("SELECT id FROM users WHERE (username = ? OR email = ?) AND id != ?");
-    $stmt->bind_param("ssi", $username, $email, $user_id);
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
+    $stmt->bind_param("si", $email, $user_id);
     $stmt->execute();
     if ($stmt->get_result()->num_rows > 0) {
-        echo json_encode(['success' => false, 'message' => 'Логин или email уже заняты']);
+        echo json_encode(['success' => false, 'message' => 'Email уже занят']);
         exit;
     }
 
-    $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, full_name = ?, phone = ?, address = ? WHERE id = ?");
-    $stmt->bind_param("sssssi", $username, $email, $full_name, $phone, $address, $user_id);
+    $stmt = $conn->prepare("UPDATE users SET email = ?, full_name = ?, phone = ?, address = ? WHERE id = ?");
+    $stmt->bind_param("ssssi", $email, $full_name, $phone, $address, $user_id);
     $stmt->execute();
-
-    $_SESSION['username'] = $username;
 
     echo json_encode(['success' => true, 'message' => 'Данные обновлены']);
 }

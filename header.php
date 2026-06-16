@@ -27,7 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <a href="#" class="icon-link" aria-label="Поиск">
                 <i class="fas fa-search"></i>
             </a>
-            <a href="/kickzone/cart.php" class="icon-link" aria-label="Корзина">
+            <a href="/kickzone/account/cart.php" class="icon-link" aria-label="Корзина">
                 <i class="fas fa-shopping-bag"></i>
             </a>
             <?php if (isset($_SESSION['user_id'])): ?>
