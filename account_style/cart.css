@@ -23,7 +23,7 @@ html, body {
     align-items: center;
 }
 
-/* Кнопка назад - центрирование по вертикали */
+/* Кнопка назад*/
 .back-home-btn {
     position: absolute;
     left: 35px;
@@ -182,11 +182,11 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 30px 0 30px;
     padding: 60px 20px;
     background: white;
     border: 2px solid black;
     border-radius: 12px;
-    min-height: 300px;
 }
 
 .empty-cart-content {
@@ -198,10 +198,10 @@ html, body {
 }
 
 .empty-cart-image img {
-    max-width: 200px;
+    width: 200px;
+    margin-top: 50px;
     height: auto;
     display: block;
-    margin: 0 auto;
 }
 
 .empty-cart p {
