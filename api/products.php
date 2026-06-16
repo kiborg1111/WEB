@@ -4,7 +4,7 @@ require_once '../includes/db.php';
 
 $result = $conn->query("SELECT p.*, 
                             c.name as category_name, 
-                            col.value as color, 
+                            col.name as color, 
                             b.name as brand,
                             s.value as size
                         FROM products p 

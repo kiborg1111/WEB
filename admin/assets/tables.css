@@ -23,10 +23,17 @@
     border-bottom: 1px solid #e9ecef;
     vertical-align: middle;
     height: 80px;
+    text-align: left;
 }
 
 .admin-table td:last-child {
     vertical-align: middle;
+    text-align: center;
+}
+
+.admin-table td:nth-child(1),
+.admin-table td:nth-child(6) {
+    text-align: center;
 }
 
 .status-dot {

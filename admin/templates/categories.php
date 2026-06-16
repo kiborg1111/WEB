@@ -21,7 +21,6 @@ include __DIR__ . '/../header.php';
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Изображение</th>
                     <th>Название</th>
                     <th>Slug</th>
                     <th>Описание</th>
@@ -33,7 +32,7 @@ include __DIR__ . '/../header.php';
             <tbody>
                 <?php if (empty($categories)): ?>
                     <tr>
-                        <td colspan="8" style="text-align: center;">Нет категорий</td>
+                        <td colspan="7" style="text-align: center;">Нет категорий</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($categories as $cat): ?>
@@ -45,13 +44,6 @@ include __DIR__ . '/../header.php';
                         ?>
                         <tr style="height: 80px;">
                             <td style="vertical-align: middle;"><?= $cat['id'] ?></td>
-                            <td style="vertical-align: middle;">
-                                <?php if ($cat['image']): ?>
-                                    <img src="../uploads/categories/<?= htmlspecialchars($cat['image']) ?>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
-                                <?php else: ?>
-                                    <span style="display: inline-block; width: 50px; height: 50px; background: #f0f0f0; border-radius: 8px;"></span>
-                                <?php endif; ?>
-                            </td>
                             <td style="vertical-align: middle;"><?= htmlspecialchars($cat['name']) ?></td>
                             <td style="vertical-align: middle;"><?= htmlspecialchars($cat['slug']) ?></td>
                             <td style="vertical-align: middle;"><?= htmlspecialchars($cat['description']) ?></td>
