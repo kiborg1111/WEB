@@ -60,12 +60,14 @@ fetch('http://localhost/kickzone/api/products.php')
             const products = data.products.slice(0, 6);
             
             container.innerHTML = products.map(product => `
-                <div class="card" style="background-image: url('/kickzone/uploads/products/${product.image}')">
-                    <div>
-                        <div>${product.name}</div>
-                        <div>${Number(product.price).toLocaleString()} ₽</div>
+                <a href="/kickzone/product-card.php?id=${product.id}" class="card-link">
+                    <div class="card" style="background: url('/kickzone/uploads/products/${product.image}') center/cover no-repeat;">
+                        <div>
+                            <div>${product.name}</div>
+                            <div>${Number(product.price).toLocaleString()} ₽</div>
+                        </div>
                     </div>
-                </div>
+                </a>
             `).join('');
         }
     })

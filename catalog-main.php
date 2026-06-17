@@ -93,20 +93,16 @@
         
         container.innerHTML = products.map(product => `
             <div class="card-product">
-                <img src="/kickzone/uploads/products/${product.image || 'placeholder.jpg'}" style="width: 100%; height: 200px; object-fit: cover;">
-                <h3>${product.name}</h3>
-                <p>${Number(product.price).toLocaleString()} ₽</p>
-                <button class="add-to-cart-btn" data-id="${product.id}"><i class="fa-solid fa-basket-shopping"></i></button>
+                <a href="/kickzone/product-card.php?id=${product.id}" style="text-decoration: none; color: inherit;">
+                    <img src="/kickzone/uploads/products/${product.image || 'placeholder.jpg'}" style="width: 100%; height: 200px; object-fit: cover;">
+                    <h3>${product.name}</h3>
+                    <p>${Number(product.price).toLocaleString()} ₽</p>
+                </a>
+                <button class="add-to-cart-btn" onclick="addToCart(${product.id}, 1); event.stopPropagation();">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                </button>
             </div>
         `).join('');
-        
-        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                const productId = btn.dataset.id;
-                const result = await addToCart(productId, 1);
-                alert(result.success ? 'Товар добавлен в корзину' : 'Ошибка: ' + result.message);
-            });
-        });
     }
 
     function filterProducts() {

@@ -166,7 +166,7 @@ $username = $_SESSION['username'];
             document.querySelectorAll('.remove-btn').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const productId = btn.dataset.productId;
-                    if (confirm('Удалить товар из корзины?')) {
+                    if (confirm) {
                         await removeFromCart(productId);
                         loadCart();
                     }
@@ -231,7 +231,6 @@ $username = $_SESSION['username'];
         }
     }
     
-    // Загружаем корзину при загрузке страницы
     loadCart();
 </script>
 

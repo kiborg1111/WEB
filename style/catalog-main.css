@@ -25,8 +25,8 @@
 
 .filter-cards {
     display: flex;
-    justify-content: space-between;  /* ← растягивает элементы по краям */
-    align-items: flex-start;         /* ← выравнивание по верху */
+    justify-content: space-between;  
+    align-items: flex-start;         
     gap: 40px;
     margin: 0 auto;
     padding: 0 20px;
@@ -36,7 +36,7 @@
 .filter {
     display: flex;
     flex-direction: column;
-    width: 280px;                    /* ← фиксированная ширина */
+    width: 280px;                    
     border: 2px solid black;
     border-radius: 5px;
     margin-top: 60px;
@@ -179,8 +179,8 @@
 
 /* Цена товара */
 .card-product p {
-    font-family: 'font1', sans-serif;
-    font-size: 15px;
+    font-family: 'font2', sans-serif;
+    font-size: 20px;
     font-weight: 500;
     margin: 0 10px 15px 10px;
     color: black;
