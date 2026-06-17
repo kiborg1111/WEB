@@ -13,7 +13,7 @@ $user_id = $_SESSION['user_id'];
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-if(empty($data['address'])) {
+if (empty($data['address']) || trim($data['address']) === '') {
     echo json_encode(['success' => false, 'message' => 'Укажите адрес доставки']);
     exit;
 }

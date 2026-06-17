@@ -60,7 +60,7 @@ $user = $stmt->get_result()->fetch_assoc();
                 
                 <div class="form-group">
                     <label>Телефон</label>
-                    <input type="tel" id="phone" name="phone" value="<?= htmlspecialchars($user['phone'] ?? '') ?>" placeholder="+7 (999) 123-45-67">
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" value="<?= htmlspecialchars($user['phone'] ?? '') ?>" required>
                 </div>
                 
                 <div class="form-group">
@@ -155,6 +155,46 @@ $user = $stmt->get_result()->fetch_assoc();
             errorDiv.textContent = 'Ошибка соединения с сервером';
             errorDiv.style.display = 'block';
         }
+    });
+    document.getElementById('phone').addEventListener('input', function(e) {
+        let value = this.value.replace(/\D/g, '');
+        
+        // Убираем лишние символы в начале
+        if (value.startsWith('8')) {
+            value = '7' + value.slice(1);
+        }
+        
+        if (value.length === 0) {
+            this.value = '';
+            return;
+        }
+        
+        if (!value.startsWith('7')) {
+            value = '7' + value;
+        }
+        
+        if (value.length > 11) {
+            value = value.slice(0, 11);
+        }
+        
+        let formatted = '';
+        if (value.length > 0) {
+            formatted = '+7';
+            if (value.length > 1) {
+                formatted += ' (' + value.slice(1, 4);
+            }
+            if (value.length >= 5) {
+                formatted += ') ' + value.slice(4, 7);
+            }
+            if (value.length >= 8) {
+                formatted += '-' + value.slice(7, 9);
+            }
+            if (value.length >= 10) {
+                formatted += '-' + value.slice(9, 11);
+            }
+        }
+        
+        this.value = formatted;
     });
 </script>
 

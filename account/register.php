@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация - KickZone</title>
     <link rel="stylesheet" href="/kickzone/style/header.css">
-    <link rel="stylesheet" href="/kickzone/style/footer.css">
     <link rel="stylesheet" href="/kickzone/account_style/register.css">
 </head>
 <body>
@@ -44,8 +43,6 @@
         </div>
     </div>
 </div>
-
-<?php include '../footer.php'; ?>
 
 <script>
 document.getElementById('registerForm').addEventListener('submit', async (e) => {

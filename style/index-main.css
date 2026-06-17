@@ -39,18 +39,32 @@
 }
 
 .main-container {
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    background: #ff7cbd;       
+    justify-content: space-between; 
     border-bottom: 2px solid black;
 }
-
 
 /* Слоган */
 .title {
     font-family: 'font2', sans-serif;
     font-size: 90px;
+    padding: 100px 0 100px 300px;
+    flex: 1;                    
+}
+
+
+.titlw-photo {       
     display: flex;
-    margin-left: 25vh;
-    padding: 100px 0;
+    justify-content: flex-end;
+}
+
+.titlw-photo img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    display: block;
 }
 
 .boot {

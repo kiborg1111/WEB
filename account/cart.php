@@ -25,7 +25,7 @@ $username = $_SESSION['username'];
 
 <div class="cart-container">
     <div class="cart-header">
-        <a href="/kickzone/catalog.php" class="back-home-btn">
+        <a href="#" onclick="history.back(); return false;" class="back-home-btn">
             <i class="fas fa-angle-left"></i>
         </a>
         <h2>Корзина</h2>
@@ -173,10 +173,45 @@ $username = $_SESSION['username'];
                 });
             });
             
-            document.getElementById('checkoutBtn').addEventListener('click', () => {
-                window.location.href = '/kickzone/account/checkout.php';
+            document.getElementById('checkoutBtn').addEventListener('click', async () => {
+                try {
+                    // 1. Сначала получаем данные пользователя из БД
+                    const userResponse = await fetch('/kickzone/api/get_user_info.php');
+                    const userData = await userResponse.json();
+                    
+                    let address = userData.address;
+                    let phone = userData.phone;
+                    
+                    // 2. Если адрес или телефон не заполнены - запрашиваем
+                    if (!address || address.trim() === '') {
+                            alert('Адрес доставки обязателен!');
+                            return;
+                        }
+                    
+                    if (!phone || phone.trim() === '') {
+                            alert('Номер телефона обязателен!');
+                            return;
+                        }
+                    
+                    const response = await fetch('/kickzone/api/checkout.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            address: address.trim(), 
+                            phone: phone.trim()
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        alert('Заказ №' + data.order_number + ' успешно оформлен!');
+                        window.location.href = '/kickzone/account/orders.php';
+                    }
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                }
             });
-            
         } catch (error) {
             container.innerHTML = '<div class="error">Ошибка загрузки корзины</div>';
             console.error('Ошибка:', error);

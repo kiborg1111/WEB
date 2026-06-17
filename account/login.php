@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход - KickZone</title>
     <link rel="stylesheet" href="/kickzone/style/header.css">
-    <link rel="stylesheet" href="/kickzone/style/footer.css">
     <link rel="stylesheet" href="/kickzone/account_style/login.css">
 </head>
 <body>
@@ -38,8 +37,6 @@
         <img src="/kickzone/photo/nike.png" alt="кроссовки">
     </div>
 </div>
-
-<?php include '../footer.php'; ?>
 
 <script>
 document.getElementById('loginForm').addEventListener('submit', async (e) => {

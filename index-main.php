@@ -4,6 +4,9 @@
             <div class="title">
                 Кроссовки <br> которых <br> нет у всех
             </div>
+            <div class="titlw-photo">
+                <img src="../kickzone/photo/2.png" alt="Арт">
+            </div>
         </div>
         <div class="boot">
             <img src="../kickzone/photo/1.png" alt="Кроссовок">
