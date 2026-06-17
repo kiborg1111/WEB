@@ -1,11 +1,10 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $title = "Каталог";
+$gender = isset($_GET['gender']) ? $_GET['gender'] : 'all';
 $year = date("Y");
 ?>
 
@@ -28,5 +27,10 @@ $year = date("Y");
 <?php include 'catalog-main.php'; ?>
 <?php include 'footer.php'; ?>
 <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
+
+<script>
+    const GENDER = '<?= $gender ?>';
+</script>
+
 </body>
 </html>

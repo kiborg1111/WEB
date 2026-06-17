@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $is_edit = isset($_POST['id']) && !empty($_POST['id']);
 
 $name = trim($_POST['name'] ?? '');
+$gender = $_POST['gender'] ?? 'unisex';
 $category_id = (int)($_POST['category_id'] ?? 0);
 $slug = trim($_POST['slug'] ?? '');
 $description = trim($_POST['description'] ?? '');
@@ -36,17 +37,17 @@ if ($is_edit) {
     $id = (int)$_POST['id'];
 
     if ($image_name) {
-        $stmt = $conn->prepare("UPDATE products SET name=?, category_id=?, slug=?, description=?, price=?, image=?, brand_id=?, color_id=? WHERE id=?");
-        $stmt->bind_param("sisssdssi", $name, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id, $id);
+        $stmt = $conn->prepare("UPDATE products SET name=?, gender=?, category_id=?, slug=?, description=?, price=?, image=?, brand_id=?, color_id=? WHERE id=?");
+        $stmt->bind_param("sssisssdss", $name, $gender, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id, $id);
     } else {
-        $stmt = $conn->prepare("UPDATE products SET name=?, category_id=?, slug=?, description=?, price=?, brand_id=?, color_id=? WHERE id=?");
-        $stmt->bind_param("sisssdss", $name, $category_id, $slug, $description, $price, $brand_id, $color_id, $id);
+        $stmt = $conn->prepare("UPDATE products SET name=?, gender=?, category_id=?, slug=?, description=?, price=?, brand_id=?, color_id=? WHERE id=?");
+        $stmt->bind_param("sssisssds", $name, $gender, $category_id, $slug, $description, $price, $brand_id, $color_id, $id);
     }
     $stmt->execute();
     $product_id = $id;
 } else {
-    $stmt = $conn->prepare("INSERT INTO products (name, category_id, slug, description, price, image, brand_id, color_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sisssdss", $name, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id);
+    $stmt = $conn->prepare("INSERT INTO products (name, gender, category_id, slug, description, price, image, brand_id, color_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssisssds", $name, $gender, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id);
     $stmt->execute();
     $product_id = $conn->insert_id;
 }

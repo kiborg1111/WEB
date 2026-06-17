@@ -69,7 +69,8 @@
 
     async function loadProducts() {
         try {
-            const response = await fetch('http://localhost/kickzone/api/products.php');
+            const url = GENDER ? '/kickzone/api/products.php?gender=' + GENDER : '/kickzone/api/products.php';
+            const response = await fetch(url);
             const data = await response.json();
             if (data.success) {
                 allProducts = data.products;

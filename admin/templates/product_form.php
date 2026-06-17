@@ -97,6 +97,15 @@ include __DIR__ . '/../header.php';
             <label>Название товара *</label>
             <input type="text" name="name" required value="<?= htmlspecialchars($product['name'] ?? '') ?>">
         </div>
+
+        <div class="form-group">
+            <label>Пол</label>
+            <select name="gender">
+                <option value="unisex" <?= isset($product) && $product['gender'] == 'unisex' ? 'selected' : '' ?>>Унисекс</option>
+                <option value="male" <?= isset($product) && $product['gender'] == 'male' ? 'selected' : '' ?>>Мужское</option>
+                <option value="female" <?= isset($product) && $product['gender'] == 'female' ? 'selected' : '' ?>>Женское</option>
+            </select>
+        </div>
         
         <div class="row-2cols" style="display: flex; gap: 20px;">
             <div class="form-group" style="flex: 1;">
@@ -268,7 +277,6 @@ include __DIR__ . '/../header.php';
         document.getElementById(type + '-select').value = '';
     }
 
-    // Добавление бренда
     async function addNewBrand() {
         const input = document.getElementById('new-brand-input');
         const name = input.value.trim();
