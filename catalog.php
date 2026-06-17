@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 $title = "Каталог";
 $gender = isset($_GET['gender']) ? $_GET['gender'] : 'all';
+$category = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 $year = date("Y");
 ?>
 
@@ -30,6 +31,7 @@ $year = date("Y");
 
 <script>
     const GENDER = '<?= $gender ?>';
+    const CATEGORY = '<?= $category ?>';
 </script>
 
 </body>

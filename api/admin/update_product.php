@@ -18,8 +18,25 @@ $price = (float)($_POST['price'] ?? 0);
 $brand_id = (int)($_POST['brand_id'] ?? 0);
 $color_id = (int)($_POST['color_id'] ?? 0);
 
-if (empty($slug)) {
+if (empty($slug) || $slug === '' || $slug === '0') {
     $slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $name), '-'));
+}
+
+if (empty($slug) || $slug === '0') {
+    $slug = 'product-' . time();
+}
+
+if ($is_edit) {
+    $id = (int)$_POST['id'];
+    $check = $conn->prepare("SELECT id FROM products WHERE slug = ? AND id != ?");
+    $check->bind_param("si", $slug, $id);
+} else {
+    $check = $conn->prepare("SELECT id FROM products WHERE slug = ?");
+    $check->bind_param("s", $slug);
+}
+$check->execute();
+if ($check->get_result()->num_rows > 0) {
+    $slug = $slug . '-' . time();
 }
 
 $image_name = null;
@@ -38,21 +55,20 @@ if ($is_edit) {
 
     if ($image_name) {
         $stmt = $conn->prepare("UPDATE products SET name=?, gender=?, category_id=?, slug=?, description=?, price=?, image=?, brand_id=?, color_id=? WHERE id=?");
-        $stmt->bind_param("sssisssdss", $name, $gender, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id, $id);
+        $stmt->bind_param("ssissdsiii", $name, $gender, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id, $id);
     } else {
         $stmt = $conn->prepare("UPDATE products SET name=?, gender=?, category_id=?, slug=?, description=?, price=?, brand_id=?, color_id=? WHERE id=?");
-        $stmt->bind_param("sssisssds", $name, $gender, $category_id, $slug, $description, $price, $brand_id, $color_id, $id);
+        $stmt->bind_param("ssissdiii", $name, $gender, $category_id, $slug, $description, $price, $brand_id, $color_id, $id);
     }
     $stmt->execute();
     $product_id = $id;
 } else {
     $stmt = $conn->prepare("INSERT INTO products (name, gender, category_id, slug, description, price, image, brand_id, color_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssisssds", $name, $gender, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id);
+    $stmt->bind_param("ssissdsii", $name, $gender, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id);
     $stmt->execute();
     $product_id = $conn->insert_id;
 }
 
-// --- Сохранение размеров ---
 if ($product_id) {
     $conn->query("DELETE FROM product_sizes WHERE product_id = $product_id");
     
