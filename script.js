@@ -7,12 +7,26 @@ async function getProducts() {
 }
 
 async function addToCart(productId, quantity = 1) {
-    const response = await fetch('/kickzone/api/cart.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product_id: productId, quantity: quantity })
-    });
-    return await response.json();
+    try {
+        const response = await fetch('/kickzone/api/cart.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ product_id: productId, quantity: quantity })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Товар добавлен в корзину', 'success');
+        } else {
+            showNotification(data.message, 'error');
+        }
+        
+        return data;
+    } catch (error) {
+        console.error('Ошибка:', error);
+        showNotification('Ошибка при добавлении', 'error');
+    }
 }
 
 async function getCart() {

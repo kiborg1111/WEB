@@ -8,13 +8,19 @@ if (!$product_id) {
     header('Location: /kickzone/catalog.php');
     exit();
 }
-
 $stmt = $conn->prepare("
-    SELECT p.*, c.name as category_name, cl.name as color_name, cl.value as color_value
+    SELECT p.*, 
+           c.name as category_name, 
+           cl.name as color_name, 
+           cl.value as color_value,
+           GROUP_CONCAT(DISTINCT s.value ORDER BY s.sort_order SEPARATOR ', ') as size_value
     FROM products p 
     LEFT JOIN categories c ON p.category_id = c.id 
     LEFT JOIN colors cl ON p.color_id = cl.id
+    LEFT JOIN product_sizes ps ON p.id = ps.product_id
+    LEFT JOIN sizes s ON ps.size_id = s.id
     WHERE p.id = ?
+    GROUP BY p.id
 ");
 $stmt->bind_param("i", $product_id);
 $stmt->execute();

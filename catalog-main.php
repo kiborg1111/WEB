@@ -30,8 +30,30 @@
     </div>
 </div>
 
+<!-- Уведомление -->
+<div id="cartNotification" class="cart-notification">
+    <span id="notificationMessage">Товар добавлен в корзину</span>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
 <script>
+    function showNotification(message, type = 'success') {
+        const notification = document.getElementById('cartNotification');
+        const messageEl = document.getElementById('notificationMessage');
+        
+        notification.classList.remove('success', 'error', 'show', 'hide');
+        notification.classList.add(type);
+        
+        messageEl.textContent = message || 'Товар добавлен в корзину';
+        notification.classList.add('show');
+        
+        clearTimeout(window.notificationTimeout);
+        window.notificationTimeout = setTimeout(() => {
+            notification.classList.remove('show');
+            notification.classList.add('hide');
+        }, 3000);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const slider = document.getElementById('Slider');
         
@@ -87,7 +109,7 @@
         if (!container) return;
         
         if (products.length === 0) {
-            container.innerHTML = '<div class="card-product">Нет товаров</div>';
+            container.innerHTML = '<div class="no-product">Нет товаров</div>';
             return;
         }
         

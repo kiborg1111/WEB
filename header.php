@@ -20,7 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li><a href="/kickzone/catalog.php?gender=all">Каталог</a></li>
                 <li><a href="/kickzone/catalog.php?gender=male">Мужское</a></li>
                 <li><a href="/kickzone/catalog.php?gender=female">Женское</a></li>
-                <li><a href="index.php">О нас</a></li>
+                <li><a href="about.php">О нас</a></li>
             </ul>
         </nav>
         <div class="header-icons">
