@@ -18,16 +18,15 @@ include __DIR__ . '/../header.php';
                     <th>Категория</th>
                     <th>Бренд</th>
                     <th>Цвет</th>
-                    <th>Размер</th>
+                    <th>Размеры</th>
                     <th>Цена</th>
-                    <th>Остаток</th>
                     <th>Действия</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($products)): ?>
                     <tr>
-                        <td colspan="10" style="text-align: center;">Нет товаров</td>
+                        <td colspan="9" style="text-align: center;">Нет товаров</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($products as $product): ?>
@@ -43,10 +42,9 @@ include __DIR__ . '/../header.php';
                             <td style="vertical-align: middle;"><?= htmlspecialchars($product['name']) ?></td>
                             <td style="vertical-align: middle;"><?= htmlspecialchars($product['category_name'] ?? 'Без категории') ?></td>
                             <td style="vertical-align: middle;"><?= htmlspecialchars($product['brand'] ?? '') ?></td>
-                            <td style="vertical-align: middle;"><?= htmlspecialchars($product['color'] ?? '') ?></td>
-                            <td style="vertical-align: middle;"><?= htmlspecialchars($product['size'] ?? '') ?></td>
+                            <td style="vertical-align: middle; text-align: left;"><?= htmlspecialchars($product['color'] ?? '') ?></td>
+                            <td style="vertical-align: middle;"><?= htmlspecialchars($product['sizes'] ?? '') ?></td>
                             <td style="vertical-align: middle;"><?= number_format($product['price'], 2) ?> ₽</td>
-                            <td style="vertical-align: middle;"><?= $product['stock'] ?></td>
                             <td style="vertical-align: middle;">
                                 <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
                                     <a href="product_form.php?id=<?= $product['id'] ?>" class="btn-icon btn-edit">

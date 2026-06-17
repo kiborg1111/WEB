@@ -37,6 +37,47 @@ include __DIR__ . '/../header.php';
     .hidden {
         display: none !important;
     }
+    .size-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+    .size-row select {
+        flex: 2;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+    .size-row input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+    .size-row button {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .size-row button:hover {
+        background: #c82333;
+    }
+    .add-size-btn {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .add-size-btn:hover {
+        background: #218838;
+    }
 </style>
 
 <div class="form-container">
@@ -101,39 +142,50 @@ include __DIR__ . '/../header.php';
             </div>
         </div>
         
-        <div class="row-2cols" style="display: flex; gap: 20px;">
-            <div class="form-group" style="flex: 1;">
-                <label>Размер</label>
-                <select name="size_id" id="size-select">
-                    <option value="">Выберите размер</option>
+        <div class="form-group">
+            <label>Размеры и остатки</label>
+            <div id="sizes-container">
+                <?php if ($is_edit && isset($product['id'])): ?>
                     <?php
-                    $sizes = $conn->query("SELECT id, value FROM sizes ORDER BY sort_order");
-                    while ($size = $sizes->fetch_assoc()):
+                    $sizesData = $conn->query("
+                        SELECT ps.*, s.value as size_name 
+                        FROM product_sizes ps 
+                        JOIN sizes s ON ps.size_id = s.id 
+                        WHERE ps.product_id = " . $product['id'] . "
+                        ORDER BY s.sort_order
+                    ");
+                    while ($row = $sizesData->fetch_assoc()):
                     ?>
-                        <option value="<?= $size['id'] ?>" <?= isset($product) && $product['size_id'] == $size['id'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($size['value']) ?>
-                        </option>
+                    <div class="size-row">
+                        <select name="size_ids[]">
+                            <?php
+                            $allSizes = $conn->query("SELECT id, value FROM sizes ORDER BY sort_order");
+                            while ($size = $allSizes->fetch_assoc()):
+                            ?>
+                                <option value="<?= $size['id'] ?>" <?= $row['size_id'] == $size['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($size['value']) ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                        <input type="number" name="stocks[]" placeholder="Остаток" value="<?= $row['stock'] ?>">
+                        <button type="button" onclick="this.parentElement.remove()">✕</button>
+                    </div>
                     <?php endwhile; ?>
-                    <option value="add_new_size">+ Добавить новый</option>
-                </select>
-                <div id="size-add-form" class="inline-add hidden">
-                    <input type="text" id="new-size-input" placeholder="Размер (например, 46)">
-                    <button type="button" onclick="addNewSize()">Добавить</button>
-                    <button type="button" class="cancel-btn" onclick="cancelAdd('size')">Отмена</button>
-                </div>
+                <?php endif; ?>
             </div>
-            
-            <div class="form-group" style="flex: 1;">
-                <label>Категория *</label>
-                <select name="category_id" required>
-                    <option value="">Выберите категорию</option>
-                    <?php foreach ($categories as $cat): ?>
-                        <option value="<?= $cat['id'] ?>" <?= isset($product) && $product['category_id'] == $cat['id'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($cat['name']) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+            <button type="button" class="add-size-btn" onclick="addSizeRow()">+ Добавить размер</button>
+        </div>
+        
+        <div class="form-group">
+            <label>Категория *</label>
+            <select name="category_id" required>
+                <option value="">Выберите категорию</option>
+                <?php foreach ($categories as $cat): ?>
+                    <option value="<?= $cat['id'] ?>" <?= isset($product) && $product['category_id'] == $cat['id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($cat['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         
         <div class="form-group">
@@ -151,11 +203,6 @@ include __DIR__ . '/../header.php';
             <div class="form-group" style="flex: 1;">
                 <label>Цена *</label>
                 <input type="number" step="0.01" name="price" required value="<?= $product['price'] ?? '' ?>">
-            </div>
-            
-            <div class="form-group" style="flex: 1;">
-                <label>Количество на складе</label>
-                <input type="number" name="stock" value="<?= $product['stock'] ?? 0 ?>">
             </div>
         </div>
         
@@ -201,7 +248,6 @@ include __DIR__ . '/../header.php';
 </style>
 
 <script>
-    // Показ формы добавления
     document.getElementById('brand-select').addEventListener('change', function() {
         if (this.value === 'add_new_brand') {
             document.getElementById('brand-add-form').classList.remove('hidden');
@@ -216,15 +262,7 @@ include __DIR__ . '/../header.php';
             document.getElementById('color-add-form').classList.add('hidden');
         }
     });
-    document.getElementById('size-select').addEventListener('change', function() {
-        if (this.value === 'add_new_size') {
-            document.getElementById('size-add-form').classList.remove('hidden');
-        } else {
-            document.getElementById('size-add-form').classList.add('hidden');
-        }
-    });
 
-    // Отмена добавления
     function cancelAdd(type) {
         document.getElementById(type + '-add-form').classList.add('hidden');
         document.getElementById(type + '-select').value = '';
@@ -256,7 +294,6 @@ include __DIR__ . '/../header.php';
         }
     }
 
-    // Добавление цвета
     async function addNewColor() {
         const input = document.getElementById('new-color-input');
         const name = input.value.trim();
@@ -282,30 +319,37 @@ include __DIR__ . '/../header.php';
         }
     }
 
-    // Добавление размера
-    async function addNewSize() {
-        const input = document.getElementById('new-size-input');
-        const value = input.value.trim();
-        if (!value) return alert('Введите размер');
+    function addSizeRow() {
+        const container = document.getElementById('sizes-container');
+        const row = document.createElement('div');
+        row.className = 'size-row';
         
-        const response = await fetch('/kickzone/api/admin/add_size.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ value })
-        });
-        const data = await response.json();
-        if (data.success) {
-            const select = document.getElementById('size-select');
-            const option = document.createElement('option');
-            option.value = data.id;
-            option.textContent = value;
-            select.insertBefore(option, select.lastElementChild);
-            select.value = data.id;
-            input.value = '';
-            document.getElementById('size-add-form').classList.add('hidden');
-        } else {
-            alert('Ошибка: ' + data.message);
-        }
+        const select = document.createElement('select');
+        select.name = 'size_ids[]';
+        <?php
+        $allSizes = $conn->query("SELECT id, value FROM sizes ORDER BY sort_order");
+        while ($size = $allSizes->fetch_assoc()):
+        ?>
+            const opt<?= $size['id'] ?> = document.createElement('option');
+            opt<?= $size['id'] ?>.value = '<?= $size['id'] ?>';
+            opt<?= $size['id'] ?>.textContent = '<?= htmlspecialchars($size['value']) ?>';
+            select.appendChild(opt<?= $size['id'] ?>);
+        <?php endwhile; ?>
+        
+        const stockInput = document.createElement('input');
+        stockInput.type = 'number';
+        stockInput.name = 'stocks[]';
+        stockInput.placeholder = 'Остаток';
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.textContent = '✕';
+        deleteBtn.onclick = function() { this.parentElement.remove(); };
+        
+        row.appendChild(select);
+        row.appendChild(stockInput);
+        row.appendChild(deleteBtn);
+        container.appendChild(row);
     }
 </script>
 

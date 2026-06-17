@@ -9,49 +9,65 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $is_edit = isset($_POST['id']) && !empty($_POST['id']);
 
-$name = $_POST['name'] ?? '';
+$name = trim($_POST['name'] ?? '');
 $category_id = (int)($_POST['category_id'] ?? 0);
-$slug = $_POST['slug'] ?? '';
-$description = $_POST['description'] ?? '';
+$slug = trim($_POST['slug'] ?? '');
+$description = trim($_POST['description'] ?? '');
 $price = (float)($_POST['price'] ?? 0);
-$stock = (int)($_POST['stock'] ?? 0);
-$brand = (int)($_POST['brand_id'] ?? 0);
-$color = (int)($_POST['color_id'] ?? 0);
-$size = (int)($_POST['size_id'] ?? 0);
+$brand_id = (int)($_POST['brand_id'] ?? 0);
+$color_id = (int)($_POST['color_id'] ?? 0);
 
-if(empty($slug)) {
+if (empty($slug)) {
     $slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $name), '-'));
 }
 
 $image_name = null;
-if(isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
     $upload_dir = '../../uploads/products/';
-    if(!file_exists($upload_dir)) {
+    if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
-
     $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
     $image_name = uniqid() . '.' . $ext;
-    $upload_path = $upload_dir . $image_name;
-
-    move_uploaded_file($_FILES['image']['tmp_name'], $upload_path);
+    move_uploaded_file($_FILES['image']['tmp_name'], $upload_dir . $image_name);
 }
 
-if($is_edit) {
+if ($is_edit) {
     $id = (int)$_POST['id'];
 
-    if($image_name) {
-        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, image = ?, brand_id = ?, color_id = ?, size_id = ? WHERE id = ?");
-        $stmt->bind_param("sisssdissi", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size, $id);
+    if ($image_name) {
+        $stmt = $conn->prepare("UPDATE products SET name=?, category_id=?, slug=?, description=?, price=?, image=?, brand_id=?, color_id=? WHERE id=?");
+        $stmt->bind_param("sisssdssi", $name, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id, $id);
     } else {
-        $stmt = $conn->prepare("UPDATE products SET name = ?, category_id = ?, slug = ?, description = ?, price = ?, stock = ?, brand_id = ?, color_id = ?, size_id = ? WHERE id = ?");
-        $stmt->bind_param("sisssdissi", $name, $category_id, $slug, $description, $price, $stock, $brand, $color, $size, $id);
+        $stmt = $conn->prepare("UPDATE products SET name=?, category_id=?, slug=?, description=?, price=?, brand_id=?, color_id=? WHERE id=?");
+        $stmt->bind_param("sisssdss", $name, $category_id, $slug, $description, $price, $brand_id, $color_id, $id);
     }
     $stmt->execute();
+    $product_id = $id;
 } else {
-    $stmt = $conn->prepare("INSERT INTO products (name, category_id, slug, description, price, stock, image, brand_id, color_id, size_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sisssdissi", $name, $category_id, $slug, $description, $price, $stock, $image_name, $brand, $color, $size);
+    $stmt = $conn->prepare("INSERT INTO products (name, category_id, slug, description, price, image, brand_id, color_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sisssdss", $name, $category_id, $slug, $description, $price, $image_name, $brand_id, $color_id);
     $stmt->execute();
+    $product_id = $conn->insert_id;
+}
+
+// --- Сохранение размеров ---
+if ($product_id) {
+    $conn->query("DELETE FROM product_sizes WHERE product_id = $product_id");
+    
+    $size_ids = $_POST['size_ids'] ?? [];
+    $stocks = $_POST['stocks'] ?? [];
+    
+    for ($i = 0; $i < count($size_ids); $i++) {
+        if (!empty($size_ids[$i])) {
+            $size = (int)$size_ids[$i];
+            $stock = (int)($stocks[$i] ?? 0);
+            
+            $stmt = $conn->prepare("INSERT INTO product_sizes (product_id, size_id, stock) VALUES (?, ?, ?)");
+            $stmt->bind_param("iii", $product_id, $size, $stock);
+            $stmt->execute();
+        }
+    }
 }
 
 header('Location: /kickzone/admin/products.php');

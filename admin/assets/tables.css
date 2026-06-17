@@ -26,13 +26,11 @@
     text-align: left;
 }
 
-.admin-table td:last-child {
-    vertical-align: middle;
+.admin-table td:first-child {
     text-align: center;
 }
 
-.admin-table td:nth-child(1),
-.admin-table td:nth-child(6) {
+.admin-table td:last-child {
     text-align: center;
 }
 

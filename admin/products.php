@@ -35,14 +35,15 @@ $stmt = $conn->prepare("SELECT p.*,
                             c.name as category_name, 
                             col.name as color, 
                             b.name as brand,
-                            s.value as size
-                        FROM products p 
-                        LEFT JOIN categories c ON p.category_id = c.id 
-                        LEFT JOIN colors col ON p.color_id = col.id 
-                        LEFT JOIN brands b ON p.brand_id = b.id 
-                        LEFT JOIN sizes s ON p.size_id = s.id 
+                            GROUP_CONCAT(DISTINCT s.value ORDER BY s.sort_order SEPARATOR ', ') as sizes
+                        FROM products p
+                        LEFT JOIN categories c ON p.category_id = c.id
+                        LEFT JOIN colors col ON p.color_id = col.id
+                        LEFT JOIN brands b ON p.brand_id = b.id
+                        LEFT JOIN product_sizes ps ON p.id = ps.product_id
+                        LEFT JOIN sizes s ON ps.size_id = s.id
+                        GROUP BY p.id
                         ORDER BY p.id DESC");
-
 $stmt->execute();
 $result = $stmt->get_result();
 $products = $result->fetch_all(MYSQLI_ASSOC);
