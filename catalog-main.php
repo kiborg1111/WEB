@@ -2,7 +2,15 @@
     <div class="main1">
         <div class="main-container1">
             <div class="title1">
-                Каталог
+                <?php
+                if ($gender === 'male') {
+                    echo 'Мужское';
+                } elseif ($gender === 'female') {
+                    echo 'Женское';
+                } else {
+                    echo 'Каталог';
+                }
+                ?>
             </div>
         </div>
         <div class="filter-cards">

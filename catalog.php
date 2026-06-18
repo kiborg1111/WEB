@@ -3,9 +3,20 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$title = "Каталог";
 $gender = isset($_GET['gender']) ? $_GET['gender'] : 'all';
 $category = isset($_GET['category']) ? (int)$_GET['category'] : 0;
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+if ($gender === 'male') {
+    $title = "Мужское";
+} elseif ($gender === 'female') {
+    $title = "Женское";
+} elseif (!empty($search)) {
+    $title = "Результаты поиска: " . htmlspecialchars($search);
+} else {
+    $title = "Каталог";
+}
+
 $year = date("Y");
 ?>
 
@@ -14,7 +25,7 @@ $year = date("Y");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title;?></title>
+    <title><?php echo $title; ?> - KickZone</title>
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/catalog-main.css">
     <link rel="stylesheet" href="style/footer.css">
@@ -32,6 +43,7 @@ $year = date("Y");
 <script>
     const GENDER = '<?= $gender ?>';
     const CATEGORY = '<?= $category ?>';
+    const SEARCH = '<?= addslashes($search) ?>';
 </script>
 
 </body>

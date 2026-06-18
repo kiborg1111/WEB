@@ -184,14 +184,20 @@ $username = $_SESSION['username'];
                     
                     // 2. Если адрес или телефон не заполнены - запрашиваем
                     if (!address || address.trim() === '') {
-                            alert('Адрес доставки обязателен!');
-                            return;
+                        const confirmRedirect = confirm('Адрес доставки обязателен!\nДобавишь прямо сейчас?');
+                        if (confirmRedirect) {
+                            window.location.href = '/kickzone/account/personal_data.php';
                         }
+                        return;
+                    }
                     
                     if (!phone || phone.trim() === '') {
-                            alert('Номер телефона обязателен!');
-                            return;
+                        const confirmRedirect = confirm('Номер телефона обязателен!\nДобавишь прямо сейчас?');
+                        if (confirmRedirect) {
+                            window.location.href = '/kickzone/account/personal_data.php';
                         }
+                        return;
+                    }
                     
                     const response = await fetch('/kickzone/api/checkout.php', {
                         method: 'POST',
