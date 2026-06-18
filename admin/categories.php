@@ -19,19 +19,6 @@ if(isset($_GET['delete_id'])) {
     if($count > 0) {
         $_SESSION['error'] = "Нельзя удалить категорию, в которой есть товары";
     } else {
-        $stmt = $conn->prepare("SELECT image FROM categories WHERE id = ?");
-        $stmt->bind_param("i", $delete_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $category = $result->fetch_assoc();
-
-        if($category && $category['image']) {
-            $image_path = '../uploads/categories/' . $category['image'];
-            if(file_exists($image_path)){
-                unlink($image_path);
-            }
-        }
-
         $stmt = $conn->prepare("DELETE FROM categories WHERE id = ?");
         $stmt->bind_param("i", $delete_id);
         $stmt->execute();

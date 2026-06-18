@@ -2,21 +2,35 @@
     <div class="main1">
         <div class="main-container1">
             <div class="title1">
-                Каталог
+                <?php
+                if ($gender === 'male') {
+                    echo 'Мужское';
+                } elseif ($gender === 'female') {
+                    echo 'Женское';
+                } else {
+                    echo 'Каталог';
+                }
+                ?>
             </div>
         </div>
         <div class="filter-cards">
             <div class="filter">
+                <div class="brend">Категория</div>
+                <div class="brend-card" id="category-filters"></div>
+
                 <div class="price">Цена</div>
                 <div class="slider" id="Slider"></div>
                 <div class="price-values">
                     <span id="sliderMinValue"></span>
                     <span id="sliderMaxValue"></span>
                 </div>
+
                 <div class="brend">Бренд</div>
                 <div class="brend-card" id="brand-filters"></div>
+
                 <div class="size">Размер</div>
                 <div class="size-card" id="size-filters"></div>
+
                 <div class="color">Цвет</div>
                 <div class="color-card" id="color-filters"></div>
             </div>
@@ -128,9 +142,10 @@
     }
 
     function filterProducts() {
-        const selectedBrands = Array.from(document.querySelectorAll('.brend-card input:checked')).map(cb => cb.value);
-        const selectedColors = Array.from(document.querySelectorAll('.color-card input:checked')).map(cb => cb.value);
-        const selectedSizes = Array.from(document.querySelectorAll('.size-card input:checked')).map(cb => cb.value);
+        const selectedCategories = Array.from(document.querySelectorAll('#category-filters input:checked')).map(cb => cb.value);
+        const selectedBrands = Array.from(document.querySelectorAll('#brand-filters input:checked')).map(cb => cb.value);
+        const selectedColors = Array.from(document.querySelectorAll('#color-filters input:checked')).map(cb => cb.value);
+        const selectedSizes = Array.from(document.querySelectorAll('#size-filters input:checked')).map(cb => cb.value);
         
         const slider = document.getElementById('Slider');
         let minPrice = 2000;
@@ -145,6 +160,9 @@
         
         filtered = filtered.filter(p => parseFloat(p.price) >= minPrice && parseFloat(p.price) <= maxPrice);
         
+        if (selectedCategories.length > 0) {
+            filtered = filtered.filter(p => selectedCategories.includes(p.category_name));
+        }
         if (selectedBrands.length > 0) {
             filtered = filtered.filter(p => selectedBrands.includes(p.brand));
         }
@@ -163,6 +181,7 @@
     }
 
     function initFilters() {
+        const categories = [...new Set(allProducts.map(p => p.category_name).filter(c => c))];
         const brands = [...new Set(allProducts.map(p => p.brand).filter(b => b))];
         const colors = [...new Set(allProducts.map(p => p.color).filter(c => c))];
         const sizes = [...new Set(
@@ -171,10 +190,14 @@
                 .filter(s => s)
         )];
         
+        const categoryContainer = document.getElementById('category-filters');
         const brandContainer = document.getElementById('brand-filters');
         const colorContainer = document.getElementById('color-filters');
         const sizeContainer = document.getElementById('size-filters');
         
+        if (categoryContainer) {
+            categoryContainer.innerHTML = categories.map(c => `<label><input type="checkbox" value="${c}" class="filter-checkbox"> ${c}</label>`).join('');
+        }
         if (brandContainer) {
             brandContainer.innerHTML = brands.map(b => `<label><input type="checkbox" value="${b}" class="filter-checkbox"> ${b}</label>`).join('');
         }
