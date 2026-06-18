@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="/kickzone/style/header.css">
+
 <div class="header">
     <div class="header-container">
         <div class="logo">
@@ -20,16 +21,30 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li><a href="/kickzone/catalog.php?gender=all">Каталог</a></li>
                 <li><a href="/kickzone/catalog.php?gender=male">Мужское</a></li>
                 <li><a href="/kickzone/catalog.php?gender=female">Женское</a></li>
-                <li><a href="about.php">О нас</a></li>
+                <li><a href="/kickzone/about.php">О нас</a></li>
             </ul>
         </nav>
+
         <div class="header-icons">
-            <a href="#" class="icon-link" aria-label="Поиск">
-                <i class="fas fa-search"></i>
-            </a>
+            <div class="search-wrapper">
+                <button class="search-toggle" id="searchToggle" aria-label="Поиск">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div class="search-dropdown" id="searchDropdown">
+                    <form id="searchForm" action="/kickzone/catalog.php" method="GET">
+                        <input type="text" id="searchInput" name="search" placeholder="Поиск товаров..." class="search-input-dropdown" autocomplete="off">
+                        <button type="submit" class="search-btn-dropdown">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
             <a href="/kickzone/account/cart.php" class="icon-link" aria-label="Корзина">
                 <i class="fas fa-shopping-bag"></i>
             </a>
+
             <?php if (isset($_SESSION['user_id'])): ?>
                 <?php if ($_SESSION['role'] === 'admin'): ?>
                     <a href="/kickzone/admin/index.php" class="icon-link" aria-label="Личный кабинет">
@@ -48,3 +63,106 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchToggle = document.getElementById('searchToggle');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+    const suggestions = document.getElementById('searchSuggestions');
+
+    let isOpen = false;
+    let searchTimeout = null;
+
+    searchToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isOpen = !isOpen;
+        searchDropdown.classList.toggle('active', isOpen);
+        if (isOpen) {
+            searchInput.focus();
+            searchInput.value = '';
+            suggestions.innerHTML = '';
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!searchDropdown.contains(e.target) && e.target !== searchToggle && !searchToggle.contains(e.target)) {
+            searchDropdown.classList.remove('active');
+            isOpen = false;
+        }
+    });
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+
+        clearTimeout(searchTimeout);
+
+        if (query.length < 2) {
+            suggestions.innerHTML = '';
+            return;
+        }
+
+        searchTimeout = setTimeout(async function() {
+            try {
+                const response = await fetch('/kickzone/api/products.php?search=' + encodeURIComponent(query));
+                const data = await response.json();
+
+                if (data.success && data.products.length > 0) {
+                    const limited = data.products.slice(0, 5);
+                    suggestions.innerHTML = limited.map(p => `
+                        <a href="/kickzone/product-card.php?id=${p.id}" class="suggestion-item">
+                            <img src="/kickzone/uploads/products/${p.image || 'placeholder.jpg'}" alt="${p.name}">
+                            <div class="suggestion-info">
+                                <div class="suggestion-name">${p.name}</div>
+                                <div class="suggestion-price">${Number(p.price).toLocaleString()} ₽</div>
+                            </div>
+                        </a>
+                    `).join('');
+                } else {
+                    suggestions.innerHTML = '<div class="suggestion-empty">Ничего не найдено</div>';
+                }
+            } catch (error) {
+                console.error('Ошибка поиска:', error);
+            }
+        }, 300);
+    });
+
+    searchForm.addEventListener('submit', function(e) {
+        const query = searchInput.value.trim();
+        if (!query || query.length < 2) {
+            e.preventDefault();
+            showNotification('Введите минимум 2 символа для поиска', 'error');
+            return;
+        }
+        searchDropdown.classList.remove('active');
+        isOpen = false;
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isOpen) {
+            searchDropdown.classList.remove('active');
+            isOpen = false;
+        }
+    });
+});
+
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('cartNotification');
+    if (notification) {
+        const messageEl = document.getElementById('notificationMessage');
+        notification.classList.remove('success', 'error', 'show', 'hide');
+        notification.classList.add(type);
+        messageEl.textContent = message;
+        notification.classList.add('show');
+
+        clearTimeout(window.notificationTimeout);
+        window.notificationTimeout = setTimeout(() => {
+            notification.classList.remove('show');
+            notification.classList.add('hide');
+        }, 3000);
+    } else {
+        alert(message);
+    }
+}
+</script>

@@ -5,17 +5,11 @@
     src: url("../fonts/font2.ttf") format("truetype");
 }
 
-/* ======================================== */
-/* КОНТЕЙНЕР ЗАКАЗОВ */
-/* ======================================== */
 .orders-container {
     margin: 0 auto;
     padding: 0 15px;
 }
 
-/* ======================================== */
-/* ШАПКА ЗАКАЗОВ */
-/* ======================================== */
 .orders-header {
     width: 100%;
     background: white;
@@ -41,7 +35,6 @@
     margin: 0;
     text-align: center;
 }
-
 
 .orders-filters {
     display: flex;
@@ -95,7 +88,6 @@
     overflow: hidden;
 }
 
-/* Шапка карточки заказа */
 .order-header {
     display: flex;
     justify-content: space-between;
@@ -123,7 +115,6 @@
     color: #666;
 }
 
-/* Статус заказа */
 .order-status {
     display: inline-block;
     padding: 5px 15px;
@@ -159,7 +150,6 @@
     color: #721c24;
 }
 
-/* Тело карточки заказа */
 .order-body {
     padding: 20px;
 }
@@ -190,3 +180,139 @@
     font-weight: 500;
 }
 
+@media (max-width: 768px) {
+    .orders-container {
+        padding: 0 10px;
+    }
+
+    .orders-header {
+        padding: 10px 0;
+        margin-bottom: 20px;
+    }
+
+    .orders-header-content h2 {
+        font-size: 20px;
+    }
+
+    .orders-filters {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .filter-btn {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .order-card {
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 15px;
+    }
+
+    .order-info {
+        gap: 12px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .order-number {
+        font-size: 18px;
+    }
+
+    .order-date {
+        font-size: 12px;
+    }
+
+    .order-status {
+        font-size: 11px;
+        padding: 4px 12px;
+    }
+
+    .order-body {
+        padding: 12px 15px;
+    }
+
+    .order-details {
+        gap: 6px;
+    }
+
+    .order-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .detail-label {
+        font-size: 12px;
+        min-width: unset;
+    }
+
+    .detail-value {
+        font-size: 13px;
+    }
+
+    .filter-divider {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .orders-container {
+        padding: 0 6px;
+    }
+
+    .orders-header-content h2 {
+        font-size: 18px;
+    }
+
+    .orders-filters {
+        gap: 12px;
+    }
+
+    .filter-btn {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .order-number {
+        font-size: 15px;
+    }
+
+    .order-date {
+        font-size: 11px;
+    }
+
+    .order-status {
+        font-size: 10px;
+        padding: 3px 10px;
+        border-radius: 12px;
+    }
+
+    .order-header {
+        padding: 10px 12px;
+    }
+
+    .order-body {
+        padding: 10px 12px;
+    }
+
+    .detail-label {
+        font-size: 11px;
+    }
+
+    .detail-value {
+        font-size: 12px;
+    }
+
+    .filter-divider {
+        margin-bottom: 15px;
+    }
+}

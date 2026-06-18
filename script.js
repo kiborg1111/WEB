@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 const API_URL = '/kickzone/api/';
 
 async function getProducts() {
@@ -13,42 +19,20 @@ async function addToCart(productId, quantity = 1) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: productId, quantity: quantity })
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
             showNotification('Товар добавлен в корзину', 'success');
         } else {
             showNotification(data.message, 'error');
         }
-        
+
         return data;
     } catch (error) {
         console.error('Ошибка:', error);
         showNotification('Ошибка при добавлении', 'error');
     }
-}
-
-function showNotification(message, type = 'success') {
-    const notification = document.getElementById('cartNotification');
-    const messageEl = document.getElementById('notificationMessage');
-    
-    if (!notification) {
-        console.error('Уведомление не найдено');
-        return;
-    }
-    
-    notification.classList.remove('success', 'error', 'show', 'hide');
-    notification.classList.add(type);
-    
-    messageEl.textContent = message || 'Сообщение';
-    notification.classList.add('show');
-    
-    clearTimeout(window.notificationTimeout);
-    window.notificationTimeout = setTimeout(() => {
-        notification.classList.remove('show');
-        notification.classList.add('hide');
-    }, 3000);
 }
 
 async function getCart() {
@@ -78,15 +62,15 @@ async function getOrders() {
 }
 
 async function updateProfile(email, full_name, phone, address) {
-        const response = await fetch('/kickzone/api/update_profile.php', {
+    const response = await fetch('/kickzone/api/update_profile.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            action: 'update_info', 
-            email, 
-            full_name, 
-            phone, 
-            address 
+        body: JSON.stringify({
+            action: 'update_info',
+            email,
+            full_name,
+            phone,
+            address
         })
     });
     return await response.json();
@@ -96,10 +80,10 @@ async function changePassword(old_password, new_password) {
     const response = await fetch('/kickzone/api/update_profile.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            action: 'change_password', 
-            old_password, 
-            new_password 
+        body: JSON.stringify({
+            action: 'change_password',
+            old_password,
+            new_password
         })
     });
     return await response.json();
@@ -129,4 +113,67 @@ async function removeFromFavorites(productId) {
 async function checkAuth() {
     const response = await fetch('/api/auth.php');
     return await response.json();
+}
+
+async function searchProducts(query) {
+    try {
+        const response = await fetch('/kickzone/api/products.php?search=' + encodeURIComponent(query));
+        const data = await response.json();
+        return data.success ? data.products : [];
+    } catch (error) {
+        console.error('Ошибка поиска:', error);
+        return [];
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const profileToggle = document.getElementById('profileToggle');
+    const profileSidebar = document.getElementById('profileSidebar');
+    const profileOverlay = document.getElementById('profileOverlay');
+
+    if (profileToggle && profileSidebar && profileOverlay) {
+        if (window.innerWidth <= 768) {
+            profileToggle.style.display = 'flex';
+        }
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                profileToggle.style.display = 'flex';
+            } else {
+                profileToggle.style.display = 'none';
+                profileSidebar.classList.remove('active');
+                profileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        profileToggle.addEventListener('click', function() {
+            profileSidebar.classList.toggle('active');
+            profileOverlay.classList.toggle('active');
+            document.body.style.overflow = profileSidebar.classList.contains('active') ? 'hidden' : '';
+        });
+
+        profileOverlay.addEventListener('click', function() {
+            profileSidebar.classList.remove('active');
+            profileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+});
+
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('cartNotification');
+    if (notification) {
+        const messageEl = document.getElementById('notificationMessage');
+        notification.classList.remove('success', 'error', 'show', 'hide');
+        notification.classList.add(type);
+        messageEl.textContent = message;
+        notification.classList.add('show');
+
+        clearTimeout(window.notificationTimeout);
+        window.notificationTimeout = setTimeout(() => {
+            notification.classList.remove('show');
+            notification.classList.add('hide');
+        }, 3000);
+    }
 }

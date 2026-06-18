@@ -24,3 +24,31 @@
     transform: translateX(-4px);
     box-shadow: 3px 3px black;
 }
+
+@media (max-width: 768px) {
+    .back-home-btn {
+        top: 10px;
+        left: 10px;
+        padding: 6px 10px;
+        font-size: 12px;
+        z-index: 1001;
+    }
+
+    .back-home-btn i {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-home-btn {
+        top: 8px;
+        left: 8px;
+        padding: 4px 8px;
+        font-size: 10px;
+        border-radius: 6px;
+    }
+
+    .back-home-btn i {
+        font-size: 10px;
+    }
+}

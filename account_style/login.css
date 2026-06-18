@@ -13,7 +13,6 @@
     padding: 40px 20px;
 }
 
-/* Главный контейнер формы */
 .auth-container {
     max-width: 450px;
     width: 100%;
@@ -53,14 +52,12 @@
     font-family: 'font1', sans-serif;
 }
 
-/* Поле ввода при фокусе */
 .form-group input:focus {
     border-color: #ff6ab5;
     outline: none;
     box-shadow: 0 0 5px rgba(255, 22, 138, 0.3);
 }
 
-/* Кнопка входа */
 .btn-login {
     width: 100%;
     padding: 14px;
@@ -74,12 +71,10 @@
     color: black;
 }
 
-/* Кнопка при наведении */
 .btn-login:hover {
     transform: translateY(-5px);
     box-shadow: 4px 4px rgb(0, 0, 0);
 }
-
 
 .error {
     background: #ffe0e0;
@@ -114,7 +109,7 @@
 .nike {
     display: flex;
     align-items: flex-end;
-    margin-left: 280px
+    margin-left: 280px;
 }
 
 .nike img {
@@ -122,7 +117,7 @@
     width: 100px;
     height: 200px;
     animation: swing 2s ease-in-out infinite;
-    transform-origin: top ;
+    transform-origin: top;
 }
 
 @keyframes swing {
@@ -134,5 +129,105 @@
     }
     100% {
         transform: rotate(-4deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .login-page {
+        padding: 30px 15px;
+        min-height: 60vh;
+    }
+
+    .auth-container {
+        padding: 30px 25px;
+        border-radius: 12px;
+    }
+
+    .auth-container h1 {
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btn-login {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .nike {
+        margin-left: 0;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .nike img {
+        width: 80px;
+        height: 160px;
+    }
+
+    .link {
+        font-size: 13px;
+        margin-top: 20px;
+    }
+
+    .error {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-page {
+        padding: 20px 10px;
+    }
+
+    .auth-container {
+        padding: 20px 16px;
+        border-radius: 10px;
+    }
+
+    .auth-container h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group input {
+        padding: 8px 10px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+
+    .btn-login {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .nike img {
+        width: 60px;
+        height: 120px;
+    }
+
+    .link {
+        font-size: 12px;
+        margin-top: 15px;
+    }
+
+    .error {
+        font-size: 12px;
+        padding: 8px;
+        border-radius: 6px;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-// Проверка авторизации
 if (!isset($_SESSION['user_id'])) {
     header('Location: /kickzone/account/login.php');
     exit();
@@ -8,16 +7,21 @@ if (!isset($_SESSION['user_id'])) {
 $username = $_SESSION['username'];
 ?>
 
-<div class="profile-sidebar">
+<button class="profile-toggle" id="profileToggle" aria-label="Меню профиля">
+    <i class="fas fa-bars"></i>
+</button>
+<div class="profile-sidebar-overlay" id="profileOverlay"></div>
+
+<div class="profile-sidebar" id="profileSidebar">
     <div class="profile-user">
         <div class="profile-avatar">
-            <img src = "/kickzone/photo/avatar.jpg" alt = "Avatar">
+            <img src="/kickzone/photo/avatar.jpg" alt="Avatar">
         </div>
         <div class="profile-name">
             <h3><?= htmlspecialchars($username) ?></h3>
         </div>
     </div>
-    
+
     <nav class="profile-nav">
         <ul>
             <li>
@@ -32,15 +36,9 @@ $username = $_SESSION['username'];
                     <span>Заказы</span>
                 </a>
             </li>
-            <li>
-                <a href="favorites.php" class="profile-link">
-                    <i class="fas fa-heart"></i>
-                    <span>Избранное</span>
-                </a>
-            </li>
         </ul>
     </nav>
-    
+
     <div class="profile-logout">
         <a href="logout.php" class="logout-link">
             <i class="fas fa-sign-out-alt"></i>

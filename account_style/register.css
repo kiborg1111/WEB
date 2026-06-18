@@ -31,7 +31,6 @@
     color: #333;
 }
 
-
 .form-group {
     margin-bottom: 20px;
 }
@@ -89,7 +88,6 @@
     display: none;
 }
 
-/* Сообщение об успехе */
 .success {
     background: #e0ffe0;
     color: green;
@@ -102,7 +100,6 @@
     display: none;
 }
 
-/* Ссылка на вход */
 .link {
     text-align: center;
     margin-top: 25px;
@@ -124,11 +121,113 @@
 .nike {
     display: flex;
     align-items: flex-end;
-    margin-left: 280px
+    margin-left: 280px;
 }
 
 .nike img {
     display: block;
     width: 100px;
     height: 200px;
+}
+
+@media (max-width: 768px) {
+    .register-page {
+        padding: 30px 15px;
+        min-height: 60vh;
+    }
+
+    .auth-container {
+        padding: 30px 25px;
+        border-radius: 12px;
+    }
+
+    .auth-container h1 {
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btn-register {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .nike {
+        margin-left: 0;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .nike img {
+        width: 80px;
+        height: 160px;
+    }
+
+    .link {
+        font-size: 13px;
+        margin-top: 20px;
+    }
+
+    .error,
+    .success {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-page {
+        padding: 20px 10px;
+    }
+
+    .auth-container {
+        padding: 20px 16px;
+        border-radius: 10px;
+    }
+
+    .auth-container h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group input {
+        padding: 8px 10px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+
+    .btn-register {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .nike img {
+        width: 60px;
+        height: 120px;
+    }
+
+    .link {
+        font-size: 12px;
+        margin-top: 15px;
+    }
+
+    .error,
+    .success {
+        font-size: 12px;
+        padding: 8px;
+        border-radius: 6px;
+    }
 }
