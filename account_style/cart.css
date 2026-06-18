@@ -201,3 +201,45 @@ html, body {
     font-family: 'font1', sans-serif;
     color: #666;
 }
+
+
+.cart-notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 16px 24px;
+    border-radius: 5px;
+    font-family: 'font2', sans-serif;
+    color: black;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 9999;
+    transform: translateX(120%);
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 2px solid transparent;
+}
+
+.cart-notification.success {
+    background: #ff6ab5;
+    border-color: black;
+    box-shadow: 4px 4px rgb(68, 241, 76);
+}
+
+.cart-notification.error {
+    background: #ff6ab5;
+    border-color: black;
+    box-shadow: 4px 4px rgb(241, 74, 68);
+}
+
+.cart-notification.show {
+    transform: translateX(0);
+}
+
+.cart-notification.hide {
+    transform: translateX(120%);
+}

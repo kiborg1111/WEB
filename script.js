@@ -29,6 +29,28 @@ async function addToCart(productId, quantity = 1) {
     }
 }
 
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('cartNotification');
+    const messageEl = document.getElementById('notificationMessage');
+    
+    if (!notification) {
+        console.error('Уведомление не найдено');
+        return;
+    }
+    
+    notification.classList.remove('success', 'error', 'show', 'hide');
+    notification.classList.add(type);
+    
+    messageEl.textContent = message || 'Сообщение';
+    notification.classList.add('show');
+    
+    clearTimeout(window.notificationTimeout);
+    window.notificationTimeout = setTimeout(() => {
+        notification.classList.remove('show');
+        notification.classList.add('hide');
+    }, 3000);
+}
+
 async function getCart() {
     const response = await fetch(API_URL + 'cart.php');
     return await response.json();

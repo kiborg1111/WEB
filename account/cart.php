@@ -35,6 +35,9 @@ $username = $_SESSION['username'];
         <div class="loading">Загрузка...</div>
     </div>
 </div>
+<div id="cartNotification" class="cart-notification">
+    <span id="notificationMessage"></span>
+</div>
 
 <script>
     // Функция для получения корзины
@@ -66,6 +69,7 @@ $username = $_SESSION['username'];
                             <div class="empty-cart-image">
                                 <img src="/kickzone/photo/cart.png" alt="Пустая корзина">
                             </div>
+                            <p>Ваша корзина пуста</p>
                         </div>
                     </div>
                 `;
@@ -81,6 +85,7 @@ $username = $_SESSION['username'];
                             <th>Цена</th>
                             <th>Кол-во</th>
                             <th>Сумма</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -166,7 +171,7 @@ $username = $_SESSION['username'];
             document.querySelectorAll('.remove-btn').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const productId = btn.dataset.productId;
-                    if (confirm) {
+                    if (confirm('Удалить товар из корзины?')) {
                         await removeFromCart(productId);
                         loadCart();
                     }
@@ -175,23 +180,16 @@ $username = $_SESSION['username'];
             
             document.getElementById('checkoutBtn').addEventListener('click', async () => {
                 try {
-                    // 1. Сначала получаем данные пользователя из БД
                     const userResponse = await fetch('/kickzone/api/get_user_info.php');
                     const userData = await userResponse.json();
                     
                     let address = userData.address;
                     let phone = userData.phone;
                     
-                    // 2. Если адрес или телефон не заполнены - запрашиваем
                     if (!address || address.trim() === '') {
-                            alert('Адрес доставки обязателен!');
-                            return;
-                        }
-                    
-                    if (!phone || phone.trim() === '') {
-                            alert('Номер телефона обязателен!');
-                            return;
-                        }
+                        showNotification('Адрес доставки обязателен', 'error');
+                        return;
+                    }
                     
                     const response = await fetch('/kickzone/api/checkout.php', {
                         method: 'POST',
@@ -205,15 +203,25 @@ $username = $_SESSION['username'];
                     const data = await response.json();
                     
                     if (data.success) {
-                        alert('Заказ №' + data.order_number + ' успешно оформлен!');
-                        window.location.href = '/kickzone/account/orders.php';
+                        showNotification('Заказ №' + data.order_number + ' успешно оформлен!', 'success');
+                        setTimeout(() => {
+                            window.location.href = '/kickzone/account/orders.php';
+                        }, 1500);
+                    } else {
+                        showNotification(data.message, 'error');
                     }
                 } catch (error) {
                     console.error('Ошибка:', error);
+                    showNotification('Ошибка при оформлении заказа', 'error');
                 }
             });
+            
         } catch (error) {
+            // ======================================== */
+            // ОШИБКА ЗАГРУЗКИ КОРЗИНЫ
+            // ======================================== */
             container.innerHTML = '<div class="error">Ошибка загрузки корзины</div>';
+            showNotification('Ошибка загрузки корзины', 'error');
             console.error('Ошибка:', error);
         }
     }
