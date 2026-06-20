@@ -1,9 +1,3 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-
 const API_URL = '/kickzone/api/';
 
 async function getProducts() {
@@ -19,15 +13,15 @@ async function addToCart(productId, quantity = 1) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: productId, quantity: quantity })
         });
-
+        
         const data = await response.json();
-
+        
         if (data.success) {
             showNotification('Товар добавлен в корзину', 'success');
         } else {
             showNotification(data.message, 'error');
         }
-
+        
         return data;
     } catch (error) {
         console.error('Ошибка:', error);

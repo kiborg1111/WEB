@@ -217,9 +217,6 @@ $username = $_SESSION['username'];
             });
             
         } catch (error) {
-            // ======================================== */
-            // ОШИБКА ЗАГРУЗКИ КОРЗИНЫ
-            // ======================================== */
             container.innerHTML = '<div class="error">Ошибка загрузки корзины</div>';
             showNotification('Ошибка загрузки корзины', 'error');
             console.error('Ошибка:', error);
