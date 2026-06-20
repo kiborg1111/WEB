@@ -13,15 +13,12 @@ async function addToCart(productId, quantity = 1) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: productId, quantity: quantity })
         });
-        
         const data = await response.json();
-        
         if (data.success) {
             showNotification('Товар добавлен в корзину', 'success');
         } else {
             showNotification(data.message, 'error');
         }
-        
         return data;
     } catch (error) {
         console.error('Ошибка:', error);
@@ -56,31 +53,41 @@ async function getOrders() {
 }
 
 async function updateProfile(email, full_name, phone, address) {
-    const response = await fetch('/kickzone/api/update_profile.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            action: 'update_info',
-            email,
-            full_name,
-            phone,
-            address
-        })
-    });
-    return await response.json();
+    try {
+        const response = await fetch('/kickzone/api/update_profile.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'update_info',
+                email: email,
+                full_name: full_name,
+                phone: phone,
+                address: address
+            })
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка updateProfile:', error);
+        return { success: false, message: 'Ошибка соединения с сервером' };
+    }
 }
 
 async function changePassword(old_password, new_password) {
-    const response = await fetch('/kickzone/api/update_profile.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            action: 'change_password',
-            old_password,
-            new_password
-        })
-    });
-    return await response.json();
+    try {
+        const response = await fetch('/kickzone/api/update_profile.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'change_password',
+                old_password: old_password,
+                new_password: new_password
+            })
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка changePassword:', error);
+        return { success: false, message: 'Ошибка соединения с сервером' };
+    }
 }
 
 async function getFavorites() {

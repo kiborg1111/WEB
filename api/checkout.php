@@ -3,6 +3,9 @@ session_start();
 header('Content-Type: application/json');
 require_once '../includes/db.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if(!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Требуется авторизация']);
     exit;
@@ -13,13 +16,23 @@ $user_id = $_SESSION['user_id'];
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-if (empty($data['address']) || trim($data['address']) === '') {
-    echo json_encode(['success' => false, 'message' => 'Укажите адрес доставки']);
+if (!$data) {
+    echo json_encode(['success' => false, 'message' => 'Ошибка: пустой запрос']);
     exit;
 }
 
-$address = $data['address'];
-$phone = $data['phone'] ?? '';
+$address = trim($data['address'] ?? '');
+$phone = trim($data['phone'] ?? '');
+
+if (empty($address)) {
+    echo json_encode(['success' => false, 'message' => 'Укажите адрес доставки в личном кабинете']);
+    exit;
+}
+
+if (empty($phone)) {
+    echo json_encode(['success' => false, 'message' => 'Укажите номер телефона в личном кабинете']);
+    exit;
+}
 
 $stmt = $conn->prepare("SELECT c.product_id, c.quantity, p.name, p.price
                         FROM cart c
@@ -45,8 +58,8 @@ try {
     
     $order_number = 'ORD-' . time() . '-' . $user_id;
     
-    $stmt = $conn->prepare("INSERT INTO orders (user_id, order_number, total, address, phone)
-                            VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO orders (user_id, order_number, total, address, phone, status)
+                            VALUES (?, ?, ?, ?, ?, 'pending')");
     $stmt->bind_param("isdss", $user_id, $order_number, $total, $address, $phone);
     $stmt->execute();
     

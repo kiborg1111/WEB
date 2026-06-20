@@ -109,3 +109,11 @@
     border: 1px solid black;
     box-shadow: none;
 }
+
+#refreshBtn:hover,
+#toggleLiveBtn:hover {
+    background: #ff6ab5 !important;
+    transform: translateY(-2px);
+    border-color: black !important;
+    box-shadow: 4px 4px rgb(0, 0, 0);
+}

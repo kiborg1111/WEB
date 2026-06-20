@@ -178,18 +178,49 @@ $username = $_SESSION['username'];
                 });
             });
             
-            document.getElementById('checkoutBtn').addEventListener('click', async () => {
+            document.getElementById('checkoutBtn').addEventListener('click', async function() {
                 try {
+                    // Блокируем кнопку
+                    this.disabled = true;
+                    const originalText = this.textContent;
+                    this.textContent = 'Оформление...';
+                    showNotification('Проверяем данные...', 'success');
+                    
                     const userResponse = await fetch('/kickzone/api/get_user_info.php');
                     const userData = await userResponse.json();
+                    
+                    if (!userData.success) {
+                        showNotification('Ошибка получения данных пользователя', 'error');
+                        this.disabled = false;
+                        this.textContent = originalText;
+                        return;
+                    }
                     
                     let address = userData.address;
                     let phone = userData.phone;
                     
                     if (!address || address.trim() === '') {
-                        showNotification('Адрес доставки обязателен', 'error');
+                        const confirmRedirect = confirm('У вас не указан адрес доставки!\nПерейти в личный кабинет для заполнения?');
+                        if (confirmRedirect) {
+                            window.location.href = '/kickzone/account/personal_data.php';
+                        }
+                        this.disabled = false;
+                        this.textContent = originalText;
                         return;
                     }
+                    
+                    // Проверяем телефон
+                    if (!phone || phone.trim() === '') {
+                        const confirmRedirect = confirm('У вас не указан номер телефона!\nПерейти в личный кабинет для заполнения?');
+                        if (confirmRedirect) {
+                            window.location.href = '/kickzone/account/personal_data.php';
+                        }
+                        this.disabled = false;
+                        this.textContent = originalText;
+                        return;
+                    }
+                    
+                    showNotification('Оформляем заказ...', 'success');
                     
                     const response = await fetch('/kickzone/api/checkout.php', {
                         method: 'POST',
@@ -203,16 +234,20 @@ $username = $_SESSION['username'];
                     const data = await response.json();
                     
                     if (data.success) {
-                        showNotification('Заказ №' + data.order_number + ' успешно оформлен!', 'success');
+                        showNotification('Заказ №' + data.order_number + ' успешно оформлен! 🎉', 'success');
                         setTimeout(() => {
                             window.location.href = '/kickzone/account/orders.php';
                         }, 1500);
                     } else {
-                        showNotification(data.message, 'error');
+                        showNotification(data.message || 'Ошибка оформления заказа', 'error');
+                        this.disabled = false;
+                        this.textContent = originalText;
                     }
                 } catch (error) {
                     console.error('Ошибка:', error);
-                    showNotification('Ошибка при оформлении заказа', 'error');
+                    showNotification('Ошибка при оформлении заказа: ' + error.message, 'error');
+                    this.disabled = false;
+                    this.textContent = 'Оформить заказ';
                 }
             });
             
@@ -223,7 +258,6 @@ $username = $_SESSION['username'];
         }
     }
     
-    // Обновление количества
     async function updateCartQuantity(productId, quantity) {
         try {
             await fetch('/kickzone/api/cart.php', {

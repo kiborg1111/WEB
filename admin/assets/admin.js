@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const orderId = this.dataset.orderId;
             const newStatus = this.value;
             const row = this.closest('tr');
+            const dot = row.querySelector('.status-dot');
+            
+            this.disabled = true;
             
             fetch('../api/admin/update_order_status.php', {
                 method: 'POST',
@@ -17,14 +20,21 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    const dot = row.querySelector('.status-dot');
                     if (dot) {
                         dot.className = 'status-dot status-dot-' + newStatus;
                         console.log('Кружок обновлён:', newStatus);
                     }
+                    this.disabled = false;
                 } else {
                     alert('Ошибка: ' + data.message);
+                    this.value = this.querySelector(`option[value="${newStatus}"]`).value;
+                    this.disabled = false;
                 }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Ошибка соединения с сервером');
+                this.disabled = false;
             });
         });
     });

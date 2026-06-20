@@ -11,11 +11,21 @@ require_once '../includes/db.php';
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 
-// Получаем все заказы пользователя
 $stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $all_orders = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+function getStatusLabel($status) {
+    $labels = [
+        'pending' => 'Ожидает',
+        'confirmed' => 'Подтверждён',
+        'shipped' => 'Отправлен',
+        'delivered' => 'Доставлен',
+        'cancelled' => 'Отменён'
+    ];
+    return $labels[$status] ?? $status;
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,45 +55,38 @@ $all_orders = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             </div>
         </div>
 
-        <!-- Фильтры -->
         <div class="orders-filters">
             <button class="filter-btn active" data-filter="active">Активные</button>
             <button class="filter-btn" data-filter="completed">Завершенные</button>
         </div>
 
-        <!-- Разделительная линия -->
         <div class="filter-divider"></div>
 
-        <!-- Список заказов -->
         <div id="ordersList">
             <?php if (empty($all_orders)): ?>
+                <div class="empty-orders" style="text-align: center; padding: 50px 0; font-family: 'font1', sans-serif; font-size: 18px; color: #999;">
+                    У вас пока нет заказов
+                </div>
             <?php else: ?>
                 <?php foreach ($all_orders as $order): 
                     $is_active = in_array($order['status'], ['pending', 'confirmed', 'shipped']);
                     $is_completed = in_array($order['status'], ['delivered', 'cancelled']);
-                    
-                    if ($is_active) {
-                        $status_class = 'active';
-                    } elseif ($is_completed) {
-                        $status_class = 'completed';
-                    } else {
-                        $status_class = 'other';
-                    }
+                    $status_class = $is_active ? 'active' : ($is_completed ? 'completed' : 'other');
                 ?>
-                    <div class="order-card" data-status="<?= $status_class ?>">
+                    <div class="order-card" data-status="<?= $status_class ?>" data-order-id="<?= $order['id'] ?>">
                         <div class="order-header">
                             <div class="order-info">
                                 <span class="order-number">Заказ №<?= htmlspecialchars($order['order_number']) ?></span>
                                 <span class="order-date"><?= date('d.m.Y H:i', strtotime($order['created_at'])) ?></span>
                             </div>
-                            <span class="order-status status-<?= $order['status'] ?>">
-                                <?= $order['status'] ?>
+                            <span class="order-status status-<?= $order['status'] ?>" id="status-<?= $order['id'] ?>">
+                                <?= getStatusLabel($order['status']) ?>
                             </span>
                         </div>
                         <div class="order-body">
                             <div class="order-details">
                                 <div class="order-detail">
-                                    <span class="detail-label">Cумма:</span>
+                                    <span class="detail-label">Сумма:</span>
                                     <span class="detail-value"><?= number_format($order['total'], 0, '', ' ') ?> ₽</span>
                                 </div>
                                 <div class="order-detail">
@@ -104,54 +107,102 @@ $all_orders = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterBtns = document.querySelectorAll('.filter-btn');
+    let loadInterval = null;
+    let isLive = true;
+
+    async function updateOrderStatuses() {
         const orderCards = document.querySelectorAll('.order-card');
-        const emptyOrders = document.querySelector('.empty-orders');
         
-        if (orderCards.length > 0 && emptyOrders) {
-            emptyOrders.style.display = 'none';
-        }
+        if (orderCards.length === 0) return;
         
-        function filterOrders(filter) {
-            let hasVisible = false;
+        for (const card of orderCards) {
+            const orderId = card.dataset.orderId;
+            if (!orderId) continue;
             
-            orderCards.forEach(card => {
-                const status = card.dataset.status;
-                if (filter === 'all' || status === filter) {
-                    card.style.display = 'block';
-                    hasVisible = true;
-                } else {
-                    card.style.display = 'none';
+            try {
+                const response = await fetch('/kickzone/api/get_order_status.php?order_id=' + orderId);
+                const data = await response.json();
+                
+                if (data.success) {
+                    const statusSpan = document.getElementById('status-' + orderId);
+                    if (statusSpan) {
+                        const labels = {
+                            'pending': 'Ожидает',
+                            'confirmed': 'Подтверждён',
+                            'shipped': 'Отправлен',
+                            'delivered': 'Доставлен',
+                            'cancelled': 'Отменён'
+                        };
+                        statusSpan.className = 'order-status status-' + data.status;
+                        statusSpan.textContent = labels[data.status] || data.status;
+                    }
+                    
+                    const isActive = ['pending', 'confirmed', 'shipped'].includes(data.status);
+                    const isCompleted = ['delivered', 'cancelled'].includes(data.status);
+                    
+                    if (isActive) {
+                        card.dataset.status = 'active';
+                    } else if (isCompleted) {
+                        card.dataset.status = 'completed';
+                    } else {
+                        card.dataset.status = 'other';
+                    }
+                    
+                    const activeFilter = document.querySelector('.filter-btn.active');
+                    if (activeFilter) {
+                        filterOrders(activeFilter.dataset.filter);
+                    }
                 }
-            });
-            
-            // Показываем или скрываем сообщение "Нет заказов"
-            if (emptyOrders) {
-                if (filter === 'active') {
-                    const activeCards = document.querySelectorAll('.order-card[data-status="active"]');
-                    emptyOrders.style.display = activeCards.length === 0 ? 'block' : 'none';
-                } else if (filter === 'completed') {
-                    const completedCards = document.querySelectorAll('.order-card[data-status="completed"]');
-                    emptyOrders.style.display = completedCards.length === 0 ? 'block' : 'none';
-                } else {
-                    emptyOrders.style.display = 'none';
-                }
+            } catch (error) {
+                console.error('Ошибка обновления статуса заказа:', error);
             }
         }
+    }
+
+    function filterOrders(filter) {
+        const orderCards = document.querySelectorAll('.order-card');
+        const emptyOrders = document.querySelector('.empty-orders');
+        let hasVisible = false;
         
-        // Обработчики кнопок
+        orderCards.forEach(card => {
+            const status = card.dataset.status;
+            if (filter === 'all' || status === filter) {
+                card.style.display = 'block';
+                hasVisible = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        if (emptyOrders) {
+            emptyOrders.style.display = hasVisible ? 'none' : 'block';
+        }
+    }
+
+    function toggleLive() {
+        if (isLive) {
+            clearInterval(loadInterval);
+            isLive = false;
+        } else {
+            isLive = true;
+            updateOrderStatuses();
+            loadInterval = setInterval(updateOrderStatuses, 5000);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
         filterBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                filterOrders(filter);
+                filterOrders(this.dataset.filter);
             });
         });
         
-        // При загрузке показываем активные заказы
+        setTimeout(updateOrderStatuses, 500);
+        loadInterval = setInterval(updateOrderStatuses, 5000);
         filterOrders('active');
     });
 </script>

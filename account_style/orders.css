@@ -316,3 +316,17 @@
         margin-bottom: 15px;
     }
 }
+
+#liveStatus {
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+#liveStatus:hover {
+    background: #e0e0e0;
+    transform: scale(1.05);
+}

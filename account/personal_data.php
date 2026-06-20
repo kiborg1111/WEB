@@ -10,7 +10,6 @@ require_once '../includes/db.php';
 
 $user_id = $_SESSION['user_id'];
 
-// Получаем данные пользователя
 $stmt = $conn->prepare("SELECT email, full_name, phone, address FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -94,7 +93,6 @@ $user = $stmt->get_result()->fetch_assoc();
     document.getElementById('profileForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Убрал username, оставил только email
         const email = document.getElementById('display_email').innerText;
         const full_name = document.getElementById('full_name').value;
         const phone = document.getElementById('phone').value;
@@ -109,7 +107,6 @@ $user = $stmt->get_result()->fetch_assoc();
         successDiv.style.display = 'none';
         errorDiv.style.display = 'none';
         
-        // Смена пароля
         if (old_password || new_password || confirm_password) {
             if (new_password !== confirm_password) {
                 errorDiv.textContent = 'Новый пароль и подтверждение не совпадают';
@@ -141,7 +138,6 @@ $user = $stmt->get_result()->fetch_assoc();
             }
         }
         
-        // Обновление профиля (без username)
         try {
             const result = await updateProfile(email, full_name, phone, address);
             if (result.success) {
@@ -156,10 +152,10 @@ $user = $stmt->get_result()->fetch_assoc();
             errorDiv.style.display = 'block';
         }
     });
+
     document.getElementById('phone').addEventListener('input', function(e) {
         let value = this.value.replace(/\D/g, '');
         
-        // Убираем лишние символы в начале
         if (value.startsWith('8')) {
             value = '7' + value.slice(1);
         }

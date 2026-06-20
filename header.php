@@ -26,20 +26,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </nav>
 
         <div class="header-icons">
-            <div class="search-wrapper">
-                <button class="search-toggle" id="searchToggle" aria-label="Поиск">
-                    <i class="fas fa-search"></i>
-                </button>
-                <div class="search-dropdown" id="searchDropdown">
-                    <form id="searchForm" action="/kickzone/catalog.php" method="GET">
-                        <input type="text" id="searchInput" name="search" placeholder="Поиск товаров..." class="search-input-dropdown" autocomplete="off">
-                        <button type="submit" class="search-btn-dropdown">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                    <div class="search-suggestions" id="searchSuggestions"></div>
-                </div>
-            </div>
+        
 
             <a href="/kickzone/account/cart.php" class="icon-link" aria-label="Корзина">
                 <i class="fas fa-shopping-bag"></i>
