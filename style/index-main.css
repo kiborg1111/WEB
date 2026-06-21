@@ -3,28 +3,6 @@
     padding: 0;
 }
 
-/*.boot {
-    outline: 2px solid red !important;
-}
-
-.catalog-container {
-    outline: 2px solid blue !important;
-}
-
-.main-catalog {
-    outline: 2px solid green !important;
-}
-
-.text{
-    outline: 2px solid green !important;
-}
-
-.catalog-image {
-    outline: 2px solid orange !important;
-}
-.scroll {
-    outline: 2px solid orange !important;
-}*/
 
 @font-face {
     font-family: 'font1';
@@ -58,6 +36,7 @@
 .titlw-photo {       
     display: flex;
     justify-content: flex-end;
+    flex: 0 0 50%; 
 }
 
 .titlw-photo img {
@@ -279,4 +258,294 @@
 
 .scroll-container::-webkit-scrollbar {
     display: none;
+}
+
+/* ======================================== */
+/* АДАПТИВНАЯ ВЁРСТКА ДЛЯ ГЛАВНОЙ СТРАНИЦЫ */
+/* ======================================== */
+
+/* Планшеты и маленькие ноутбуки (до 1024px) */
+@media (max-width: 1024px) {
+    .title {
+        font-size: 70px;
+        padding: 80px 0 80px 150px;
+    }
+
+    .titlw-photo img {
+        max-width: 450px;
+    }
+
+    .boot img {
+        width: 160px;
+        height: auto;
+        margin-right: 80px;
+        margin-top: 30px;
+    }
+
+    .main-catalog {
+        height: 500px;
+        width: 85vw;
+    }
+
+    .card {
+        width: 35vw;
+        height: 32vh;
+    }
+
+    .text {
+        font-size: 50px;
+        margin-top: 150px;
+        margin-left: 40px;
+    }
+
+    .glass img {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Планшеты вертикальные (до 768px) */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 20px 30px;
+        gap: 20px;
+    }
+
+    .title {
+        font-size: 50px;
+        padding: 50px 0;
+        margin-left: 0;
+    }
+
+    .titlw-photo {
+        flex: 0 0 40%;
+    }
+
+    .titlw-photo img {
+        max-width: 100%;
+    }
+
+    .boot img {
+        width: 120px;
+        height: auto;
+        margin-right: 40px;
+        margin-top: 20px;
+    }
+
+    .main-catalog {
+        height: 400px;
+        width: 90vw;
+    }
+
+    .catalog-button {
+        padding: 20px;
+    }
+
+    .btn-catalog {
+        font-size: 14px;
+        padding: 7px 15px;
+    }
+
+    .new {
+        min-height: 150px;
+    }
+
+    .text {
+        font-size: 40px;
+        margin-top: 100px;
+        margin-left: 30px;
+        width: 150px;
+    }
+
+    .glass {
+        margin-right: 40px;
+    }
+
+    .glass img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .group {
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .card {
+        width: 40vw !important;
+        height: 35vh !important;
+    }
+
+    .card div div:first-child {
+        font-size: 32px;
+        padding: 15px;
+    }
+
+    .card div div:last-child {
+        font-size: 22px;
+        padding-right: 25px;
+        padding-bottom: 8px;
+    }
+
+    .card::before {
+        height: 30px;
+    }
+
+    .left, .right {
+        font-size: 40px;
+    }
+
+    .left {
+        left: 10px;
+    }
+
+    .right {
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        flex-direction: column;        /* ← вертикально на телефонах */
+        padding: 10px 0;              /* ← убрал боковые отступы */
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 32px;
+        padding: 20px 15px;           /* ← отступы только по бокам для текста */
+        margin-left: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .titlw-photo {
+        flex: 1;
+        width: 100%;
+        justify-content: center;
+        padding: 0;                   /* ← убрал отступы */
+    }
+
+    .titlw-photo img {
+        max-width: 100%;              /* ← на всю ширину */
+        width: 100%;
+        height: auto;
+    }
+
+    .boot img {
+        width: 80px;
+        height: auto;
+        margin-right: 20px;
+        margin-top: 10px;
+    }
+
+    .main-catalog {
+        height: 300px;
+        width: 95vw;
+    }
+
+    .catalog-button {
+        padding: 15px;
+    }
+
+    .btn-catalog {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+
+    .new {
+        min-height: 150px;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    .text {
+        font-size: 40px;
+        margin-top: 100px;
+        margin-left: 30px;
+        width: 150px;
+    }
+
+    .glass {
+        margin-right: 40px;
+    }
+
+    .glass img {
+        width: 130px;
+        height: 130px;
+    }
+
+
+    .group {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .card {
+        width: 60vw !important;
+        height: 30vh !important;
+        min-width: 150px;
+    }
+
+    .card div div:first-child {
+        font-size: 22px;
+        padding: 10px;
+    }
+
+    .card div div:last-child {
+        font-size: 16px;
+        padding-right: 15px;
+        padding-bottom: 5px;
+    }
+
+    .card::before {
+        height: 22px;
+        bottom: 5px;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 2px 2px rgb(0, 0, 0);
+    }
+
+    .left, .right {
+        font-size: 28px;
+    }
+
+    .left {
+        left: 5px;
+    }
+
+    .right {
+        right: 5px;
+    }
+}
+
+/* В самый конец файла */
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-width: 100%;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.main {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.main-container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.titlw-photo img,
+.boot img,
+.glass img {
+    max-width: 100%;
+    height: auto;
 }
