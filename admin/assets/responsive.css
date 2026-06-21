@@ -1,12 +1,405 @@
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
+/* ======================================== */
+/* АДАПТИВНАЯ ВЕРСТКА ДЛЯ АДМИН-ПАНЕЛИ */
+/* ======================================== */
+
+@media (max-width: 1024px) {
+    .admin-header {
+        padding: 12px 20px !important;
+        gap: 10px !important;
     }
-    .admin-table th, .admin-table td {
-        padding: 10px 12px;
-        font-size: 12px;
+    
+    .admin-header h1 {
+        font-size: 20px !important;
     }
+    
     .nav-links {
-        flex-wrap: wrap;
+        padding: 10px 20px !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .nav-links a {
+        font-size: 13px !important;
+        padding: 6px 14px !important;
+    }
+    
+    .container {
+        padding: 20px !important;
+    }
+    
+    .section-title {
+        font-size: 22px !important;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+    }
+    
+    .admin-table td {
+        height: 60px !important;
+    }
+    
+    .form-container {
+        padding: 20px !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        padding: 10px 15px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .admin-header h1 {
+        font-size: 16px !important;
+        white-space: nowrap !important;
+    }
+    
+    .admin-header > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        flex: 0 1 auto !important;
+    }
+    
+    .admin-user {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        flex: 0 1 auto !important;
+    }
+    
+    .back-home-btn {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        border-radius: 6px !important;
+    }
+    
+    .back-home-btn i {
+        font-size: 12px !important;
+    }
+    
+    .logout-btn {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        border-radius: 6px !important;
+    }
+    
+    .logout-btn i {
+        font-size: 12px !important;
+    }
+    
+    .nav-links {
+        padding: 8px 15px !important;
+        gap: 6px !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .nav-links a {
+        font-size: 12px !important;
+        padding: 5px 10px !important;
+    }
+    
+    .container {
+        padding: 10px !important;
+    }
+    
+    .content-card {
+        border-radius: 8px !important;
+    }
+    
+    .section-title {
+        font-size: 18px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .admin-table {
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 8px 10px !important;
+        font-size: 11px !important;
+    }
+    
+    .admin-table td {
+        height: 50px !important;
+    }
+    
+    .admin-table td img {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    .btn-icon {
+        width: 28px !important;
+        height: 28px !important;
+        padding: 4px !important;
+    }
+    
+    .btn-icon i {
+        font-size: 12px !important;
+    }
+    
+    .btn-add {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 16px !important;
+    }
+    
+    .status-select {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        border-radius: 12px !important;
+        max-width: 100px !important;
+    }
+    
+    .status-dot {
+        width: 8px !important;
+        height: 8px !important;
+        margin-left: 4px !important;
+    }
+    
+    .form-container {
+        padding: 15px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 12px !important;
+    }
+    
+    .form-group label {
+        font-size: 13px !important;
+    }
+    
+    input, select, textarea {
+        padding: 8px 10px !important;
+        font-size: 13px !important;
+    }
+    
+    button[type="submit"] {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+    }
+    
+    .row-2cols {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .size-row {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+    
+    .size-row select {
+        flex: 1 1 100% !important;
+        min-width: 80px !important;
+    }
+    
+    .size-row input {
+        flex: 1 1 60% !important;
+        min-width: 60px !important;
+    }
+    
+    .size-row button {
+        flex: 0 0 30px !important;
+        padding: 4px 8px !important;
+    }
+    
+    .add-size-btn {
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+    }
+    
+    .inline-add {
+        flex-wrap: wrap !important;
+    }
+    
+    .inline-add input {
+        flex: 1 1 100% !important;
+        min-width: unset !important;
+    }
+    
+    .inline-add button {
+        flex: 1 1 45% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-header {
+        padding: 6px 10px !important;
+        gap: 4px !important;
+    }
+    
+    .admin-header h1 {
+        font-size: 13px !important;
+    }
+    
+    .admin-header > div:first-child {
+        gap: 4px !important;
+    }
+    
+    .back-home-btn {
+        padding: 2px 5px !important;
+        font-size: 9px !important;
+        border-radius: 4px !important;
+    }
+    
+    .back-home-btn i {
+        font-size: 10px !important;
+    }
+    
+    .logout-btn {
+        padding: 2px 5px !important;
+        font-size: 9px !important;
+        border-radius: 4px !important;
+    }
+    
+    .logout-btn i {
+        font-size: 10px !important;
+    }
+    
+    .nav-links {
+        padding: 6px 10px !important;
+        gap: 4px !important;
+    }
+    
+    .nav-links a {
+        font-size: 10px !important;
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+    }
+    
+    .container {
+        padding: 6px !important;
+    }
+    
+    .content-card {
+        border-radius: 6px !important;
+    }
+    
+    .section-title {
+        font-size: 15px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 4px 6px !important;
+        font-size: 9px !important;
+    }
+    
+    .admin-table td {
+        height: 36px !important;
+    }
+    
+    .admin-table td img {
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 4px !important;
+    }
+    
+    .btn-icon {
+        width: 20px !important;
+        height: 20px !important;
+        padding: 2px !important;
+        border-radius: 4px !important;
+    }
+    
+    .btn-icon i {
+        font-size: 9px !important;
+    }
+    
+    .btn-add {
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 11px !important;
+        border-radius: 4px !important;
+    }
+    
+    .status-select {
+        padding: 2px 4px !important;
+        font-size: 8px !important;
+        border-radius: 6px !important;
+        max-width: 60px !important;
+    }
+    
+    .status-dot {
+        width: 5px !important;
+        height: 5px !important;
+        margin-left: 2px !important;
+    }
+    
+    .form-container {
+        padding: 10px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 8px !important;
+    }
+    
+    .form-group label {
+        font-size: 12px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    input, select, textarea {
+        padding: 5px 6px !important;
+        font-size: 11px !important;
+        border-radius: 4px !important;
+    }
+    
+    button[type="submit"] {
+        padding: 6px 14px !important;
+        font-size: 12px !important;
+        border-radius: 4px !important;
+    }
+    
+    .row-2cols {
+        gap: 6px !important;
+    }
+    
+    .size-row select {
+        font-size: 11px !important;
+        padding: 3px 5px !important;
+    }
+    
+    .size-row input {
+        font-size: 11px !important;
+        padding: 3px 5px !important;
+    }
+    
+    .size-row button {
+        flex: 0 0 20px !important;
+        height: 20px !important;
+        font-size: 9px !important;
+        padding: 0 !important;
+    }
+    
+    .add-size-btn {
+        padding: 3px 8px !important;
+        font-size: 10px !important;
+    }
+    
+    #refreshBtn {
+        padding: 3px 6px !important;
+        font-size: 10px !important;
+    }
+    
+    #refreshBtn i {
+        font-size: 10px !important;
     }
 }

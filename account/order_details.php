@@ -59,25 +59,33 @@ function getStatusLabel($status) {
     <link rel="stylesheet" href="/kickzone/account_style/profile_header.css">
     <link rel="stylesheet" href="/kickzone/account_style/orders.css">
     <style>
+        .order-detail-page .profile-toggle {
+            display: none !important;
+        }
+
+        .order-detail-page .back-home-btn {
+            display: none !important;
+        }
+
         .order-detail-header {
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
         .order-detail-header h2 {
             font-family: 'font2', sans-serif;
-            font-size: 26px;
+            font-size: 22px;
             color: black;
             margin: 0;
         }
         .order-detail-status {
             font-family: 'font1', sans-serif;
-            font-size: 14px;
-            padding: 6px 18px;
+            font-size: 13px;
+            padding: 4px 16px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 600;
             margin-left: auto;
             transition: all 0.3s ease;
         }
@@ -89,11 +97,11 @@ function getStatusLabel($status) {
 
         .order-info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
             background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 16px 20px;
+            border-radius: 10px;
             margin-bottom: 25px;
             border: 1px solid #eee;
         }
@@ -103,15 +111,16 @@ function getStatusLabel($status) {
         }
         .order-info-grid .info-item label {
             font-family: 'font1', sans-serif;
-            font-size: 12px;
-            color: #888;
+            font-size: 11px;
+            color: #999;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            font-weight: 600;
         }
         .order-info-grid .info-item span {
             font-family: 'font1', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
             color: #222;
             margin-top: 2px;
         }
@@ -124,25 +133,37 @@ function getStatusLabel($status) {
         .order-items-table th {
             background: #f8f9fa;
             font-family: 'font1', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            padding: 12px 16px;
+            padding: 10px 14px;
             text-align: left;
             border-bottom: 2px solid #e9ecef;
             color: #495057;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .order-items-table th:last-child {
+            text-align: right;
         }
         .order-items-table td {
             font-family: 'font1', sans-serif;
-            font-size: 14px;
-            padding: 12px 16px;
+            font-size: 13px;
+            padding: 10px 14px;
             border-bottom: 1px solid #e9ecef;
             vertical-align: middle;
         }
+        .order-items-table td:last-child {
+            text-align: right;
+        }
+        .order-items-table td:nth-child(3),
+        .order-items-table td:nth-child(4) {
+            text-align: center;
+        }
         .order-items-table .item-image {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid #eee;
         }
         .order-items-table .item-name {
@@ -151,50 +172,67 @@ function getStatusLabel($status) {
         .order-items-table .item-name a {
             color: #222;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             transition: color 0.3s ease;
         }
         .order-items-table .item-name a:hover {
             color: #ff6ab5;
         }
         .order-items-table .item-total {
-            font-weight: bold;
+            font-weight: 600;
             color: #ff6ab5;
         }
         .order-total-row {
             background: #f8f9fa;
-            font-weight: bold;
+            font-weight: 600;
         }
         .order-total-row td {
-            padding: 15px 16px;
-            font-size: 18px;
+            padding: 12px 14px;
+            font-size: 15px;
         }
         .order-total-row .total-label {
             text-align: right;
+            font-weight: 600;
+            color: #333;
         }
         .order-total-row .total-value {
             color: #ff6ab5;
-            font-size: 22px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .order-total-row td:last-child {
+            text-align: right;
         }
 
         .back-to-orders {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 14px;
+            padding: 6px 12px;
             background: white;
             border: 2px solid black;
             border-radius: 8px;
             color: black;
             text-decoration: none;
             font-family: 'font1', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s ease;
         }
         .back-to-orders:hover {
             background: #ff6ab5;
             transform: translateX(-4px);
             box-shadow: 4px 4px black;
+        }
+
+        .section-title {
+            font-family: 'font2', sans-serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #222;
+        }
+
+        .price-nowrap {
+            white-space: nowrap;
         }
 
         @media (max-width: 768px) {
@@ -209,45 +247,69 @@ function getStatusLabel($status) {
             }
             .order-info-grid {
                 grid-template-columns: 1fr 1fr;
+                padding: 14px 16px;
+                gap: 10px;
+            }
+            .order-info-grid .info-item span {
+                font-size: 13px;
             }
             .order-items-table {
                 font-size: 12px;
             }
             .order-items-table th,
             .order-items-table td {
-                padding: 8px 10px;
+                padding: 6px 10px;
                 font-size: 12px;
             }
             .order-items-table .item-image {
-                width: 40px;
-                height: 40px;
+                width: 35px;
+                height: 35px;
             }
             .order-total-row td {
-                font-size: 14px;
-                padding: 10px;
+                font-size: 13px;
+                padding: 8px 10px;
             }
             .order-total-row .total-value {
-                font-size: 18px;
+                font-size: 16px;
+            }
+            .back-to-orders span {
+                display: none;
+            }
+            .order-detail-header h2 {
+                font-size: 20px;
             }
         }
 
         @media (max-width: 480px) {
             .order-info-grid {
                 grid-template-columns: 1fr;
+                padding: 12px 14px;
+            }
+            .order-info-grid .info-item span {
+                font-size: 13px;
             }
             .order-items-table th,
             .order-items-table td {
-                padding: 6px 8px;
+                padding: 5px 8px;
                 font-size: 11px;
             }
             .order-items-table .item-image {
                 width: 30px;
                 height: 30px;
             }
+            .order-detail-header h2 {
+                font-size: 17px;
+            }
+            .order-total-row .total-value {
+                font-size: 15px;
+            }
+            .section-title {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
-<body>
+<body class="order-detail-page">
 
 <?php include 'profile_header.php'; ?>
 
@@ -255,7 +317,8 @@ function getStatusLabel($status) {
     <div class="orders-container">
         <div class="order-detail-header">
             <a href="orders.php" class="back-to-orders">
-                <i class="fas fa-arrow-left"></i> Назад
+                <i class="fas fa-arrow-left"></i>
+                <span>Назад</span>
             </a>
             <h2>Заказ №<?= htmlspecialchars($order['order_number']) ?></h2>
             <span class="order-detail-status <?= $order['status'] ?>" id="orderStatus">
@@ -282,7 +345,7 @@ function getStatusLabel($status) {
             </div>
         </div>
 
-        <h3 style="font-family: 'font2', sans-serif; font-size: 20px; margin-bottom: 15px;">Товары в заказе</h3>
+        <h3 class="section-title">Товары в заказе</h3>
 
         <table class="order-items-table">
             <thead>
@@ -309,7 +372,7 @@ function getStatusLabel($status) {
                             <img src="/kickzone/uploads/products/<?= htmlspecialchars($item['image']) ?>" 
                                  class="item-image" alt="<?= htmlspecialchars($item['name']) ?>">
                         <?php else: ?>
-                            <div class="item-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px;">—</div>
+                            <div class="item-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 10px; border-radius: 6px;">—</div>
                         <?php endif; ?>
                     </td>
                     <td class="item-name">
@@ -318,13 +381,13 @@ function getStatusLabel($status) {
                         </a>
                     </td>
                     <td><?= $item['quantity'] ?> шт.</td>
-                    <td><?= number_format($item['price'], 0, '', ' ') ?> ₽</td>
-                    <td class="item-total"><?= number_format($item['quantity'] * $item['price'], 0, '', ' ') ?> ₽</td>
+                    <td class="price-nowrap"><?= number_format($item['price'], 0, '', ' ') ?> ₽</td>
+                    <td class="item-total price-nowrap"><?= number_format($item['quantity'] * $item['price'], 0, '', ' ') ?> ₽</td>
                 </tr>
                 <?php endforeach; ?>
                 <tr class="order-total-row">
                     <td colspan="4" class="total-label">Итого:</td>
-                    <td class="total-value"><?= number_format($order['total'], 0, '', ' ') ?> ₽</td>
+                    <td class="total-value price-nowrap"><?= number_format($order['total'], 0, '', ' ') ?> ₽</td>
                 </tr>
                 <?php endif; ?>
             </tbody>
