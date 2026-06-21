@@ -76,7 +76,9 @@ function getStatusLabel($status) {
                     <div class="order-card" data-status="<?= $status_class ?>" data-order-id="<?= $order['id'] ?>">
                         <div class="order-header">
                             <div class="order-info">
-                                <span class="order-number">Заказ №<?= htmlspecialchars($order['order_number']) ?></span>
+                                <a href="order_details.php?id=<?= $order['id'] ?>" style="text-decoration: none; color: inherit;">
+                                    <span class="order-number">Заказ №<?= htmlspecialchars($order['order_number']) ?></span>
+                                </a>
                                 <span class="order-date"><?= date('d.m.Y H:i', strtotime($order['created_at'])) ?></span>
                             </div>
                             <span class="order-status status-<?= $order['status'] ?>" id="status-<?= $order['id'] ?>">
