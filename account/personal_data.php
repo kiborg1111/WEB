@@ -30,7 +30,7 @@ $user = $stmt->get_result()->fetch_assoc();
 </head>
 <body>
 
-<a href="/kickzone/index.php" class="back-home-btn">
+<a href="#" onclick="history.back(); return false;" class="back-home-btn">
     <i class="fas fa-angle-left" aria-label="назад"></i>
 </a>
 

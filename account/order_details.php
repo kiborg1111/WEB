@@ -189,11 +189,10 @@ function getStatusLabel($status) {
             text-decoration: none;
             font-family: 'font1', sans-serif;
             font-size: 14px;
-            transition: all 0.3s ease;
         }
         .back-to-orders:hover {
             background: #ff6ab5;
-            transform: translateX(-4px);
+            transform: translateX(-5px);
             box-shadow: 4px 4px black;
         }
 
@@ -255,7 +254,7 @@ function getStatusLabel($status) {
     <div class="orders-container">
         <div class="order-detail-header">
             <a href="orders.php" class="back-to-orders">
-                <i class="fas fa-arrow-left"></i> Назад
+                <i class="fas fa-angle-left" aria-label="Назад"></i>
             </a>
             <h2>Заказ №<?= htmlspecialchars($order['order_number']) ?></h2>
             <span class="order-detail-status <?= $order['status'] ?>" id="orderStatus">

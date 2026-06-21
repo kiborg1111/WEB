@@ -6,10 +6,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $username = $_SESSION['username'];
 ?>
-
-<button class="profile-toggle" id="profileToggle" aria-label="Меню профиля">
-    <i class="fas fa-bars"></i>
-</button>
 <div class="profile-sidebar-overlay" id="profileOverlay"></div>
 
 <div class="profile-sidebar" id="profileSidebar">

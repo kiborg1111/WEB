@@ -20,7 +20,7 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="/kickzone/account_style/profile_header.css">
 </head>
 <body>
- <a href="/kickzone/index.php" class="back-home-btn">
+ <a href="#" onclick="history.back(); return false;" class="back-home-btn">
     <i class="fas fa-angle-left" aria-label="Назад"></i> 
 </a>
 <?php include 'profile_header.php'; ?>

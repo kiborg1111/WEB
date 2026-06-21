@@ -97,7 +97,6 @@
 }
 
 .profile-logout {
-    margin-top: auto;
     padding-top: 20px;
 }
 
@@ -132,26 +131,6 @@
     min-height: 100vh;
 }
 
-.profile-toggle {
-    display: none;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1001;
-    background: white;
-    border: 2px solid black;
-    border-radius: 8px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 20px;
-    transition: all 0.3s ease;
-}
-
-.profile-toggle:hover {
-    background: #ff6ab5;
-    transform: translateY(-2px);
-    box-shadow: 3px 3px black;
-}
 
 .profile-sidebar-overlay {
     display: none;
@@ -185,10 +164,6 @@
         box-shadow: -5px 0 30px rgba(255, 106, 181, 0.5);
     }
 
-    .profile-toggle {
-        display: flex !important;
-    }
-
     .main-content {
         margin-right: 0;
         padding: 15px;
@@ -215,8 +190,13 @@
         padding: 8px 12px;
     }
 
+    .profile-logout {
+        padding-top: 10px;
+    }
+
     .logout-link {
         font-size: 13px;
         padding: 8px 12px;
+        top: 0 !important;
     }
 }

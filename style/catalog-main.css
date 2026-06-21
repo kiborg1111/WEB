@@ -32,7 +32,27 @@
     padding: 0 20px;
 }
 
-/* Фильтр - фиксированная ширина */
+.filter-toggle {
+    display: none;
+    height: 40px;
+    width: 40px;
+    background: #ff6ab5;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-family: 'font1', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    margin-top: 30px;
+    margin-left: 85vw;
+}
+
+.filter-toggle:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px rgb(0, 0, 0);
+}
+
+
 .filter {
     display: flex;
     flex-direction: column;
@@ -141,7 +161,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    gap: 50px;
+    gap: 20px;
 }
 
 /* Карточка товара */
@@ -335,4 +355,331 @@
 
 .cart-notification.hide {
     transform: translateX(120%);
+}
+
+/* ======================================== */
+/* АДАПТИВНАЯ ВЁРСТКА ДЛЯ КАТАЛОГА */
+/* ======================================== */
+
+/* Планшеты и маленькие ноутбуки (до 1024px) */
+@media (max-width: 1024px) {
+    .title1 {
+        font-size: 60px;
+        padding: 50px 0;
+        margin-left: 5vw;
+    }
+
+    .filter-cards {
+        gap: 30px;
+        padding: 0 15px;
+    }
+
+    .filter {
+        width: 220px;
+    }
+
+    .group-product {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .card-product {
+        max-width: 100%;
+    }
+
+    .card-product h3 {
+        font-size: 24px;
+    }
+
+    .card-product p {
+        font-size: 18px;
+    }
+
+    .add-to-cart-btn {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+/* Планшеты вертикальные (до 768px) */
+@media (max-width: 768px) {
+    .title1 {
+        font-size: 45px;
+        padding: 40px 0;
+        margin-left: 3vw;
+        justify-content: center;
+    }
+
+    .filter-toggle {
+        display: block;
+        font-size: 16px;
+    }
+
+    .filter-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .filter {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0;
+        display: none;
+    }
+
+    .filter.active {
+        display: flex;
+    }
+
+    .slider {
+        width: auto;
+        margin: 20px 30px 0 30px;
+    }
+
+    .card-container {
+        margin-top: 3px;
+        width: 100%;
+    }
+
+    .group-product {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .card-product {
+        max-width: 100%;
+    }
+
+    .card-product img {
+        height: 180px;
+    }
+
+    .card-product h3 {
+        font-size: 20px;
+        margin: 10px 8px 5px 8px;
+    }
+
+    .card-product p {
+        font-size: 16px;
+        margin: 0 8px 10px 8px;
+    }
+
+    .add-to-cart-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+        margin: 0 10px 8px 0;
+    }
+
+    /* Фильтр на весь экран */
+    .filter {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .price-values span {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    .cart-notification {
+        min-width: 200px;
+        max-width: 300px;
+        padding: 12px 18px;
+        font-size: 16px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* Телефоны (до 480px) */
+@media (max-width: 480px) {
+    .title1 {
+        font-size: 32px;
+        padding: 30px 0;
+        margin-left: 0;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .filter-toggle {
+        font-size: 16px;
+        padding: 10px 11px;
+    }
+
+    .filter-cards {
+        gap: 15px;
+        padding: 0 8px;
+    }
+
+    .filter {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 3px;
+        border-radius: 8px;
+    }
+
+    .price {
+        font-size: 14px;
+        padding: 12px 15px 5px 15px;
+    }
+
+    .slider {
+        margin: 15px 20px 0 20px;
+    }
+
+    .price-values {
+        margin: 10px 5px 15px 5px;
+        font-size: 10px;
+    }
+
+    .price-values span {
+        font-size: 9px;
+        padding: 3px 6px;
+    }
+
+    .brend, .size, .color {
+        font-size: 15px;
+        padding: 12px 15px 5px 15px;
+    }
+
+    .brend-card, .size-card, .color-card {
+        padding: 8px 15px 15px 15px;
+        gap: 8px;
+    }
+
+    .brend-card label, .size-card label, .color-card label {
+        font-size: 12px;
+    }
+
+    .brend-card input, .size-card input, .color-card input {
+        width: 14px;
+        height: 14px;
+    }
+
+    .card-container {
+        margin-top: 2px;
+    }
+
+    .group-product {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .card-product {
+        max-width: 100%;
+    }
+
+    .card-product img {
+        height: 150px;
+    }
+
+    .card-product h3 {
+        font-size: 18px;
+        margin: 8px 6px 4px 6px;
+    }
+
+    .card-product p {
+        font-size: 14px;
+        margin: 0 6px 8px 6px;
+    }
+
+    .add-to-cart-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        margin: 0 6px 6px 0;
+        border-radius: 3px;
+    }
+
+    .cart-notification {
+        min-width: 160px;
+        max-width: 240px;
+        padding: 10px 14px;
+        font-size: 14px;
+        bottom: 15px;
+        right: 15px;
+        border-radius: 4px;
+    }
+}
+
+/* Телефоны до 375px */
+@media (max-width: 375px) {
+    .title1 {
+        font-size: 26px;
+        padding: 20px 5px;
+    }
+
+    .filter {
+        margin-top: 15px;
+        border-radius: 6px;
+    }
+
+    .filter-toggle {
+        font-size: 16px;        /* ← было 16px */
+        padding: 9px 10px;     /* ← было 10px 11px */
+    }
+
+
+    .price {
+        font-size: 12px;
+        padding: 10px 12px 3px 12px;
+    }
+
+    .slider {
+        margin: 10px 15px 0 15px;
+    }
+
+    .price-values span {
+        font-size: 8px;
+        padding: 2px 5px;
+    }
+
+    .brend, .size, .color {
+        font-size: 13px;
+        padding: 10px 12px 3px 12px;
+    }
+
+    .brend-card, .size-card, .color-card {
+        padding: 5px 12px 12px 12px;
+        gap: 5px;
+    }
+
+    .brend-card label, .size-card label, .color-card label {
+        font-size: 11px;
+    }
+
+    .card-product img {
+        height: 120px;
+    }
+
+    .card-product h3 {
+        font-size: 15px;
+        margin: 6px 5px 3px 5px;
+    }
+
+    .card-product p {
+        font-size: 12px;
+        margin: 0 5px 6px 5px;
+    }
+
+    .add-to-cart-btn {
+        font-size: 10px;
+        padding: 4px 8px;
+        margin: 0 5px 5px 0;
+    }
+
+    .group-product {
+        gap: 5px;
+    }
+
+    .cart-notification {
+        min-width: 140px;
+        max-width: 200px;
+        padding: 8px 12px;
+        font-size: 12px;
+        bottom: 10px;
+        right: 10px;
+        border-width: 1px;
+    }
 }

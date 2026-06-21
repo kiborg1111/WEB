@@ -14,7 +14,11 @@
             </div>
         </div>
         <div class="filter-cards">
-            <div class="filter">
+            <button class="filter-toggle" id="filterToggle">
+                <i class="fas fa-sliders-h"></i> 
+            </button>
+
+            <div class="filter" id="filterSidebar">
                 <div class="brend">Категория</div>
                 <div class="brend-card" id="category-filters"></div>
 
@@ -44,7 +48,6 @@
     </div>
 </div>
 
-<!-- Уведомление -->
 <div id="cartNotification" class="cart-notification">
     <span id="notificationMessage">Товар добавлен в корзину</span>
 </div>
@@ -69,6 +72,19 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        const filterToggle = document.getElementById('filterToggle');
+        const filterSidebar = document.getElementById('filterSidebar');
+        
+        if (filterToggle && filterSidebar) {
+            filterToggle.addEventListener('click', function() {
+                filterSidebar.classList.toggle('active');
+                const isOpen = filterSidebar.classList.contains('active');
+                this.innerHTML = isOpen ? 
+                    '<i class="fas fa-times"></i>' : 
+                    '<i class="fas fa-sliders-h"></i>';
+            });
+        }
+
         const slider = document.getElementById('Slider');
         
         if (slider && window.noUiSlider) {

@@ -139,16 +139,12 @@ nav ul li a:hover {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* ОБЁРТКА ДЛЯ ИКОНОК */
 .icons-wrapper {
     display: flex;
     gap: 50px;
     align-items: center;
 }
 
-/* ======================================== */
-/* АДАПТИВНАЯ ВЁРСТКА */
-/* ======================================== */
 
 @media (max-width: 1024px) {
     nav ul {
@@ -286,8 +282,8 @@ nav ul li a:hover {
     }
 
     nav ul li a {
-        font-size: 8px;
-        padding: 3px 5px;
+        font-size: 9px;
+        padding: 5px 6px;
     }
 
     .header-icons {
