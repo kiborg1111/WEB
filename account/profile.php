@@ -20,9 +20,21 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="/kickzone/account_style/profile_header.css">
 </head>
 <body>
- <a href="#" onclick="history.back(); return false;" class="back-home-btn">
-    <i class="fas fa-angle-left" aria-label="Назад"></i> 
-</a>
-<?php include 'profile_header.php'; ?>
+    <a href="#" onclick="history.back(); return false;" class="back-home-btn">
+        <i class="fas fa-angle-left" aria-label="Назад"></i> 
+    </a>
+    
+    <?php include 'profile_header.php'; ?>
+
+    <div class="profile-gif-container">
+        <div class="gif-wrapper">
+            <div class="tenor-gif-embed" data-postid="18074765" data-share-method="host" data-aspect-ratio="1" data-width="100%">
+                <a href="https://tenor.com/view/go-vote-election-election2020-democratic-republican-gif-18074765"></a>
+                from <a href="https://tenor.com/search/go+vote-stickers"></a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 </body>
 </html>

@@ -139,10 +139,21 @@ $username = $_SESSION['username'];
                     const productId = btn.dataset.productId;
                     const input = document.querySelector(`.qty-input[data-product-id="${productId}"]`);
                     let qty = parseInt(input.value) - 1;
-                    if (qty < 1) qty = 1;
-                    input.value = qty;
-                    await updateCartQuantity(productId, qty);
-                    loadCart();
+                    
+                    if (qty < 1) {
+                        // Удаляем товар без подтверждения
+                        const result = await removeFromCart(productId);
+                        if (result.success) {
+                            showNotification('Товар удалён из корзины', 'success');
+                            loadCart();
+                        } else {
+                            showNotification(result.message, 'error');
+                        }
+                    } else {
+                        input.value = qty;
+                        await updateCartQuantity(productId, qty);
+                        loadCart();
+                    }
                 });
             });
             
@@ -171,7 +182,7 @@ $username = $_SESSION['username'];
             document.querySelectorAll('.remove-btn').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const productId = btn.dataset.productId;
-                    if (confirm('Удалить товар из корзины?')) {
+                    if (confirm) {
                         await removeFromCart(productId);
                         loadCart();
                     }
@@ -234,7 +245,7 @@ $username = $_SESSION['username'];
                     const data = await response.json();
                     
                     if (data.success) {
-                        showNotification('Заказ №' + data.order_number + ' успешно оформлен! 🎉', 'success');
+                        showNotification('Заказ №' + data.order_number + ' успешно оформлен', 'success');
                         setTimeout(() => {
                             window.location.href = '/kickzone/account/orders.php';
                         }, 1500);

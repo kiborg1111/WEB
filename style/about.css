@@ -68,3 +68,8 @@
     font-size: 40px;
     color: #ff6ab5;
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

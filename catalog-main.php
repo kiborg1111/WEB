@@ -89,12 +89,12 @@
         
         if (slider && window.noUiSlider) {
             noUiSlider.create(slider, {
-                start: [2000, 50000],
+                start: [2000, 25000],
                 connect: true,
                 step: 500,
                 range: {
                     'min': 2000,
-                    'max': 50000
+                    'max': 25000
                 },
                 format: {
                     to: value => Math.round(value),

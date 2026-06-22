@@ -683,3 +683,8 @@
         border-width: 1px;
     }
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

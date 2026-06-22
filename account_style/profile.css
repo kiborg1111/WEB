@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
 .back-home-btn {
     position: absolute;
     top: 20px;
@@ -13,6 +19,7 @@
     text-decoration: none;
     font-family: 'font1', sans-serif;
     font-size: 14px;
+    z-index: 1001;
 }
 
 .back-home-btn i {
@@ -25,17 +32,85 @@
     box-shadow: 3px 3px black;
 }
 
+.profile-gif-container {
+    width: 1000px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.gif-wrapper {
+    width: 1000px;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.gif-wrapper iframe {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    pointer-events: none !important;
+    border: none;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+}
+
+.tenor-gif-embed {
+    pointer-events: none !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.tenor-gif-embed a {
+    display: none !important;
+}
+
+
 @media (max-width: 768px) {
     .back-home-btn {
         top: 10px;
         left: 10px;
         padding: 6px 10px;
-        font-size: 30px;
+        font-size: 14px;
         z-index: 1001;
     }
 
     .back-home-btn i {
         font-size: 12px;
+    }
+
+    .profile-gif-container {
+        width: 100vw;
+        height: calc(100vh - 80px);
+        top: 80px;
+    }
+
+    .gif-wrapper {
+        width: 100vw;
+        height: calc(100vh - 80px);
+    }
+
+    .gif-wrapper iframe {
+        width: 100vw;
+        height: calc(100vh - 80px);
     }
 }
 
@@ -44,11 +119,27 @@
         top: 8px;
         left: 8px;
         padding: 4px 8px;
-        font-size: 20px;
+        font-size: 12px;
         border-radius: 6px;
     }
 
     .back-home-btn i {
         font-size: 10px;
+    }
+
+    .profile-gif-container {
+        width: 100vw !important;
+        height: calc(100vh - 80px) !important;
+        top: 80px !important;
+    }
+
+    .gif-wrapper {
+        width: 100vw !important;
+        height: calc(100vh - 80px) !important;
+    }
+
+    .gif-wrapper iframe {
+        width: 100vw !important;
+        height: calc(100vh - 80px) !important;
     }
 }
