@@ -7,10 +7,10 @@
             <div class="menu-title">Меню</div>
             <div class="text-menu">
                 <a href="/kickzone/index.php#scroll-section">Новинки</a><br>
-                <a href="/kickzone/catalog.php">Каталог</a><br>
-                Мужское<br>
-                Женское<br>
-                О нас
+                <a href="/kickzone/catalog.php?gender=all">Каталог</a><br>
+                <a href="/kickzone/catalog.php?gender=male">Мужское</a><br>
+                <a href="/kickzone/catalog.php?gender=female">Женское</a><br>
+                <a href="/kickzone/about.php">О нас</a><br>
             </div>
         </div>
         

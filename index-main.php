@@ -18,7 +18,7 @@
                 </div>
                 <div class="catalog-line"></div>
                 <div class="catalog-button">
-                    <a href="catalog.php" class="btn-catalog">Каталог</a>
+                    <a href="/kickzone/catalog.php" class="btn-catalog">Каталог</a>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
 
 <script>
 // Загрузка товаров из БД
-fetch('http://localhost/kickzone/api/products.php')
+fetch('/kickzone/api/products.php')
     .then(response => response.json())
     .then(data => {
         if (data.success && data.products.length > 0) {

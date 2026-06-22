@@ -52,7 +52,7 @@
     <span id="notificationMessage">Товар добавлен в корзину</span>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
+<script src="/kickzone/js/nouislider.min.js"></script>
 <script>
     function showNotification(message, type = 'success') {
         const notification = document.getElementById('cartNotification');
