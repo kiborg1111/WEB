@@ -69,7 +69,6 @@ $username = $_SESSION['username'];
                             <div class="empty-cart-image">
                                 <img src="/kickzone/photo/cart.png" alt="Пустая корзина">
                             </div>
-                            <p>Ваша корзина пуста</p>
                         </div>
                     </div>
                 `;
