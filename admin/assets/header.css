@@ -37,9 +37,7 @@
     transition: all 0.2s ease;
     border: 1px solid #ccc;
     cursor: pointer;
-}
-
-.back-home-btn i {
+    font-family: 'font1', sans-serif;
     font-size: 16px;
 }
 
@@ -63,9 +61,7 @@
     transition: all 0.2s ease;
     border: 1px solid #ccc;
     cursor: pointer;
-}
-
-.logout-btn i {
+    font-family: 'font1', sans-serif;
     font-size: 16px;
 }
 
@@ -110,8 +106,7 @@
     box-shadow: none;
 }
 
-#refreshBtn:hover,
-#toggleLiveBtn:hover {
+#refreshBtn:hover {
     background: #ff6ab5 !important;
     transform: translateY(-2px);
     border-color: black !important;

@@ -83,7 +83,7 @@ include __DIR__ . '/../header.php';
 <div class="form-container">
     <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
         <a href="products.php" class="back-home-btn">
-            <i class="fas fa-angle-left"></i>
+            ←
         </a>
         <h2 class="section-title" style="margin: 0;"><?= $is_edit ? 'Редактировать товар' : 'Добавить товар' ?></h2>
     </div>

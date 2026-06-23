@@ -11,20 +11,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Админ-панель' ?></title>
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
 <div class="admin-header">
     <div style="display: flex; align-items: center; gap: 20px;">
         <a href="/kickzone/index.php" class="back-home-btn">
-            <i class="fas fa-angle-left"></i>
+            ←
         </a>
         <h1>Админ-панель</h1>
     </div>
     <div class="admin-user">
         <a href="/kickzone/account/logout.php" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i>
+            🚪
         </a>
     </div>
 </div>
