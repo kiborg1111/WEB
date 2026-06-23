@@ -18,23 +18,71 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/kickzone/account_style/profile.css">
     <link rel="stylesheet" href="/kickzone/account_style/profile_header.css">
+    <style>
+        .profile-gif-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px;
+            margin-right: 280px;
+        }
+
+        .gif-wrapper {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .gif-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .profile-gif-container {
+                margin-right: 240px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-gif-container {
+                margin-right: 0;
+                min-height: 50vh;
+                padding: 40px 20px;
+                justify-content: flex-start;
+                padding-left: 10px;
+            }
+
+            .gif-wrapper {
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-gif-container {
+                padding-left: 5px;
+                min-height: 40vh;
+                justify-content: flex-start;
+            }
+
+            .gif-wrapper {
+                max-width: 220px;
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#" onclick="history.back(); return false;" class="back-home-btn">
-        <i class="fas fa-angle-left" aria-label="Назад"></i> 
+        ←
     </a>
     
     <?php include 'profile_header.php'; ?>
 
     <div class="profile-gif-container">
         <div class="gif-wrapper">
-            <div class="tenor-gif-embed" data-postid="18074765" data-share-method="host" data-aspect-ratio="1" data-width="100%">
-                <a href="https://tenor.com/view/go-vote-election-election2020-democratic-republican-gif-18074765"></a>
-                from <a href="https://tenor.com/search/go+vote-stickers"></a>
-            </div>
+            <img src="/kickzone/photo/inekemre.gif" alt="cow dancing">
         </div>
     </div>
-
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 </body>
 </html>

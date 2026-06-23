@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 ?>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="/kickzone/style/header.css">
 
 <div class="header">
@@ -33,7 +32,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </button>
             <div class="icons-wrapper" id="iconsWrapper">
                 <a href="/kickzone/account/cart.php" class="icon-link" aria-label="Корзина">
-                    <i class="fas fa-shopping-bag"></i>
+                    🛒
                 </a>
 
                 <?php if (isset($_SESSION['user_id'])): ?>
@@ -48,7 +47,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <?php endif; ?>
                 <?php else: ?>
                     <a href="/kickzone/account/login.php" class="icon-link" aria-label="Личный кабинет">
-                        <i class="fas fa-user-circle"></i>
+                        👤
                     </a>
                 <?php endif; ?>
             </div>
@@ -58,7 +57,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // БУРГЕР-МЕНЮ ДЛЯ ИКОНОК
     const menuToggle = document.getElementById('menuToggle');
     const iconsWrapper = document.getElementById('iconsWrapper');
     

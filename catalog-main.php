@@ -15,7 +15,7 @@
         </div>
         <div class="filter-cards">
             <button class="filter-toggle" id="filterToggle">
-                <i class="fas fa-sliders-h"></i> 
+                ⚙️
             </button>
 
             <div class="filter" id="filterSidebar">
@@ -79,9 +79,7 @@
             filterToggle.addEventListener('click', function() {
                 filterSidebar.classList.toggle('active');
                 const isOpen = filterSidebar.classList.contains('active');
-                this.innerHTML = isOpen ? 
-                    '<i class="fas fa-times"></i>' : 
-                    '<i class="fas fa-sliders-h"></i>';
+                this.innerHTML = isOpen ? '✕' : '⚙️';
             });
         }
 
@@ -151,7 +149,7 @@
                     <p>${Number(product.price).toLocaleString()} ₽</p>
                 </a>
                 <button class="add-to-cart-btn" onclick="addToCart(${product.id}, 1); event.stopPropagation();">
-                    <i class="fa-solid fa-basket-shopping"></i>
+                    🛒
                 </button>
             </div>
         `).join('');
