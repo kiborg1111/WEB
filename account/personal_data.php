@@ -31,7 +31,7 @@ $user = $stmt->get_result()->fetch_assoc();
 <body>
 
 <a href="#" onclick="history.back(); return false;" class="back-home-btn">
-    <i class="fas fa-angle-left" aria-label="назад"></i>
+    ←
 </a>
 
 <?php include 'profile_header.php'; ?>

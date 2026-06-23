@@ -25,7 +25,7 @@
         </div>
         
         <div class="menu">
-            <div class="menu-title">Ищи нас</div>
+            <div class="menu-title"></div>
             <div class="text-menu">
                 <div class="footer-icons">
                     <i class="fab fa-telegram"></i>

@@ -26,7 +26,7 @@ $username = $_SESSION['username'];
 <div class="cart-container">
     <div class="cart-header">
         <a href="#" onclick="history.back(); return false;" class="back-home-btn">
-            <i class="fas fa-angle-left"></i>
+            ←
         </a>
         <h2>Корзина</h2>
     </div>

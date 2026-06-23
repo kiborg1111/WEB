@@ -42,7 +42,7 @@ function getStatusLabel($status) {
 <body>
 
 <a href="#" onclick="history.back(); return false;" class="back-home-btn">
-    <i class="fas fa-angle-left"></i>
+    ←
 </a>
 
 <?php include 'profile_header.php'; ?>

@@ -92,6 +92,7 @@ nav ul li a:hover {
     color: #000000;
     font-size: 20px;
     position: relative;
+    text-decoration: none;
 }
 
 .icon-link:hover {

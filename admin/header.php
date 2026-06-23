@@ -18,13 +18,13 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 <div class="admin-header">
     <div style="display: flex; align-items: center; gap: 20px;">
         <a href="/kickzone/index.php" class="back-home-btn">
-            <i class="fas fa-angle-left"></i>
+            ←
         </a>
         <h1>Админ-панель</h1>
     </div>
     <div class="admin-user">
         <a href="/kickzone/account/logout.php" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i>
+            выйти
         </a>
     </div>
 </div>
