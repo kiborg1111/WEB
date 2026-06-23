@@ -48,10 +48,10 @@ include __DIR__ . '/../header.php';
                             <td style="vertical-align: middle;">
                                 <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
                                     <a href="product_form.php?id=<?= $product['id'] ?>" class="btn-icon btn-edit">
-                                        <i class="fas fa-pen"></i>
+                                        ✏️
                                     </a>
                                     <a href="products.php?delete_id=<?= $product['id'] ?>" class="btn-icon btn-delete" onclick="return confirm('Удалить товар?')">
-                                        <i class="fas fa-trash-alt"></i>
+                                        🗑️
                                     </a>
                                 </div>
                             </td>

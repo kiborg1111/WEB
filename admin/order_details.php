@@ -74,7 +74,7 @@ include __DIR__ . '/header.php';
 <div class="content-card">
     <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 20px;">
         <a href="index.php" class="back-home-btn">
-            <i class="fas fa-angle-left"></i>
+            ←
         </a>
         <h2 class="section-title" style="margin: 0;">Заказ №<?= htmlspecialchars($order['order_number']) ?></h2>
     </div>

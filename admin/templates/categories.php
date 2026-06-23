@@ -52,10 +52,10 @@ include __DIR__ . '/../header.php';
                             <td style="vertical-align: middle;">
                                 <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
                                     <a href="category_form.php?id=<?= $cat['id'] ?>" class="btn-icon btn-edit">
-                                        <i class="fas fa-pen"></i>
+                                        ✏️
                                     </a>
                                     <a href="categories.php?delete_id=<?= $cat['id'] ?>" class="btn-icon btn-delete" onclick="return confirm('Удалить категорию?')">
-                                        <i class="fas fa-trash-alt"></i>
+                                        🗑️
                                     </a>
                                 </div>
                             </td>

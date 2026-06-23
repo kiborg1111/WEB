@@ -15,7 +15,7 @@ include __DIR__ . '/header.php';
     <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <h2 class="section-title" style="margin: 0;">Все заказы</h2>
         <button id="refreshBtn" style="background: #f0f0f0; border: 2px solid black; border-radius: 8px; padding: 8px 12px; cursor: pointer; font-family: 'font1', sans-serif; transition: 0.2s;">
-            <i class="fas fa-sync-alt"></i>
+            🔄
         </button>
     </div>
     <div class="table-wrapper">
